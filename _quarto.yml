@@ -23,6 +23,9 @@ book:
     
     - appendices/notation.qmd
 
+filters:
+  - shared-thm-counter
+
 format:
   html:
     theme: cosmo
