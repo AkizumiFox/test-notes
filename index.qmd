@@ -1,0 +1,32 @@
+# Preface {.unnumbered}
+
+Welcome to **Advanced Linear Algebra Notes**, a comprehensive guide to spectral theory and optimization techniques in linear algebra.
+
+## About This Book
+
+This book provides a rigorous yet accessible introduction to advanced topics in linear algebra, with a focus on:
+
+- **Spectral Theory**: Eigenvalues, eigenvectors, and matrix decompositions
+- **Optimization**: Convex optimization and its applications
+- **Computational Methods**: Algorithms for numerical linear algebra
+
+## How to Use This Book
+
+Each chapter contains:
+
+- **Definitions** with precise mathematical statements
+- **Theorems** with complete proofs
+- **Examples** illustrating key concepts
+- **Exercises** for practice
+
+## Prerequisites
+
+Readers should be familiar with:
+
+- Basic linear algebra (vectors, matrices, linear transformations)
+- Calculus (derivatives, integrals)
+- Basic proof techniques
+
+## Acknowledgments
+
+This book was created using [Quarto](https://quarto.org/) with a custom LaTeX template for beautiful mathematical typesetting.

@@ -1,0 +1,29 @@
+::: {.hidden}
+$$
+% Sets
+\def\R{\mathbb{R}}
+\def\C{\mathbb{C}}
+\def\N{\mathbb{N}}
+\def\Z{\mathbb{Z}}
+\def\Q{\mathbb{Q}}
+
+% Linear Algebra
+\def\bx{\mathbf{x}}
+\def\by{\mathbf{y}}
+\def\bz{\mathbf{z}}
+\def\bu{\mathbf{u}}
+\def\bv{\mathbf{v}}
+\def\bw{\mathbf{w}}
+\def\bA{\mathbf{A}}
+\def\bB{\mathbf{B}}
+\def\bI{\mathbf{I}}
+
+% Operators
+\def\norm#1{\left\lVert#1\right\rVert}
+\def\inner#1#2{\langle #1, #2 \rangle}
+\def\trace{\text{tr}}
+\def\rank{\text{rank}}
+\def\diag{\text{diag}}
+\def\vspan{\text{span}}
+$$
+:::

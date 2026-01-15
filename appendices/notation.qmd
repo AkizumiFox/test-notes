@@ -1,0 +1,56 @@
+# Notation {.unnumbered}
+
+This appendix summarizes the notation used throughout this book.
+
+## Sets
+
+| Symbol | Meaning |
+|--------|---------|
+| $\R$ | Real numbers |
+| $\C$ | Complex numbers |
+| $\N$ | Natural numbers |
+| $\Z$ | Integers |
+| $\R^n$ | $n$-dimensional Euclidean space |
+| $\R^{m \times n}$ | Space of $m \times n$ real matrices |
+
+## Vectors and Matrices
+
+| Symbol | Meaning |
+|--------|---------|
+| $\bx, \by, \bz$ | Vectors (boldface lowercase) |
+| $\bA, \bB$ | Matrices (boldface uppercase) |
+| $\bI$ | Identity matrix |
+| $\mathbf{0}$ | Zero vector or matrix |
+| $\bA^\top$ | Transpose of $\bA$ |
+| $\bA^{-1}$ | Inverse of $\bA$ |
+| $\bA^+$ | Moore-Penrose pseudoinverse of $\bA$ |
+
+## Operations
+
+| Symbol | Meaning |
+|--------|---------|
+| $\inner{\bx}{\by}$ | Inner product of $\bx$ and $\by$ |
+| $\norm{\bx}$ | Euclidean norm of $\bx$ |
+| $\trace(\bA)$ | Trace of $\bA$ |
+| $\det(\bA)$ | Determinant of $\bA$ |
+| $\rank(\bA)$ | Rank of $\bA$ |
+| $\diag(\lambda_1, \ldots, \lambda_n)$ | Diagonal matrix |
+
+## Eigenvalues and Singular Values
+
+| Symbol | Meaning |
+|--------|---------|
+| $\lambda_i$ | Eigenvalue |
+| $\sigma_i$ | Singular value |
+| $\lambda_{\max}(\bA)$ | Largest eigenvalue of $\bA$ |
+| $\lambda_{\min}(\bA)$ | Smallest eigenvalue of $\bA$ |
+
+## Optimization
+
+| Symbol | Meaning |
+|--------|---------|
+| $\nabla f$ | Gradient of $f$ |
+| $\nabla^2 f$ | Hessian of $f$ |
+| $\bA \succ 0$ | $\bA$ is positive definite |
+| $\bA \succeq 0$ | $\bA$ is positive semidefinite |
+| $\arg\min$ | Argument that minimizes |

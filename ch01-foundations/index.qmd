@@ -1,0 +1,32 @@
+---
+title: "Chapter 1: Foundations"
+format:
+  pdf:
+    documentclass: article
+    number-sections: true
+    pdf-engine: lualatex
+    geometry:
+      - top=30mm
+      - left=25mm
+      - right=25mm
+      - bottom=30mm
+---
+
+# Foundations
+
+This chapter covers the fundamental concepts of linear algebra that form the foundation for all subsequent material.
+
+In this chapter, we will explore:
+
+- **Vector Spaces**: The abstract framework for studying linear structures
+- **Linear Maps**: Transformations that preserve linear structure
+
+These concepts are essential for understanding spectral theory and optimization techniques covered in later chapters.
+
+## Prerequisites
+
+Before proceeding, readers should be familiar with:
+
+- Basic matrix operations (addition, multiplication, transpose)
+- Systems of linear equations
+- Elementary row operations and Gaussian elimination

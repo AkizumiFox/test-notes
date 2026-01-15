@@ -1,0 +1,1077 @@
+% ======================================================================================
+% UNIFIED BOOK TEMPLATE STYLE
+% ======================================================================================
+% A comprehensive LaTeX style for writing books with:
+% - Beautiful chapter and section headers
+% - Theorem-like environments with colored borders
+% - Code blocks with syntax highlighting
+% - Page-break indicators for spanning content
+% ======================================================================================
+
+% SemanticModetrue <-> SemanticModefalse
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{book-template}[2025/12/29 Unified Book Template]
+
+% ======================================================================================
+% PACKAGE OPTIONS FOR QUARTO COMPATIBILITY
+% ======================================================================================
+\newif\if@quartomode\@quartomodefalse
+\newif\if@quartoenv\@quartoenvfalse
+\newif\if@skipgeometry\@skipgeometryfalse
+\newif\if@skiphyperref\@skiphyperreffalse
+\newif\if@skiptitlesec\@skiptitlesecfalse
+
+\DeclareOption{quarto}{\@quartomodetrue\@skipgeometrytrue\@skiphyperreftrue\@skiptitlesectrue}
+\DeclareOption{quartoenv}{\@quartoenvtrue\@skipgeometrytrue\@skiphyperreftrue\@skiptitlesectrue}
+\DeclareOption{skipgeometry}{\@skipgeometrytrue}
+\DeclareOption{skiphyperref}{\@skiphyperreftrue}
+\DeclareOption{skiptitlesec}{\@skiptitlesectrue}
+\ProcessOptions\relax
+
+% ======================================================================================
+% REQUIRED PACKAGES
+% ======================================================================================
+
+% Core packages
+\RequirePackage{amsmath, amsfonts, amssymb, amsthm}
+\RequirePackage{bm}
+\RequirePackage{upgreek}  % For upright greek letters (\upalpha, etc.)
+\RequirePackage{pgffor}   % For automation loops
+\RequirePackage{enumitem}
+\RequirePackage{graphicx}
+\RequirePackage{mathtools}
+\RequirePackage{multirow}
+\RequirePackage{xargs}
+
+% Drawing and styling
+\RequirePackage{tikz}
+\usetikzlibrary{shapes.geometric, calc, positioning, patterns}
+
+% Page layout - skip if Quarto handles it
+\if@skiptitlesec\else
+    \RequirePackage[explicit]{titlesec}
+\fi
+\if@skipgeometry\else
+    \RequirePackage[margin=1in]{geometry}
+\fi
+
+% Colors - define before hyperref
+\RequirePackage[dvipsnames]{xcolor}
+
+% ======================================================================================
+% COLOR PALETTE DEFINITIONS
+% ======================================================================================
+
+% Primary environment colors - matching HTML CSS (border colors)
+\definecolor{definitioncolor}{RGB}{233,30,99}     % Pink #e91e63
+\definecolor{theoremcolor}{RGB}{64,135,232}       % Blue #4087e8
+\definecolor{corollarycolor}{RGB}{0,172,193}      % Cyan #00acc1
+\definecolor{lemmacolor}{RGB}{255,160,0}          % Amber #ffa000
+\definecolor{propositioncolor}{RGB}{92,107,192}   % Indigo #5c6bc0
+
+% Background colors - matching HTML CSS
+\definecolor{definitionbg}{HTML}{fce4ec}          % Light pink
+\definecolor{theorembg}{HTML}{eef6ff}             % Light blue
+\definecolor{corollarybg}{HTML}{e0f7fa}           % Light cyan
+\definecolor{lemmabg}{HTML}{fff8e1}               % Light amber
+\definecolor{propositionbg}{HTML}{e8eaf6}         % Light indigo
+\definecolor{examplebg}{HTML}{e8f5e9}             % Light green
+\definecolor{problembg}{HTML}{fff3e0}             % Light orange (exercise)
+\definecolor{solutionbg}{HTML}{f9fbe7}            % Light olive
+\definecolor{remarkbg}{HTML}{fafafa}              % Light gray
+\definecolor{conjecturebg}{HTML}{f3e5f5}          % Light purple
+\definecolor{algorithmbg}{HTML}{e0f2f1}           % Light teal
+
+% Secondary colors for various environments - matching HTML CSS
+\definecolor{proofcolor}{RGB}{100,157,116}        % Keep original
+\definecolor{claimcolor}{RGB}{43,43,133}          % Keep original
+\definecolor{remarkcolor}{RGB}{117,117,117}       % Gray #757575
+\definecolor{examplecolor}{RGB}{76,175,80}        % Green #4caf50
+\definecolor{problemcolor}{RGB}{255,152,0}        % Orange #ff9800 (exercise)
+\definecolor{solutioncolor}{RGB}{158,157,36}      % Olive #9e9d24
+\definecolor{conclusioncolor}{RGB}{128,128,128}   % Keep original
+\definecolor{conjecturecolor}{RGB}{171,71,188}    % Purple #ab47bc
+\definecolor{algorithmcolor}{RGB}{0,150,136}      % Teal #009688
+
+% Chapter and section colors
+\definecolor{chaptercolor}{RGB}{40,40,40}         % Dark grey for chapters
+\definecolor{chaptershadow}{RGB}{80,80,80}        % Lighter grey for shadow
+\definecolor{sectioncolor}{RGB}{60,60,60}         % Dark grey for sections
+
+% Code block colors
+\definecolor{codebg}{RGB}{248,248,248}            % Light grey background
+\definecolor{codeborder}{RGB}{200,200,200}        % Grey border
+\definecolor{codetitle}{RGB}{70,70,70}            % Dark title background
+
+% Hyperlinks - skip if Quarto handles it
+\if@skiphyperref\else
+    \RequirePackage[
+        colorlinks=true,
+        linkcolor=definitioncolor,
+        urlcolor=definitioncolor,
+        citecolor=theoremcolor
+    ]{hyperref}
+    \RequirePackage[all]{hypcap}
+\fi
+
+% Boxes and frames
+\RequirePackage[most, breakable, skins, theorems]{tcolorbox}
+\RequirePackage[framemethod=TikZ]{mdframed}
+
+% Headers and footers - skip in Quarto mode
+\if@quartomode\else
+    \RequirePackage{fancyhdr}
+    \RequirePackage{setspace}
+\fi
+
+% Figures
+\RequirePackage{caption}
+\RequirePackage{subcaption}
+
+% Additional utilities
+\RequirePackage{xparse}
+\RequirePackage{calc}
+\RequirePackage{etoolbox}
+
+% ======================================================================================
+% PAGE LAYOUT CONFIGURATION (skip in Quarto mode)
+% ======================================================================================
+
+\if@quartomode\else
+    \setlength{\parskip}{0.8em}
+    \setlength{\parindent}{0pt}
+
+    % Header/footer configuration
+    \pagestyle{fancy}
+    \setlength{\headheight}{14pt}
+    \fancyhf{}
+    \fancyhead[LE,RO]{\thepage}
+    \fancyhead[RE]{\leftmark}
+    \fancyhead[LO]{\rightmark}
+    \renewcommand{\headrulewidth}{0.4pt}
+\fi
+
+% ======================================================================================
+% CHAPTER AND SECTION STYLING (skip in Quarto mode)
+% ======================================================================================
+
+\if@skiptitlesec\else
+    \newcommand{\chapterboxheight}{3cm}
+    \newcommand{\ChapterEnglish}{}
+    \newcommand{\ChapterChinese}{}
+
+    \titleformat{\chapter}[display]
+    {\gdef\chapterlabel{}\Huge\bfseries}{\gdef\chapterlabel{\chaptername\ \thechapter}}{0pt}{%
+    \begin{tikzpicture}[remember picture, overlay]
+        % The Lower Rectangle (shadow)
+        \fill[fill=chaptershadow] (0pt,-18pt) rectangle (\paperwidth, \chapterboxheight);
+        % The Upper Rectangle
+        \fill[fill=chaptercolor] (-16pt,0) rectangle (\paperwidth, \chapterboxheight);
+        % Chapter Label (number)
+        \node[anchor=west,yshift=55pt,xshift=-6pt] {\color{white}\chapterlabel};
+        % Chapter Title
+        \node[anchor=west,xshift=4pt,yshift=18pt] {\color{white}\Huge\bfseries #1};
+    \end{tikzpicture}%
+    }
+
+    \titlespacing*{\chapter}{0pt}{60pt}{50pt}
+
+    % Section formatting
+    \titleformat{\section}[display]
+    {\gdef\sectionlabel{}\normalfont\Large\bfseries}{\gdef\sectionlabel{\thesection}}{1em}{%
+    \begin{tikzpicture}[remember picture, overlay]
+        \node (SecSymb) [anchor=south west,yshift=6pt,xshift=-19pt,fill=sectioncolor!80] {\color{sectioncolor!80}\sectionlabel};
+        \node (SecSymb) [anchor=south west,yshift=8pt,xshift=-21pt,fill=sectioncolor] {\color{white}\sectionlabel};
+        \node[anchor=west,xshift=4pt,yshift=-1pt] at (SecSymb.east) {#1};
+    \end{tikzpicture}}
+
+    \titlespacing*{\section}{0pt}{-15pt}{5pt}
+
+    % Subsection formatting
+    \titleformat{\subsection}
+    {\Large\bfseries}
+    {\thesubsection}{1em}{#1}
+
+    \titlespacing*{\subsection}{0pt}{1.5ex plus 0.5ex minus 0.2ex}{1ex plus 0.2ex}
+
+    % ======================================================================================
+    % CUSTOM CHAPTER COMMAND
+    % ======================================================================================
+
+    \newcommand{\NewChapter}[2][]{%
+        \renewcommand{\ChapterEnglish}{#1}
+        \renewcommand{\ChapterChinese}{#2}
+        \chapter{#2}
+    }
+\fi
+
+% ======================================================================================
+% THEOREM STYLES CONFIGURATION
+% ======================================================================================
+
+% Definition style (teal)
+\newtheoremstyle{definitionstyle}%
+{10pt}{0pt}{\normalfont\parindent=0pt}{}{}%
+{\\[0.8em]}{0.25em}%
+{\sffamily\Large\color{definitioncolor}\bfseries\thmname{#1}\nobreakspace\thmnumber{#2}%
+\thmnote{\nobreakspace\sffamily\bfseries\color{black}---\nobreakspace#3}}
+
+% Theorem style (orange)
+\newtheoremstyle{theoremstyle}%
+{10pt}{0pt}{\normalfont\parindent=0pt}{}{}%
+{\\[0.8em]}{0.25em}%
+{\sffamily\Large\color{theoremcolor}\bfseries\thmname{#1}\nobreakspace\thmnumber{#2}%
+\thmnote{\nobreakspace\sffamily\bfseries\color{black}---\nobreakspace#3}}
+
+% Corollary style (dark red)
+\newtheoremstyle{corollarystyle}%
+{10pt}{0pt}{\normalfont\parindent=0pt}{}{}%
+{\\[0.8em]}{0.25em}%
+{\sffamily\Large\color{corollarycolor}\bfseries\thmname{#1}\nobreakspace\thmnumber{#2}%
+\thmnote{\nobreakspace\sffamily\bfseries\color{black}---\nobreakspace#3}}
+
+% Lemma style (teal)
+\newtheoremstyle{lemmastyle}%
+{10pt}{0pt}{\normalfont\parindent=0pt}{}{}%
+{\\[0.8em]}{0.25em}%
+{\sffamily\Large\color{lemmacolor}\bfseries\thmname{#1}\nobreakspace\thmnumber{#2}%
+\thmnote{\nobreakspace\sffamily\bfseries\color{black}---\nobreakspace#3}}
+
+% Proposition style (dark orange)
+\newtheoremstyle{propositionstyle}%
+{10pt}{0pt}{\normalfont\parindent=0pt}{}{}%
+{\\[0.8em]}{0.25em}%
+{\sffamily\Large\color{propositioncolor}\bfseries\thmname{#1}\nobreakspace\thmnumber{#2}%
+\thmnote{\nobreakspace\sffamily\bfseries\color{black}---\nobreakspace#3}}
+
+% QED symbol
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% ======================================================================================
+% THEOREM COUNTERS AND ENVIRONMENTS
+% ======================================================================================
+
+\newcounter{dummyT}
+\newcounter{dummyD}
+\@ifundefined{chapter}{
+    \@ifundefined{section}{}{
+        \numberwithin{dummyT}{section}
+        \numberwithin{dummyD}{section}
+    }
+}{
+    \numberwithin{dummyT}{chapter}
+    \numberwithin{dummyD}{chapter}
+}
+
+% Numbered theorem environments
+\theoremstyle{definitionstyle}
+\newtheorem{definitionT}[dummyD]{Definition}
+
+\theoremstyle{theoremstyle}
+\newtheorem{theoremT}[dummyT]{Theorem}
+
+\theoremstyle{corollarystyle}
+\newtheorem{corollaryT}[dummyT]{Corollary}
+
+\theoremstyle{lemmastyle}
+\newtheorem{lemmaT}[dummyT]{Lemma}
+
+\theoremstyle{propositionstyle}
+\newtheorem{propositionT}[dummyT]{Proposition}
+
+% ======================================================================================
+% COLORED BOX DEFINITIONS WITH PAGE-BREAK INDICATORS
+% ======================================================================================
+
+% TikZ style for page-break triangles
+\tikzset{breakindicator/.style={regular polygon, regular polygon sides=3, inner sep=2pt, fill=black}}
+
+% Definition box (teal)
+\newmdenv[skipabove=10pt,
+    skipbelow=2pt,
+    rightline=false,
+    leftline=true,
+    topline=false,
+    bottomline=false,
+    linecolor=definitioncolor,
+    backgroundcolor=definitionbg,
+    innerleftmargin=10pt,
+    innerrightmargin=16pt,
+    innertopmargin=10pt,
+    leftmargin=0cm,
+    rightmargin=0cm,
+    linewidth=4pt,
+    innerbottommargin=10pt,
+    splittopskip=\topskip,
+    splitbottomskip=0.3\topskip,
+    firstextra={%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    middleextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    secondextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+    }]{dBox}
+
+% Theorem box (orange)
+\newmdenv[skipabove=10pt,
+    skipbelow=2pt,
+    rightline=false,
+    leftline=true,
+    topline=false,
+    bottomline=false,
+    linecolor=theoremcolor,
+    backgroundcolor=theorembg,
+    innerleftmargin=10pt,
+    innerrightmargin=16pt,
+    innertopmargin=10pt,
+    leftmargin=0cm,
+    rightmargin=0cm,
+    linewidth=4pt,
+    innerbottommargin=10pt,
+    splittopskip=\topskip,
+    splitbottomskip=0.3\topskip,
+    firstextra={%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    middleextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    secondextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+    }]{tBox}
+
+% Corollary box (dark red)
+\newmdenv[skipabove=10pt,
+    skipbelow=2pt,
+    rightline=false,
+    leftline=true,
+    topline=false,
+    bottomline=false,
+    linecolor=corollarycolor,
+    backgroundcolor=corollarybg,
+    innerleftmargin=10pt,
+    innerrightmargin=16pt,
+    innertopmargin=10pt,
+    leftmargin=0cm,
+    rightmargin=0cm,
+    linewidth=4pt,
+    innerbottommargin=10pt,
+    splittopskip=\topskip,
+    splitbottomskip=0.3\topskip,
+    firstextra={%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    middleextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    secondextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+    }]{cBox}
+
+% Lemma box (teal)
+\newmdenv[skipabove=10pt,
+    skipbelow=2pt,
+    rightline=false,
+    leftline=true,
+    topline=false,
+    bottomline=false,
+    linecolor=lemmacolor,
+    backgroundcolor=lemmabg,
+    innerleftmargin=10pt,
+    innerrightmargin=16pt,
+    innertopmargin=10pt,
+    leftmargin=0cm,
+    rightmargin=0cm,
+    linewidth=4pt,
+    innerbottommargin=10pt,
+    splittopskip=\topskip,
+    splitbottomskip=0.3\topskip,
+    firstextra={%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    middleextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    secondextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+    }]{lBox}
+
+% Proposition box (dark orange)
+\newmdenv[skipabove=10pt,
+    skipbelow=2pt,
+    rightline=false,
+    leftline=true,
+    topline=false,
+    bottomline=false,
+    linecolor=propositioncolor,
+    backgroundcolor=propositionbg,
+    innerleftmargin=10pt,
+    innerrightmargin=16pt,
+    innertopmargin=10pt,
+    leftmargin=0cm,
+    rightmargin=0cm,
+    linewidth=4pt,
+    innerbottommargin=10pt,
+    splittopskip=\topskip,
+    splitbottomskip=0.3\topskip,
+    firstextra={%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    middleextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    secondextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+    }]{pBox}
+
+% ======================================================================================
+% MAIN THEOREM ENVIRONMENTS (Skip in Quarto mode - Quarto defines these)
+% ======================================================================================
+
+\if@quartomode\else
+\if@quartoenv\else
+    \newenvironment{definition}{\begin{dBox}\begin{definitionT}}{\end{definitionT}\end{dBox}}
+    \newenvironment{theorem}{\begin{tBox}\begin{theoremT}}{\end{theoremT}\end{tBox}}
+    \newenvironment{corollary}{\begin{cBox}\begin{corollaryT}}{\end{corollaryT}\end{cBox}}
+    \newenvironment{lemma}{\begin{lBox}\begin{lemmaT}}{\end{lemmaT}\end{lBox}}
+    \newenvironment{proposition}{\begin{pBox}\begin{propositionT}}{\end{propositionT}\end{pBox}}
+\fi
+\fi
+
+% ======================================================================================
+% ADDITIONAL THEOREM-LIKE ENVIRONMENTS
+% ======================================================================================
+
+% ======================================================================================
+% GREY BAR STYLE (for proof, solution, remark, algorithm)
+% ======================================================================================
+% Define a unified grey color for the bar
+\definecolor{greybarcolor}{RGB}{189,189,189}  % #bdbdbd - same as HTML
+
+% Proof environment (grey bar style - matching theorem box parameters EXACTLY)
+\renewcommand{\proofname}{\bfseries Proof}
+\newmdenv[skipabove=10pt,
+    skipbelow=2pt,
+    rightline=false,
+    leftline=true,
+    topline=false,
+    bottomline=false,
+    linecolor=greybarcolor,
+    backgroundcolor=white,
+    innerleftmargin=10pt,
+    innerrightmargin=16pt,
+    innertopmargin=10pt,
+    leftmargin=0cm,
+    rightmargin=0cm,
+    linewidth=4pt,
+    innerbottommargin=10pt,
+    splittopskip=\topskip,
+    splitbottomskip=0.3\topskip,
+    firstextra={%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    middleextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    secondextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+    }]{proofbox}
+
+\if@quartomode\else
+\if@quartoenv\else
+    \renewenvironment{proof}[1][\proofname]{%
+        \proofbox%
+        \parindent=0pt%
+        \noindent\textbf{#1.} %
+    }{%
+        \qed%
+        \endproofbox%
+        \vspace{0.5em}%
+    }
+\fi
+\fi
+
+% Claim environment (blue border)
+\newmdenv[skipabove=7pt,
+    skipbelow=12pt,
+    rightline=false,
+    leftline=true,
+    topline=false,
+    bottomline=false,
+    linecolor=claimcolor,
+    backgroundcolor=white,
+    innerleftmargin=10pt,
+    innerrightmargin=16pt,
+    innertopmargin=10pt,
+    leftmargin=0cm,
+    rightmargin=0cm,
+    linewidth=4pt,
+    innerbottommargin=10pt,
+    splittopskip=\topskip,
+    splitbottomskip=0.3\topskip,
+    firstextra={%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    middleextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    secondextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+    }]{claimbox}
+
+\newenvironment{claim}[1][]{%
+    \claimbox%
+    \parindent=0pt%
+    \noindent\textbf{Claim}\if\relax\detokenize{#1}\relax.\else. \textbf{(#1)}\fi\space%
+}{%
+    \endclaimbox%
+}
+
+% Remark environment (grey bar style - matching theorem box parameters EXACTLY)
+\newmdenv[skipabove=10pt,
+    skipbelow=2pt,
+    rightline=false,
+    leftline=true,
+    topline=false,
+    bottomline=false,
+    linecolor=greybarcolor,
+    backgroundcolor=white,
+    innerleftmargin=10pt,
+    innerrightmargin=16pt,
+    innertopmargin=10pt,
+    leftmargin=0cm,
+    rightmargin=0cm,
+    linewidth=4pt,
+    innerbottommargin=10pt,
+    splittopskip=\topskip,
+    splitbottomskip=0.3\topskip,
+    firstextra={%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    middleextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    secondextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+    }]{remarkbox}
+
+\if@quartomode\else
+\if@quartoenv\else
+    \newenvironment{remark}[1][]{%
+        \remarkbox%
+        \parindent=0pt%
+        \noindent\textbf{Remark}\if\relax\detokenize{#1}\relax.\else. \textbf{(#1)}\fi\space%
+    }{%
+        \endremarkbox%
+    }
+\fi
+\fi
+
+% Example environment (maroon border)
+\newmdenv[skipabove=7pt,
+    skipbelow=12pt,
+    rightline=false,
+    leftline=true,
+    topline=false,
+    bottomline=false,
+    linecolor=examplecolor,
+    backgroundcolor=examplebg,
+    innerleftmargin=10pt,
+    innerrightmargin=16pt,
+    innertopmargin=10pt,
+    leftmargin=0cm,
+    rightmargin=0cm,
+    linewidth=4pt,
+    innerbottommargin=10pt,
+    splittopskip=\topskip,
+    splitbottomskip=0.3\topskip,
+    firstextra={%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    middleextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    secondextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+    }]{examplebox}
+
+\if@quartomode\else
+\if@quartoenv\else
+    \newenvironment{example}[1][]{%
+        \examplebox%
+        \parindent=0pt%
+        \noindent\textbf{Example}\if\relax\detokenize{#1}\relax.\else. \textbf{(#1)}\fi\space%
+    }{%
+        \endexamplebox%
+    }
+\fi
+\fi
+
+% Problem environment (brown border)
+\newmdenv[skipabove=7pt,
+    skipbelow=12pt,
+    rightline=false,
+    leftline=true,
+    topline=false,
+    bottomline=false,
+    linecolor=problemcolor,
+    backgroundcolor=problembg,
+    innerleftmargin=10pt,
+    innerrightmargin=16pt,
+    innertopmargin=10pt,
+    leftmargin=0cm,
+    rightmargin=0cm,
+    linewidth=4pt,
+    innerbottommargin=10pt,
+    splittopskip=\topskip,
+    splitbottomskip=0.3\topskip,
+    firstextra={%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    middleextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    secondextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+    }]{problembox}
+
+\newenvironment{problem}[1][]{%
+    \problembox%
+    \parindent=0pt%
+    \noindent\textbf{Problem}\if\relax\detokenize{#1}\relax.\else. \textbf{(#1)}\fi\space%
+}{%
+    \endproblembox%
+}
+
+% Solution environment (grey bar style - matching theorem box parameters EXACTLY)
+\newmdenv[skipabove=10pt,
+    skipbelow=2pt,
+    rightline=false,
+    leftline=true,
+    topline=false,
+    bottomline=false,
+    linecolor=greybarcolor,
+    backgroundcolor=white,
+    innerleftmargin=10pt,
+    innerrightmargin=16pt,
+    innertopmargin=10pt,
+    leftmargin=0cm,
+    rightmargin=0cm,
+    linewidth=4pt,
+    innerbottommargin=10pt,
+    splittopskip=\topskip,
+    splitbottomskip=0.3\topskip,
+    firstextra={%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    middleextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    secondextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+    }]{solutionbox}
+
+\if@quartomode\else
+\if@quartoenv\else
+    \newenvironment{solution}[1][]{%
+        \solutionbox%
+        \parindent=0pt%
+        \noindent\textbf{Solution}\if\relax\detokenize{#1}\relax.\else. \textbf{(#1)}\fi\space%
+    }{%
+        \endsolutionbox%
+    }
+\fi
+\fi
+
+% Algorithm environment (grey bar style - matching theorem box parameters EXACTLY)
+\newmdenv[skipabove=10pt,
+    skipbelow=2pt,
+    rightline=false,
+    leftline=true,
+    topline=false,
+    bottomline=false,
+    linecolor=greybarcolor,
+    backgroundcolor=white,
+    innerleftmargin=10pt,
+    innerrightmargin=16pt,
+    innertopmargin=10pt,
+    leftmargin=0cm,
+    rightmargin=0cm,
+    linewidth=4pt,
+    innerbottommargin=10pt,
+    splittopskip=\topskip,
+    splitbottomskip=0.3\topskip,
+    firstextra={%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    middleextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    secondextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+    }]{algorithmbox}
+
+% Conclusion environment (grey border)
+\newmdenv[skipabove=7pt,
+    skipbelow=12pt,
+    rightline=false,
+    leftline=true,
+    topline=false,
+    bottomline=false,
+    linecolor=conclusioncolor,
+    backgroundcolor=white,
+    innerleftmargin=10pt,
+    innerrightmargin=16pt,
+    innertopmargin=10pt,
+    leftmargin=0cm,
+    rightmargin=0cm,
+    linewidth=4pt,
+    innerbottommargin=10pt,
+    splittopskip=\topskip,
+    splitbottomskip=0.3\topskip,
+    firstextra={%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    middleextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    secondextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+    }]{conclusionbox}
+
+\newenvironment{conclusion}[1][]{%
+    \conclusionbox%
+    \parindent=0pt%
+    \noindent\textbf{Conclusion}\if\relax\detokenize{#1}\relax.\else. \textbf{(#1)}\fi\space%
+}{%
+    \endconclusionbox%
+}
+
+% ======================================================================================
+% FIGURE HELPER
+% ======================================================================================
+
+\newcommand{\Figure}[3][0.8\textwidth]{%
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=#1]{#2}
+        \caption{#3}
+    \end{figure}
+}
+
+% ======================================================================================
+% BOOK TITLE PAGE (Springer-style) - Skip in Quarto mode
+% ======================================================================================
+
+\if@quartomode\else
+    \newcommand{\makebooktitle}[4][]{%
+        \begin{titlepage}
+            \begin{tikzpicture}[remember picture, overlay]
+                % Clean white background
+                \fill[white] (current page.south west) rectangle (current page.north east);
+                
+                % Top colored bar (Springer style)
+                \fill[definitioncolor] (current page.north west) rectangle +(\paperwidth,-0.8cm);
+                
+                % Main Title - Large and centered
+                \node[anchor=north, text=chaptercolor, text width=0.85\paperwidth, align=center] 
+                    at ([yshift=-4.5cm]current page.north) 
+                    {\fontsize{32}{38}\selectfont\bfseries #2};
+                
+                % Subtitle (if provided) - centered below title
+                \ifx&#1&\else
+                    \node[anchor=north, text=chaptercolor!75, text width=0.75\paperwidth, align=center] 
+                        at ([yshift=-7.5cm]current page.north) 
+                        {\fontsize{18}{22}\selectfont #1};
+                \fi
+                
+                % Vertical spacing line
+                \draw[chaptercolor!30, line width=1pt] 
+                    ([yshift=-10cm]current page.north west) ++(0.15\paperwidth,0) -- ++(0.7\paperwidth,0);
+                
+                % Author name - Large and centered
+                \node[anchor=north, text=chaptercolor, text width=0.7\paperwidth, align=center] 
+                    at ([yshift=-13cm]current page.north) 
+                    {\fontsize{20}{24}\selectfont\bfseries #3};
+                
+                % Bottom section with colored background (Springer style)
+                \fill[definitioncolor!10] ([yshift=4cm]current page.south west) rectangle +(\paperwidth,3cm);
+                
+                % Publisher/Institution placeholder (can be customized)
+                \node[anchor=south, text=chaptercolor!60] 
+                    at ([yshift=5.5cm]current page.south) 
+                    {\large\textit{#4}};
+                
+                % Bottom colored bar
+                \fill[definitioncolor] (current page.south west) rectangle +(\paperwidth,0.8cm);
+            \end{tikzpicture}
+        \end{titlepage}
+    }
+\fi
+
+% ======================================================================================
+% UNIVERSAL ACADEMIC MACROS (SEMANTIC & AUTOMATED)
+% ======================================================================================
+% Author: Gemini (Refactored for User)
+% ======================================================================================
+
+% [1] CONTROL PANEL (THE SWITCH)
+% ======================================================================================
+\newif\ifSemanticMode
+% ▼▼▼ STYLE SWITCH ▼▼▼
+% \SemanticModetrue  : ISO Style (Rec. for Papers)
+%                      Vectors = Italic Bold (\boldsymbol{x})
+%                      Random Vectors = Upright Bold (\mathbf{x})
+%                      Random Scalars = Upright (\mathrm{x})
+%
+% \SemanticModefalse : Engineering Style (Rec. for HW/Standard CS)
+%                      Vectors = Upright Bold (\mathbf{x})
+%                      Random Vectors = Upright Bold (\mathbf{x}) [No distinction]
+%                      Random Scalars = Italic [No distinction]
+\SemanticModetrue
+% \SemanticModefalse
+% ▲▲▲ STYLE SWITCH ▲▲▲
+
+% ======================================================================================
+% [2] CORE LOGIC DEFINITIONS
+% ======================================================================================
+\ifSemanticMode
+    % === ISO / Semantic Mode ===
+    % Deterministic Vector/Matrix (Italic Bold)
+    \newcommand{\defvec}[1]{\boldsymbol{#1}}
+    \newcommand{\defmat}[1]{\boldsymbol{#1}}
+    
+    % Random Vector/Matrix (Upright Bold)
+    \newcommand{\defrvec}[1]{\mathbf{#1}}
+    \newcommand{\defrmat}[1]{\mathbf{#1}}
+    \newcommand{\defrscal}[1]{\mathrm{#1}}
+    
+    % Greek Vectors (Italic Bold)
+    \newcommand{\defgvec}[1]{\boldsymbol{#1}}
+    \newcommand{\defgmat}[1]{\boldsymbol{#1}}
+\else
+    % === Engineering Mode ===
+    % Deterministic Vector/Matrix (Upright Bold)
+    \newcommand{\defvec}[1]{\mathbf{#1}}
+    \newcommand{\defmat}[1]{\mathbf{#1}}
+    
+    % Random Vector/Matrix (Same as Deterministic)
+    \newcommand{\defrvec}[1]{\mathbf{#1}}
+    \newcommand{\defrmat}[1]{\mathbf{#1}}
+    \newcommand{\defrscal}[1]{#1} % No special font for random scalar
+    
+    % Greek Vectors (Upright Bold via upgreek)
+    % Note: requires \upalpha, \upbeta...
+    \newcommand{\defgvec}[1]{\bm{\csname up#1\endcsname}} 
+    \newcommand{\defgmat}[1]{\bm{#1}} % Capital Greek is already upright in LaTeX usually
+\fi
+
+% ======================================================================================
+% [3] AUTOMATED GENERATORS (THE LOOP)
+% ======================================================================================
+
+% --- 1. Latin Vectors (\va ... \vz) ---
+% Logic: \v + letter -> Deterministic Vector
+\foreach \letter in {a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z}{%
+    \expandafter\xdef\csname v\letter\endcsname{\noexpand\defvec{\letter}}
+}
+
+% --- 2. Latin Matrices (\A ... \Z) ---
+% Logic: Capital letter -> Deterministic Matrix
+% Note: Using \A directly to match your habit.
+\foreach \letter in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z}{%
+    \expandafter\xdef\csname \letter\endcsname{\noexpand\defmat{\letter}}
+}
+
+% --- 3. Capital Latin Vectors (\vA ... \vZ) ---
+% Logic: \v + Capital letter -> Deterministic Vector
+\foreach \letter in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z}{%
+    \expandafter\xdef\csname v\letter\endcsname{\noexpand\defvec{\letter}}
+}
+
+% --- 4. Greek Vectors (\valpha ... \vomega) ---
+% Logic: \v + name -> Deterministic Vector
+\foreach \gletter in {alpha,beta,gamma,delta,epsilon,zeta,eta,theta,iota,kappa,lambda,mu,nu,xi,pi,rho,sigma,tau,upsilon,phi,chi,psi,omega,varepsilon,vartheta,varpi,varrho,varsigma,varphi}{%
+    \expandafter\xdef\csname v\gletter\endcsname{\noexpand\defgvec{\gletter}}
+}
+
+% --- 5. Greek Matrices (\vGamma ... \vOmega) ---
+% Logic: \v + Capital name -> Deterministic Matrix
+\foreach \gletter in {Gamma,Delta,Theta,Lambda,Xi,Pi,Sigma,Upsilon,Phi,Psi,Omega}{%
+    \expandafter\xdef\csname v\gletter\endcsname{\noexpand\defgmat{\gletter}}
+}
+
+% --- 6. Random Variables (\rx, \rX) ---
+% Logic: \r + letter -> Random Vector / Matrix
+\foreach \letter in {a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z}{%
+    \expandafter\xdef\csname r\letter\endcsname{\noexpand\defrvec{\letter}}
+}
+\foreach \letter in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z}{%
+    \expandafter\xdef\csname r\letter\endcsname{\noexpand\defrmat{\letter}}
+}
+
+% --- 7. Special Definitions (Zero, One) ---
+\def\0{\defvec{0}}
+\def\1{\defvec{1}}
+
+% ======================================================================================
+% [4] SPEED ALIASES (OPTIONAL)
+% ======================================================================================
+% Map single letters to vectors for high-speed typing
+% WARNING: This overwrites standard commands. 
+% \def \x {\vx}
+% \def \y {\vy}
+% \def \z {\vz}
+% \def \w {\vw}
+% \def \b {\vb}
+
+% ======================================================================================
+% [5] SETS SHORTCUTS (UNCHANGED)
+% ======================================================================================
+% Calligraphic Sets (\sA -> \mathcal{A})
+\foreach \letter in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z}{%
+    \expandafter\xdef\csname s\letter\endcsname{\noexpand\mathcal{\letter}}
+}
+
+% Blackboard Sets (\nA -> \mathbb{A})
+\foreach \letter in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z}{%
+    \expandafter\xdef\csname n\letter\endcsname{\noexpand\mathbb{\letter}}
+}
+
+% Common aliases
+% \def \R {\nR}
+% \def \N {\nN}
+% \def \Z {\nZ}
+% \def \C {\nC}
+% \def \Q {\nQ}
+
+% ======================================================================================
+% [6] PROBABILITY & STATISTICS
+% ======================================================================================
+\DeclareMathOperator*{\Ev}{\mathbb{E}}
+\let\Pr\relax \DeclareMathOperator{\Pr}{Pr}
+\DeclareMathOperator*{\Var}{Var}
+\DeclareMathOperator*{\Cov}{Cov}
+\DeclareMathOperator*{\Cor}{Cor}
+\DeclareMathOperator*{\Corr}{Corr}
+
+% Distributions
+\DeclareMathOperator{\distBern}{Ber}
+\DeclareMathOperator{\distBin}{Bin}
+\DeclareMathOperator{\distGeom}{Geo}
+\DeclareMathOperator{\distNB}{NB}
+\DeclareMathOperator{\distPois}{Poi}
+\DeclareMathOperator{\distHyp}{Hyp}
+\DeclareMathOperator{\distUnif}{Unif}
+\DeclareMathOperator{\distExp}{Exp}
+\DeclareMathOperator{\distGamma}{Gamma}
+\DeclareMathOperator{\distN}{\mathcal{N}}
+\DeclareMathOperator{\distBeta}{Beta}
+\DeclareMathOperator{\distCauchy}{Cauchy}
+\DeclareMathOperator{\distLognormal}{Lognormal}
+\DeclareMathOperator{\distWeibull}{Weibull}
+\DeclareMathOperator{\distPareto}{Pareto}
+\DeclareMathOperator{\distDir}{Dir}
+\DeclareMathOperator{\distMult}{Mult}
+\DeclareMathOperator{\distWishart}{Wishart}
+\DeclareMathOperator{\distInvWishart}{InvWishart}
+
+% ======================================================================================
+% [7] LINEAR ALGEBRA & ANALYSIS
+% ======================================================================================
+\let\tr\relax \DeclareMathOperator{\tr}{tr}
+\let\rank\relax \DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\nul}{nul}
+\DeclareMathOperator{\img}{img}
+\let\diag\relax \DeclareMathOperator{\diag}{diag}
+\def \dd {\mathrm{d}} % Differential d (ISO standard)
+\def \T {^\top}       % Transpose (Usage: \A\T)
+
+% Delimiters (from old set)
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\im}{im}
+
+% ======================================================================================
+% [8] EXTREME SHORTCUTS (Use with caution)
+% ======================================================================================
+% Save original commands in case you need to type Polish names or accents later
+\let\oldl\l
+\let\oldr\r
+
+% Redefine \l and \r to be \left and \right
+\renewcommand{\l}{\left}
+\renewcommand{\r}{\right}
+
+% ======================================================================================
+% QUARTO ENVIRONMENT STYLING HOOKS
+% ======================================================================================
+% When using quartoenv option, wrap Quarto's theorem environments with styled boxes
+% This is done at begin document so Quarto's environments are already defined
+
+\if@quartoenv
+\AtBeginDocument{%
+    % Theorem (orange) - wrap with tBox
+    \BeforeBeginEnvironment{theorem}{\par\addvspace{0.8em}\begin{tBox}}%
+    \AfterEndEnvironment{theorem}{\end{tBox}}%
+    
+    % Definition (teal) - wrap with dBox
+    \BeforeBeginEnvironment{definition}{\par\addvspace{0.8em}\begin{dBox}}%
+    \AfterEndEnvironment{definition}{\end{dBox}}%
+    
+    % Lemma (teal) - wrap with lBox
+    \BeforeBeginEnvironment{lemma}{\par\addvspace{0.8em}\begin{lBox}}%
+    \AfterEndEnvironment{lemma}{\end{lBox}}%
+    
+    % Corollary (dark red) - wrap with cBox
+    \BeforeBeginEnvironment{corollary}{\par\addvspace{0.8em}\begin{cBox}}%
+    \AfterEndEnvironment{corollary}{\end{cBox}}%
+    
+    % Proposition (dark orange) - wrap with pBox
+    \BeforeBeginEnvironment{proposition}{\par\addvspace{0.8em}\begin{pBox}}%
+    \AfterEndEnvironment{proposition}{\end{pBox}}%
+    
+    % Example (maroon) - wrap with examplebox
+    \BeforeBeginEnvironment{example}{\par\addvspace{0.8em}\begin{examplebox}}%
+    \AfterEndEnvironment{example}{\end{examplebox}}%
+    
+    % Exercise (brown) - wrap with problembox
+    \BeforeBeginEnvironment{exercise}{\par\addvspace{0.8em}\begin{problembox}}%
+    \AfterEndEnvironment{exercise}{\end{problembox}}%
+    
+    % --- Minimal grey bar style for proof environment ---
+    % Proof (grey bar) - standard amsthm, use Before/After hooks
+    \BeforeBeginEnvironment{proof}{\begin{proofbox}}%
+    \AfterEndEnvironment{proof}{\end{proofbox}}%
+    
+    % NOTE: solution, remark, algorithm need direct patching in document preamble
+    % because Quarto defines them differently. See hello.qmd include-before-body.
+}
+\fi
+
+% End of package
+\endinput

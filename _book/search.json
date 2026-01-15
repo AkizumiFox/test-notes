@@ -1,0 +1,292 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Advanced Linear Algebra Notes",
+    "section": "",
+    "text": "Preface\nWelcome to Advanced Linear Algebra Notes, a comprehensive guide to spectral theory and optimization techniques in linear algebra.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#about-this-book",
+    "href": "index.html#about-this-book",
+    "title": "Advanced Linear Algebra Notes",
+    "section": "About This Book",
+    "text": "About This Book\nThis book provides a rigorous yet accessible introduction to advanced topics in linear algebra, with a focus on:\n\nSpectral Theory: Eigenvalues, eigenvectors, and matrix decompositions\nOptimization: Convex optimization and its applications\nComputational Methods: Algorithms for numerical linear algebra",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#how-to-use-this-book",
+    "href": "index.html#how-to-use-this-book",
+    "title": "Advanced Linear Algebra Notes",
+    "section": "How to Use This Book",
+    "text": "How to Use This Book\nEach chapter contains:\n\nDefinitions with precise mathematical statements\nTheorems with complete proofs\nExamples illustrating key concepts\nExercises for practice",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#prerequisites",
+    "href": "index.html#prerequisites",
+    "title": "Advanced Linear Algebra Notes",
+    "section": "Prerequisites",
+    "text": "Prerequisites\nReaders should be familiar with:\n\nBasic linear algebra (vectors, matrices, linear transformations)\nCalculus (derivatives, integrals)\nBasic proof techniques",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#acknowledgments",
+    "href": "index.html#acknowledgments",
+    "title": "Advanced Linear Algebra Notes",
+    "section": "Acknowledgments",
+    "text": "Acknowledgments\nThis book was created using Quarto with a custom LaTeX template for beautiful mathematical typesetting.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "ch01-foundations/index.html",
+    "href": "ch01-foundations/index.html",
+    "title": "1  Chapter 1: Foundations",
+    "section": "",
+    "text": "2 Foundations\nThis chapter covers the fundamental concepts of linear algebra that form the foundation for all subsequent material.\nIn this chapter, we will explore:\nThese concepts are essential for understanding spectral theory and optimization techniques covered in later chapters.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Chapter 1: Foundations</span>"
+    ]
+  },
+  {
+    "objectID": "ch01-foundations/index.html#prerequisites",
+    "href": "ch01-foundations/index.html#prerequisites",
+    "title": "1  Chapter 1: Foundations",
+    "section": "2.1 Prerequisites",
+    "text": "2.1 Prerequisites\nBefore proceeding, readers should be familiar with:\n\nBasic matrix operations (addition, multiplication, transpose)\nSystems of linear equations\nElementary row operations and Gaussian elimination",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Chapter 1: Foundations</span>"
+    ]
+  },
+  {
+    "objectID": "ch01-foundations/01-vector-spaces.html",
+    "href": "ch01-foundations/01-vector-spaces.html",
+    "title": "2  1.1 Vector Spaces",
+    "section": "",
+    "text": "2.1 Vector Spaces",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1.1 Vector Spaces</span>"
+    ]
+  },
+  {
+    "objectID": "ch01-foundations/01-vector-spaces.html#vector-spaces",
+    "href": "ch01-foundations/01-vector-spaces.html#vector-spaces",
+    "title": "2  1.1 Vector Spaces",
+    "section": "",
+    "text": "2.1.1 Introduction\nA vector space is one of the most fundamental structures in mathematics. It provides an abstract framework for studying objects that can be added together and scaled.\n\n\n2.1.2 Definition\n\nDefinition 2.1 (Vector Space) A vector space over a field \\(\\mathbb{R}\\) (or \\(\\mathbb{C}\\)) is a set \\(V\\) together with two operations:\n\nVector addition: \\(+: V \\times V \\to V\\)\nScalar multiplication: \\(\\cdot: \\mathbb{R}\\times V \\to V\\)\n\nsatisfying the following axioms for all \\(\\mathbf{u}, \\mathbf{v}, \\mathbf{w}\\in V\\) and \\(a, b \\in \\mathbb{R}\\):\n\nCommutativity: \\(\\mathbf{u}+ \\mathbf{v}= \\mathbf{v}+ \\mathbf{u}\\)\nAssociativity: \\((\\mathbf{u}+ \\mathbf{v}) + \\mathbf{w}= \\mathbf{u}+ (\\mathbf{v}+ \\mathbf{w})\\)\nAdditive identity: There exists \\(\\mathbf{0} \\in V\\) such that \\(\\mathbf{v}+ \\mathbf{0} = \\mathbf{v}\\)\nAdditive inverse: For each \\(\\mathbf{v}\\), there exists \\(-\\mathbf{v}\\) such that \\(\\mathbf{v}+ (-\\mathbf{v}) = \\mathbf{0}\\)\nScalar associativity: \\(a(b\\mathbf{v}) = (ab)\\mathbf{v}\\)\nDistributivity: \\(a(\\mathbf{u}+ \\mathbf{v}) = a\\mathbf{u}+ a\\mathbf{v}\\) and \\((a+b)\\mathbf{v}= a\\mathbf{v}+ b\\mathbf{v}\\)\nScalar identity: \\(1\\mathbf{v}= \\mathbf{v}\\)\n\n\n\n\n2.1.3 Examples\n\nExample 2.1 (Euclidean Space) The set \\(\\mathbb{R}^n\\) with standard addition and scalar multiplication is a vector space.\n\n\n\n2.1.4 Exercises\n\nExercise 2.1 (Subspace Criterion) Prove that a non-empty subset \\(W \\subseteq V\\) is a subspace if and only if \\(a\\mathbf{u}+ b\\mathbf{v}\\in W\\) for all \\(\\mathbf{u}, \\mathbf{v}\\in W\\) and \\(a, b \\in \\mathbb{R}\\).",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1.1 Vector Spaces</span>"
+    ]
+  },
+  {
+    "objectID": "ch01-foundations/02-linear-maps.html",
+    "href": "ch01-foundations/02-linear-maps.html",
+    "title": "3  1.2 Linear Maps",
+    "section": "",
+    "text": "3.1 Linear Maps",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>1.2 Linear Maps</span>"
+    ]
+  },
+  {
+    "objectID": "ch01-foundations/02-linear-maps.html#linear-maps",
+    "href": "ch01-foundations/02-linear-maps.html#linear-maps",
+    "title": "3  1.2 Linear Maps",
+    "section": "",
+    "text": "3.1.1 Introduction\nLinear maps are functions between vector spaces that preserve the linear structure. They are the natural morphisms in the category of vector spaces.\n\n\n3.1.2 Definition\n\nDefinition 3.1 (Linear Map) Let \\(V\\) and \\(W\\) be vector spaces over \\(\\mathbb{R}\\). A function \\(T: V \\to W\\) is called a linear map (or linear transformation) if for all \\(\\mathbf{u}, \\mathbf{v}\\in V\\) and \\(a \\in \\mathbb{R}\\):\n\n\\(T(\\mathbf{u}+ \\mathbf{v}) = T(\\mathbf{u}) + T(\\mathbf{v})\\) (additivity)\n\\(T(a\\mathbf{v}) = aT(\\mathbf{v})\\) (homogeneity)\n\n\nEquivalently, \\(T\\) is linear if and only if \\(T(a\\mathbf{u}+ b\\mathbf{v}) = aT(\\mathbf{u}) + bT(\\mathbf{v})\\) for all vectors and scalars.\n\n\n3.1.3 Fundamental Subspaces\n\nDefinition 3.2 (Kernel and Image) Let \\(T: V \\to W\\) be a linear map.\n\nThe kernel (or null space) of \\(T\\) is \\(\\ker(T) = \\{\\mathbf{v}\\in V : T(\\mathbf{v}) = \\mathbf{0}\\}\\)\nThe image (or range) of \\(T\\) is \\(\\text{im}(T) = \\{T(\\mathbf{v}) : \\mathbf{v}\\in V\\}\\)\n\n\n\nTheorem 3.1 (Rank-Nullity Theorem) Let \\(T: V \\to W\\) be a linear map where \\(V\\) is finite-dimensional. Then: \\[\n\\dim(V) = \\dim(\\ker(T)) + \\dim(\\text{im}(T))\n\\]\n\n\n\n3.1.4 Exercises\n\nExercise 3.1 (Composition of Linear Maps) Prove that the composition of two linear maps is linear.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>1.2 Linear Maps</span>"
+    ]
+  },
+  {
+    "objectID": "ch02-spectral-theory/index.html",
+    "href": "ch02-spectral-theory/index.html",
+    "title": "4  Chapter 2: Spectral Theory",
+    "section": "",
+    "text": "5 Spectral Theory\nThis chapter delves into spectral theory, one of the most powerful tools in linear algebra with applications across mathematics, physics, and engineering.\nIn this chapter, we will explore:",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Chapter 2: Spectral Theory</span>"
+    ]
+  },
+  {
+    "objectID": "ch02-spectral-theory/index.html#motivation",
+    "href": "ch02-spectral-theory/index.html#motivation",
+    "title": "4  Chapter 2: Spectral Theory",
+    "section": "5.1 Motivation",
+    "text": "5.1 Motivation\nSpectral theory allows us to understand linear transformations by examining their action on special vectors (eigenvectors) and the associated scaling factors (eigenvalues). This perspective simplifies many problems and reveals deep connections between algebra and geometry.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Chapter 2: Spectral Theory</span>"
+    ]
+  },
+  {
+    "objectID": "ch02-spectral-theory/index.html#applications",
+    "href": "ch02-spectral-theory/index.html#applications",
+    "title": "4  Chapter 2: Spectral Theory",
+    "section": "5.2 Applications",
+    "text": "5.2 Applications\nThe techniques in this chapter are essential for:\n\nPrincipal Component Analysis (PCA)\nStability analysis of dynamical systems\nQuantum mechanics\nNetwork analysis and PageRank",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Chapter 2: Spectral Theory</span>"
+    ]
+  },
+  {
+    "objectID": "ch02-spectral-theory/01-eigenvalues.html",
+    "href": "ch02-spectral-theory/01-eigenvalues.html",
+    "title": "5  2.1 Eigenvalues and Eigenvectors",
+    "section": "",
+    "text": "5.1 Eigenvalues and Eigenvectors",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>2.1 Eigenvalues and Eigenvectors</span>"
+    ]
+  },
+  {
+    "objectID": "ch02-spectral-theory/01-eigenvalues.html#eigenvalues-and-eigenvectors",
+    "href": "ch02-spectral-theory/01-eigenvalues.html#eigenvalues-and-eigenvectors",
+    "title": "5  2.1 Eigenvalues and Eigenvectors",
+    "section": "",
+    "text": "5.1.1 Introduction\nEigenvalues and eigenvectors reveal the intrinsic properties of linear transformations. They tell us about the directions in which a transformation acts by simple scaling.\n\n\n5.1.2 Definitions\n\nDefinition 5.1 (Eigenvalue and Eigenvector) Let \\(\\mathbf{A}\\in \\mathbb{R}^{n \\times n}\\). A scalar \\(\\lambda \\in \\mathbb{C}\\) is called an eigenvalue of \\(\\mathbf{A}\\) if there exists a non-zero vector \\(\\mathbf{v}\\in \\mathbb{C}^n\\) such that: \\[\n\\mathbf{A}\\mathbf{v}= \\lambda\\mathbf{v}\n\\] The vector \\(\\mathbf{v}\\) is called an eigenvector corresponding to \\(\\lambda\\).\n\n\nDefinition 5.2 (Characteristic Polynomial) The characteristic polynomial of \\(\\mathbf{A}\\) is: \\[\np(\\lambda) = \\det(\\mathbf{A}- \\lambda\\mathbf{I})\n\\] The eigenvalues of \\(\\mathbf{A}\\) are the roots of \\(p(\\lambda)\\).\n\n\n\n5.1.3 Properties\n\nTheorem 5.1 (Real Eigenvalues of Symmetric Matrices) If \\(\\mathbf{A}\\in \\mathbb{R}^{n \\times n}\\) is symmetric, then all eigenvalues of \\(\\mathbf{A}\\) are real.\n\n\nProof. Let \\(\\lambda\\) be an eigenvalue with eigenvector \\(\\mathbf{v}\\). Taking the conjugate transpose of \\(\\mathbf{A}\\mathbf{v}= \\lambda\\mathbf{v}\\): \\[\n\\bar{\\mathbf{v}}^\\top \\mathbf{A}= \\bar{\\lambda} \\bar{\\mathbf{v}}^\\top\n\\] Multiplying both sides on the right by \\(\\mathbf{v}\\) and using symmetry of \\(\\mathbf{A}\\): \\[\n\\bar{\\mathbf{v}}^\\top \\mathbf{A}\\mathbf{v}= \\bar{\\lambda} \\bar{\\mathbf{v}}^\\top \\mathbf{v}= \\bar{\\lambda} \\left\\lVert\\mathbf{v}\\right\\rVert^2\n\\] But also \\(\\bar{\\mathbf{v}}^\\top \\mathbf{A}\\mathbf{v}= \\bar{\\mathbf{v}}^\\top (\\lambda \\mathbf{v}) = \\lambda \\left\\lVert\\mathbf{v}\\right\\rVert^2\\). Thus \\(\\lambda = \\bar{\\lambda}\\), so \\(\\lambda \\in \\mathbb{R}\\).\n\n\n\n5.1.4 Exercises\n\nExercise 5.1 (Trace and Determinant) Prove that for any \\(\\mathbf{A}\\in \\mathbb{R}^{n \\times n}\\):\n\n\\(\\text{tr}(\\mathbf{A}) = \\sum_{i=1}^n \\lambda_i\\)\n\\(\\det(\\mathbf{A}) = \\prod_{i=1}^n \\lambda_i\\)\n\nwhere \\(\\lambda_1, \\ldots, \\lambda_n\\) are the eigenvalues of \\(\\mathbf{A}\\) (counting multiplicity).",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>2.1 Eigenvalues and Eigenvectors</span>"
+    ]
+  },
+  {
+    "objectID": "ch02-spectral-theory/02-decompositions.html",
+    "href": "ch02-spectral-theory/02-decompositions.html",
+    "title": "6  2.2 Matrix Decompositions",
+    "section": "",
+    "text": "6.1 Matrix Decompositions",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>2.2 Matrix Decompositions</span>"
+    ]
+  },
+  {
+    "objectID": "ch02-spectral-theory/02-decompositions.html#matrix-decompositions",
+    "href": "ch02-spectral-theory/02-decompositions.html#matrix-decompositions",
+    "title": "6  2.2 Matrix Decompositions",
+    "section": "",
+    "text": "6.1.1 Introduction\nMatrix decompositions factor a matrix into products of simpler matrices. These factorizations reveal structure and enable efficient computation.\n\n\n6.1.2 Spectral Decomposition\n\nTheorem 6.1 (Spectral Theorem) Let \\(\\mathbf{A}\\in \\mathbb{R}^{n \\times n}\\) be symmetric. Then \\(\\mathbf{A}\\) can be decomposed as: \\[\n\\mathbf{A}= \\mathbf{Q} \\mathbf{\\Lambda} \\mathbf{Q}^\\top\n\\] where \\(\\mathbf{Q}\\) is orthogonal (its columns are orthonormal eigenvectors of \\(\\mathbf{A}\\)) and \\(\\mathbf{\\Lambda} = \\text{diag}(\\lambda_1, \\ldots, \\lambda_n)\\) is diagonal (containing the eigenvalues).\n\n\n\n6.1.3 Singular Value Decomposition\n\nDefinition 6.1 (Singular Value Decomposition (SVD)) Every matrix \\(\\mathbf{A}\\in \\mathbb{R}^{m \\times n}\\) can be factored as: \\[\n\\mathbf{A}= \\mathbf{U} \\mathbf{\\Sigma} \\mathbf{V}^\\top\n\\] where:\n\n\\(\\mathbf{U} \\in \\mathbb{R}^{m \\times m}\\) is orthogonal (left singular vectors)\n\\(\\mathbf{\\Sigma} \\in \\mathbb{R}^{m \\times n}\\) is diagonal with non-negative entries (singular values)\n\\(\\mathbf{V} \\in \\mathbb{R}^{n \\times n}\\) is orthogonal (right singular vectors)\n\n\n\nTheorem 6.2 (SVD and Rank) The rank of \\(\\mathbf{A}\\) equals the number of non-zero singular values.\n\n\n\n6.1.4 Applications\n\nExample 6.1 (Principal Component Analysis) PCA uses the SVD to find the directions of maximum variance in a dataset. If \\(\\mathbf{X}\\) is a centered data matrix, the principal components are the right singular vectors of \\(\\mathbf{X}\\).\n\n\n\n6.1.5 Exercises\n\nExercise 6.1 (Moore-Penrose Pseudoinverse) Using the SVD \\(\\mathbf{A}= \\mathbf{U} \\mathbf{\\Sigma} \\mathbf{V}^\\top\\), show that the pseudoinverse is given by \\(\\mathbf{A}^+ = \\mathbf{V} \\mathbf{\\Sigma}^+ \\mathbf{U}^\\top\\).",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>2.2 Matrix Decompositions</span>"
+    ]
+  },
+  {
+    "objectID": "ch03-optimization/index.html",
+    "href": "ch03-optimization/index.html",
+    "title": "7  Chapter 3: Optimization",
+    "section": "",
+    "text": "8 Optimization\nThis chapter covers optimization theory, with a focus on problems that leverage linear algebraic structure.\nIn this chapter, we will explore:",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Chapter 3: Optimization</span>"
+    ]
+  },
+  {
+    "objectID": "ch03-optimization/index.html#motivation",
+    "href": "ch03-optimization/index.html#motivation",
+    "title": "7  Chapter 3: Optimization",
+    "section": "8.1 Motivation",
+    "text": "8.1 Motivation\nOptimization is central to machine learning, operations research, control theory, and many other fields. Linear algebra provides both the language for formulating optimization problems and the tools for solving them efficiently.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Chapter 3: Optimization</span>"
+    ]
+  },
+  {
+    "objectID": "ch03-optimization/index.html#connection-to-previous-chapters",
+    "href": "ch03-optimization/index.html#connection-to-previous-chapters",
+    "title": "7  Chapter 3: Optimization",
+    "section": "8.2 Connection to Previous Chapters",
+    "text": "8.2 Connection to Previous Chapters\nThe spectral theory from Chapter 2 plays a crucial role in:\n\nAnalyzing the convergence of optimization algorithms\nUnderstanding the geometry of quadratic functions\nDeriving closed-form solutions for least squares problems",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Chapter 3: Optimization</span>"
+    ]
+  },
+  {
+    "objectID": "ch03-optimization/01-convex-optimization.html",
+    "href": "ch03-optimization/01-convex-optimization.html",
+    "title": "8  3.1 Convex Optimization",
+    "section": "",
+    "text": "8.1 Convex Optimization",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>3.1 Convex Optimization</span>"
+    ]
+  },
+  {
+    "objectID": "ch03-optimization/01-convex-optimization.html#convex-optimization",
+    "href": "ch03-optimization/01-convex-optimization.html#convex-optimization",
+    "title": "8  3.1 Convex Optimization",
+    "section": "",
+    "text": "8.1.1 Introduction\nConvex optimization is the study of minimizing convex functions over convex sets. The theory is elegant and the algorithms are efficient, making convex optimization a cornerstone of modern applied mathematics.\n\n\n8.1.2 Convex Sets and Functions\n\nDefinition 8.1 (Convex Set) A set \\(C \\subseteq \\mathbb{R}^n\\) is convex if for all \\(\\mathbf{x}, \\mathbf{y}\\in C\\) and \\(\\theta \\in [0, 1]\\): \\[\n\\theta \\mathbf{x}+ (1 - \\theta) \\mathbf{y}\\in C\n\\]\n\n\nDefinition 8.2 (Convex Function) A function \\(f: \\mathbb{R}^n \\to \\mathbb{R}\\) is convex if for all \\(\\mathbf{x}, \\mathbf{y}\\in \\mathbb{R}^n\\) and \\(\\theta \\in [0, 1]\\): \\[\nf(\\theta \\mathbf{x}+ (1 - \\theta) \\mathbf{y}) \\leq \\theta f(\\mathbf{x}) + (1 - \\theta) f(\\mathbf{y})\n\\]\n\n\n\n8.1.3 Optimality Conditions\n\nTheorem 8.1 (First-Order Optimality) Let \\(f: \\mathbb{R}^n \\to \\mathbb{R}\\) be convex and differentiable. Then \\(\\mathbf{x}^*\\) is a global minimizer if and only if: \\[\n\\nabla f(\\mathbf{x}^*) = \\mathbf{0}\n\\]\n\n\nTheorem 8.2 (Second-Order Condition) A twice-differentiable function \\(f\\) is convex if and only if its Hessian is positive semidefinite everywhere: \\[\n\\nabla^2 f(\\mathbf{x}) \\succeq 0 \\quad \\text{for all } \\mathbf{x}\n\\]\n\n\n\n8.1.4 Quadratic Programming\n\nDefinition 8.3 (Quadratic Program) A quadratic program (QP) is an optimization problem of the form: \\[\n\\begin{aligned}\n\\min_{\\mathbf{x}} \\quad & \\frac{1}{2} \\mathbf{x}^\\top \\mathbf{P} \\mathbf{x}+ \\mathbf{q}^\\top \\mathbf{x}\\\\\n\\text{s.t.} \\quad & \\mathbf{A}\\mathbf{x}= \\mathbf{b} \\\\\n& \\mathbf{G} \\mathbf{x}\\leq \\mathbf{h}\n\\end{aligned}\n\\] The problem is convex if \\(\\mathbf{P} \\succeq 0\\).\n\n\n\n8.1.5 Exercises\n\nExercise 8.1 (Least Squares as QP) Show that the least squares problem \\(\\min_\\mathbf{x}\\left\\lVert\\mathbf{A}\\mathbf{x}- \\mathbf{b}\\right\\rVert^2\\) is a convex QP and derive the normal equations.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>3.1 Convex Optimization</span>"
+    ]
+  },
+  {
+    "objectID": "appendices/notation.html",
+    "href": "appendices/notation.html",
+    "title": "Notation",
+    "section": "",
+    "text": "Sets\nThis appendix summarizes the notation used throughout this book.",
+    "crumbs": [
+      "Notation"
+    ]
+  },
+  {
+    "objectID": "appendices/notation.html#sets",
+    "href": "appendices/notation.html#sets",
+    "title": "Notation",
+    "section": "",
+    "text": "Symbol\nMeaning\n\n\n\n\n\\(\\R\\)\nReal numbers\n\n\n\\(\\C\\)\nComplex numbers\n\n\n\\(\\N\\)\nNatural numbers\n\n\n\\(\\Z\\)\nIntegers\n\n\n\\(\\R^n\\)\n\\(n\\)-dimensional Euclidean space\n\n\n\\(\\R^{m \\times n}\\)\nSpace of \\(m \\times n\\) real matrices",
+    "crumbs": [
+      "Notation"
+    ]
+  },
+  {
+    "objectID": "appendices/notation.html#vectors-and-matrices",
+    "href": "appendices/notation.html#vectors-and-matrices",
+    "title": "Notation",
+    "section": "Vectors and Matrices",
+    "text": "Vectors and Matrices\n\n\n\nSymbol\nMeaning\n\n\n\n\n\\(\\bx, \\by, \\bz\\)\nVectors (boldface lowercase)\n\n\n\\(\\bA, \\bB\\)\nMatrices (boldface uppercase)\n\n\n\\(\\bI\\)\nIdentity matrix\n\n\n\\(\\mathbf{0}\\)\nZero vector or matrix\n\n\n\\(\\bA^\\top\\)\nTranspose of \\(\\bA\\)\n\n\n\\(\\bA^{-1}\\)\nInverse of \\(\\bA\\)\n\n\n\\(\\bA^+\\)\nMoore-Penrose pseudoinverse of \\(\\bA\\)",
+    "crumbs": [
+      "Notation"
+    ]
+  },
+  {
+    "objectID": "appendices/notation.html#operations",
+    "href": "appendices/notation.html#operations",
+    "title": "Notation",
+    "section": "Operations",
+    "text": "Operations\n\n\n\nSymbol\nMeaning\n\n\n\n\n\\(\\inner{\\bx}{\\by}\\)\nInner product of \\(\\bx\\) and \\(\\by\\)\n\n\n\\(\\norm{\\bx}\\)\nEuclidean norm of \\(\\bx\\)\n\n\n\\(\\trace(\\bA)\\)\nTrace of \\(\\bA\\)\n\n\n\\(\\det(\\bA)\\)\nDeterminant of \\(\\bA\\)\n\n\n\\(\\rank(\\bA)\\)\nRank of \\(\\bA\\)\n\n\n\\(\\diag(\\lambda_1, \\ldots, \\lambda_n)\\)\nDiagonal matrix",
+    "crumbs": [
+      "Notation"
+    ]
+  },
+  {
+    "objectID": "appendices/notation.html#eigenvalues-and-singular-values",
+    "href": "appendices/notation.html#eigenvalues-and-singular-values",
+    "title": "Notation",
+    "section": "Eigenvalues and Singular Values",
+    "text": "Eigenvalues and Singular Values\n\n\n\nSymbol\nMeaning\n\n\n\n\n\\(\\lambda_i\\)\nEigenvalue\n\n\n\\(\\sigma_i\\)\nSingular value\n\n\n\\(\\lambda_{\\max}(\\bA)\\)\nLargest eigenvalue of \\(\\bA\\)\n\n\n\\(\\lambda_{\\min}(\\bA)\\)\nSmallest eigenvalue of \\(\\bA\\)",
+    "crumbs": [
+      "Notation"
+    ]
+  },
+  {
+    "objectID": "appendices/notation.html#optimization",
+    "href": "appendices/notation.html#optimization",
+    "title": "Notation",
+    "section": "Optimization",
+    "text": "Optimization\n\n\n\nSymbol\nMeaning\n\n\n\n\n\\(\\nabla f\\)\nGradient of \\(f\\)\n\n\n\\(\\nabla^2 f\\)\nHessian of \\(f\\)\n\n\n\\(\\bA \\succ 0\\)\n\\(\\bA\\) is positive definite\n\n\n\\(\\bA \\succeq 0\\)\n\\(\\bA\\) is positive semidefinite\n\n\n\\(\\arg\\min\\)\nArgument that minimizes",
+    "crumbs": [
+      "Notation"
+    ]
+  }
+]

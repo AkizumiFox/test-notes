@@ -1,0 +1,33 @@
+---
+title: "Chapter 3: Optimization"
+format:
+  pdf:
+    documentclass: article
+    number-sections: true
+    pdf-engine: lualatex
+    geometry:
+      - top=30mm
+      - left=25mm
+      - right=25mm
+      - bottom=30mm
+---
+
+# Optimization
+
+This chapter covers optimization theory, with a focus on problems that leverage linear algebraic structure.
+
+In this chapter, we will explore:
+
+- **Convex Optimization**: Theory and algorithms for convex problems
+
+## Motivation
+
+Optimization is central to machine learning, operations research, control theory, and many other fields. Linear algebra provides both the language for formulating optimization problems and the tools for solving them efficiently.
+
+## Connection to Previous Chapters
+
+The spectral theory from Chapter 2 plays a crucial role in:
+
+- Analyzing the convergence of optimization algorithms
+- Understanding the geometry of quadratic functions
+- Deriving closed-form solutions for least squares problems

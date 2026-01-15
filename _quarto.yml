@@ -1,0 +1,66 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "Advanced Linear Algebra Notes"
+  subtitle: "Spectral Theory & Optimization"
+  author: "Your Name"
+  date: last-modified
+  chapters:
+    - index.qmd
+    
+    - ch01-foundations/index.qmd
+    - ch01-foundations/01-vector-spaces.qmd
+    - ch01-foundations/02-linear-maps.qmd
+    
+    - ch02-spectral-theory/index.qmd
+    - ch02-spectral-theory/01-eigenvalues.qmd
+    - ch02-spectral-theory/02-decompositions.qmd
+    
+    - ch03-optimization/index.qmd
+    - ch03-optimization/01-convex-optimization.qmd
+    
+    - appendices/notation.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    number-sections: true
+    code-tools: true
+    html-math-method: mathjax
+    css: assets/custom.css
+    include-after-body:
+      text: |
+        <script>
+        // Add PDF download link to each page
+        document.addEventListener('DOMContentLoaded', function() {
+          var path = window.location.pathname;
+          var pdfPath = path.replace(/\.html$/, '.pdf').replace(/\/$/, '/index.pdf');
+          if (path.endsWith('/')) pdfPath = path + 'index.pdf';
+          
+          var link = document.createElement('a');
+          link.href = pdfPath;
+          link.className = 'btn btn-outline-primary btn-sm pdf-download-btn';
+          link.innerHTML = '<i class="bi bi-file-pdf"></i> Download PDF';
+          link.style.cssText = 'position:fixed;bottom:20px;right:20px;z-index:1000;';
+          document.body.appendChild(link);
+        });
+        </script>
+    
+  pdf:
+    documentclass: book
+    number-sections: true
+    colorlinks: true
+    linkcolor: "blue"
+    urlcolor: "blue"
+    pdf-engine: lualatex
+    include-in-header:
+      text: |
+        \usepackage[quarto]{assets/book-template}
+    geometry:
+      - top=30mm
+      - left=25mm
+      - right=25mm
+      - bottom=30mm
