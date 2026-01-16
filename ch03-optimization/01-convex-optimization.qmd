@@ -1,26 +1,34 @@
 ---
-title: "3.1 Convex Optimization"
+chapter-number: 5
+filters:
+  - chapter-number
 format:
   pdf:
-    documentclass: article
+    documentclass: memoir
+    classoption: [12pt, letterpaper, oneside]
     number-sections: true
     pdf-engine: lualatex
-    geometry:
-      - top=30mm
-      - left=25mm
-      - right=25mm
-      - bottom=30mm
+    geometry: [top=30mm, left=25mm, right=25mm, bottom=30mm]
+    include-in-header:
+      text: |
+        \usepackage[quartoenv]{../assets/book-template}
+        \def\R{\mathbb{R}}
+        \def\C{\mathbb{C}}
+        \def\bx{\mathbf{x}}
+        \def\by{\mathbf{y}}
+        \def\bA{\mathbf{A}}
+        \def\norm#1{\left\lVert#1\right\rVert}
 ---
 
 {{< include ../_common.qmd >}}
 
-## Convex Optimization
+# Convex Optimization
 
-### Introduction
+## Introduction
 
 Convex optimization is the study of minimizing convex functions over convex sets. The theory is elegant and the algorithms are efficient, making convex optimization a cornerstone of modern applied mathematics.
 
-### Convex Sets and Functions
+## Convex Sets and Functions
 
 ::: {#def-convex-set}
 ## Convex Set
@@ -38,7 +46,7 @@ f(\theta \bx + (1 - \theta) \by) \leq \theta f(\bx) + (1 - \theta) f(\by)
 $$
 :::
 
-### Optimality Conditions
+## Optimality Conditions
 
 ::: {#thm-first-order}
 ## First-Order Optimality
@@ -56,7 +64,7 @@ $$
 $$
 :::
 
-### Quadratic Programming
+## Quadratic Programming
 
 ::: {#def-qp}
 ## Quadratic Program
@@ -71,7 +79,7 @@ $$
 The problem is convex if $\mathbf{P} \succeq 0$.
 :::
 
-### Exercises
+## Exercises
 
 ::: {#exr-least-squares}
 ## Least Squares as QP

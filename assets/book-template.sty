@@ -37,8 +37,24 @@
 \RequirePackage{amsmath, amsfonts, amssymb, amsthm}
 \RequirePackage{bm}
 \RequirePackage{upgreek}  % For upright greek letters (\upalpha, etc.)
+
+% Define \@removefromreset for counter manipulation (removes counter from reset list)
+\providecommand{\@removefromreset}[2]{%
+  \expandafter\let\csname c@#1\endcsname\@removefromreset@tmp
+  \def\@elt##1{%
+    \expandafter\ifx\csname c@##1\endcsname\@removefromreset@tmp\else
+      \noexpand\@elt{##1}%
+    \fi}%
+  \expandafter\xdef\csname cl@#2\endcsname{%
+    \csname cl@#2\endcsname}%
+}
 \RequirePackage{pgffor}   % For automation loops
 \RequirePackage{enumitem}
+% Reduce vertical spacing for enumerate/itemize
+\setlist{topsep=0.0em, itemsep=0.3em, parsep=0.1em, partopsep=0pt}
+\setlist[enumerate]{topsep=0.0em, itemsep=0.3em}
+\setlist[itemize]{topsep=0.0em, itemsep=0.3em}
+
 \RequirePackage{graphicx}
 \RequirePackage{mathtools}
 \RequirePackage{multirow}
@@ -431,6 +447,35 @@
     secondextra={%
         \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
     }]{pBox}
+
+% Conjecture box (purple)
+\newmdenv[skipabove=10pt,
+    skipbelow=2pt,
+    rightline=false,
+    leftline=true,
+    topline=false,
+    bottomline=false,
+    linecolor=conjecturecolor,
+    backgroundcolor=conjecturebg,
+    innerleftmargin=10pt,
+    innerrightmargin=16pt,
+    innertopmargin=10pt,
+    leftmargin=0cm,
+    rightmargin=0cm,
+    linewidth=4pt,
+    innerbottommargin=10pt,
+    splittopskip=\topskip,
+    splitbottomskip=0.3\topskip,
+    firstextra={%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    middleextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+        \node[xshift=-8pt, yshift=4pt, anchor=north, breakindicator, rotate=180] at (O-|P) {};%
+    },
+    secondextra={%
+        \node[xshift=-8pt, yshift=-4pt, anchor=north, breakindicator] at (P) {};%
+    }]{cnBox}
 
 % ======================================================================================
 % MAIN THEOREM ENVIRONMENTS (Skip in Quarto mode - Quarto defines these)
@@ -1035,41 +1080,78 @@
 
 \if@quartoenv
 \AtBeginDocument{%
-    % Theorem (orange) - wrap with tBox
-    \BeforeBeginEnvironment{theorem}{\par\addvspace{0.8em}\begin{tBox}}%
+    % Override Quarto's theorem numbering to use chapter.counter format (not chapter.section.counter)
+    % Only redefine if the counter exists (Quarto only creates counters for environments used)
+    % Quarto theorem environments: theorem, lemma, corollary, proposition, conjecture,
+    %                              definition, example, exercise, solution, remark
+    \@ifundefined{c@theorem}{}{\renewcommand{\thetheorem}{\thechapter.\arabic{theorem}}}%
+    \@ifundefined{c@lemma}{}{\renewcommand{\thelemma}{\thechapter.\arabic{lemma}}}%
+    \@ifundefined{c@corollary}{}{\renewcommand{\thecorollary}{\thechapter.\arabic{corollary}}}%
+    \@ifundefined{c@proposition}{}{\renewcommand{\theproposition}{\thechapter.\arabic{proposition}}}%
+    \@ifundefined{c@conjecture}{}{\renewcommand{\theconjecture}{\thechapter.\arabic{conjecture}}}%
+    \@ifundefined{c@definition}{}{\renewcommand{\thedefinition}{\thechapter.\arabic{definition}}}%
+    \@ifundefined{c@example}{}{\renewcommand{\theexample}{\thechapter.\arabic{example}}}%
+    \@ifundefined{c@exercise}{}{\renewcommand{\theexercise}{\thechapter.\arabic{exercise}}}%
+    \@ifundefined{c@solution}{}{\renewcommand{\thesolution}{\thechapter.\arabic{solution}}}%
+    \@ifundefined{c@remark}{}{\renewcommand{\theremark}{\thechapter.\arabic{remark}}}%
+    %
+    % Remove counters from section reset (Quarto defaults to numberwithin{section})
+    % and add them to chapter reset instead
+    \@ifundefined{c@theorem}{}{\@removefromreset{theorem}{section}\@addtoreset{theorem}{chapter}}%
+    \@ifundefined{c@lemma}{}{\@removefromreset{lemma}{section}\@addtoreset{lemma}{chapter}}%
+    \@ifundefined{c@corollary}{}{\@removefromreset{corollary}{section}\@addtoreset{corollary}{chapter}}%
+    \@ifundefined{c@proposition}{}{\@removefromreset{proposition}{section}\@addtoreset{proposition}{chapter}}%
+    \@ifundefined{c@conjecture}{}{\@removefromreset{conjecture}{section}\@addtoreset{conjecture}{chapter}}%
+    \@ifundefined{c@definition}{}{\@removefromreset{definition}{section}\@addtoreset{definition}{chapter}}%
+    \@ifundefined{c@example}{}{\@removefromreset{example}{section}\@addtoreset{example}{chapter}}%
+    \@ifundefined{c@exercise}{}{\@removefromreset{exercise}{section}\@addtoreset{exercise}{chapter}}%
+    \@ifundefined{c@solution}{}{\@removefromreset{solution}{section}\@addtoreset{solution}{chapter}}%
+    \@ifundefined{c@remark}{}{\@removefromreset{remark}{section}\@addtoreset{remark}{chapter}}%
+    
+    % Theorem (orange) - wrap with tBox, use normalfont (no italics)
+    \BeforeBeginEnvironment{theorem}{\par\addvspace{0.8em}\begin{tBox}\normalfont}%
     \AfterEndEnvironment{theorem}{\end{tBox}}%
     
     % Definition (teal) - wrap with dBox
-    \BeforeBeginEnvironment{definition}{\par\addvspace{0.8em}\begin{dBox}}%
+    \BeforeBeginEnvironment{definition}{\par\addvspace{0.8em}\begin{dBox}\normalfont}%
     \AfterEndEnvironment{definition}{\end{dBox}}%
     
     % Lemma (teal) - wrap with lBox
-    \BeforeBeginEnvironment{lemma}{\par\addvspace{0.8em}\begin{lBox}}%
+    \BeforeBeginEnvironment{lemma}{\par\addvspace{0.8em}\begin{lBox}\normalfont}%
     \AfterEndEnvironment{lemma}{\end{lBox}}%
     
     % Corollary (dark red) - wrap with cBox
-    \BeforeBeginEnvironment{corollary}{\par\addvspace{0.8em}\begin{cBox}}%
+    \BeforeBeginEnvironment{corollary}{\par\addvspace{0.8em}\begin{cBox}\normalfont}%
     \AfterEndEnvironment{corollary}{\end{cBox}}%
     
     % Proposition (dark orange) - wrap with pBox
-    \BeforeBeginEnvironment{proposition}{\par\addvspace{0.8em}\begin{pBox}}%
+    \BeforeBeginEnvironment{proposition}{\par\addvspace{0.8em}\begin{pBox}\normalfont}%
     \AfterEndEnvironment{proposition}{\end{pBox}}%
     
+    % Conjecture (purple) - wrap with cnBox
+    \BeforeBeginEnvironment{conjecture}{\par\addvspace{0.8em}\begin{cnBox}\normalfont}%
+    \AfterEndEnvironment{conjecture}{\end{cnBox}}%
+    
     % Example (maroon) - wrap with examplebox
-    \BeforeBeginEnvironment{example}{\par\addvspace{0.8em}\begin{examplebox}}%
+    \BeforeBeginEnvironment{example}{\par\addvspace{0.8em}\begin{examplebox}\normalfont}%
     \AfterEndEnvironment{example}{\end{examplebox}}%
     
     % Exercise (brown) - wrap with problembox
-    \BeforeBeginEnvironment{exercise}{\par\addvspace{0.8em}\begin{problembox}}%
+    \BeforeBeginEnvironment{exercise}{\par\addvspace{0.8em}\begin{problembox}\normalfont}%
     \AfterEndEnvironment{exercise}{\end{problembox}}%
+    
+    % Solution (olive) - wrap with solutionbox
+    \BeforeBeginEnvironment{solution}{\par\addvspace{0.8em}\begin{solutionbox}\normalfont}%
+    \AfterEndEnvironment{solution}{\end{solutionbox}}%
+    
+    % Remark (grey) - wrap with remarkbox
+    \BeforeBeginEnvironment{remark}{\par\addvspace{0.8em}\begin{remarkbox}\normalfont}%
+    \AfterEndEnvironment{remark}{\end{remarkbox}}%
     
     % --- Minimal grey bar style for proof environment ---
     % Proof (grey bar) - standard amsthm, use Before/After hooks
     \BeforeBeginEnvironment{proof}{\begin{proofbox}}%
     \AfterEndEnvironment{proof}{\end{proofbox}}%
-    
-    % NOTE: solution, remark, algorithm need direct patching in document preamble
-    % because Quarto defines them differently. See hello.qmd include-before-body.
 }
 \fi
 

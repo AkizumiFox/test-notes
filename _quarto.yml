@@ -10,18 +10,19 @@ book:
   chapters:
     - index.qmd
     
-    - ch01-foundations/index.qmd
-    - ch01-foundations/01-vector-spaces.qmd
-    - ch01-foundations/02-linear-maps.qmd
+    - part: ch01-foundations/index.qmd
+      chapters:
+        - ch01-foundations/01-vector-spaces.qmd
+        - ch01-foundations/02-linear-maps.qmd
     
-    - ch02-spectral-theory/index.qmd
-    - ch02-spectral-theory/01-eigenvalues.qmd
-    - ch02-spectral-theory/02-decompositions.qmd
+    - part: ch02-spectral-theory/index.qmd
+      chapters:
+        - ch02-spectral-theory/01-eigenvalues.qmd
+        - ch02-spectral-theory/02-decompositions.qmd
     
-    - ch03-optimization/index.qmd
-    - ch03-optimization/01-convex-optimization.qmd
-    
-    - appendices/notation.qmd
+    - part: ch03-optimization/index.qmd
+      chapters:
+        - ch03-optimization/01-convex-optimization.qmd
 
 filters:
   - shared-thm-counter
@@ -37,11 +38,16 @@ format:
     include-after-body:
       text: |
         <script>
-        // Add PDF download link to each page
+        // Add PDF download link to each page (skip index pages which have no PDFs)
         document.addEventListener('DOMContentLoaded', function() {
           var path = window.location.pathname;
-          var pdfPath = path.replace(/\.html$/, '.pdf').replace(/\/$/, '/index.pdf');
-          if (path.endsWith('/')) pdfPath = path + 'index.pdf';
+          
+          // Skip index pages - they don't have individual PDFs
+          if (path.endsWith('/') || path.endsWith('/index.html') || path === '/index.html') {
+            return;
+          }
+          
+          var pdfPath = path.replace(/\.html$/, '.pdf');
           
           var link = document.createElement('a');
           link.href = pdfPath;

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5&nbsp; 2.1 Eigenvalues and Eigenvectors – Advanced Linear Algebra Notes</title>
+<title>3&nbsp; Eigenvalues and Eigenvectors – Advanced Linear Algebra Notes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -148,7 +148,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ch02-spectral-theory/01-eigenvalues.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">2.1 Eigenvalues and Eigenvectors</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ch02-spectral-theory/index.html">Spectral Theory</a></li><li class="breadcrumb-item"><a href="../ch02-spectral-theory/01-eigenvalues.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Eigenvalues and Eigenvectors</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -179,60 +179,69 @@ window.Quarto = {
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ch01-foundations/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Chapter 1: Foundations</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../ch01-foundations/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ch01-foundations/01-vector-spaces.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">1.1 Vector Spaces</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Vector Spaces</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ch01-foundations/02-linear-maps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">1.2 Linear Maps</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Linear Maps</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ch02-spectral-theory/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Chapter 2: Spectral Theory</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../ch02-spectral-theory/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spectral Theory</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ch02-spectral-theory/01-eigenvalues.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">2.1 Eigenvalues and Eigenvectors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Eigenvalues and Eigenvectors</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ch02-spectral-theory/02-decompositions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">2.2 Matrix Decompositions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Matrix Decompositions</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ch03-optimization/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Chapter 3: Optimization</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../ch03-optimization/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Optimization</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ch03-optimization/01-convex-optimization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">3.1 Convex Optimization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Convex Optimization</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../appendices/notation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Notation</span></a>
-  </div>
-</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -243,22 +252,19 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#eigenvalues-and-eigenvectors" id="toc-eigenvalues-and-eigenvectors" class="nav-link active" data-scroll-target="#eigenvalues-and-eigenvectors"><span class="header-section-number">5.1</span> Eigenvalues and Eigenvectors</a>
-  <ul class="collapse">
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">5.1.1</span> Introduction</a></li>
-  <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions"><span class="header-section-number">5.1.2</span> Definitions</a></li>
-  <li><a href="#properties" id="toc-properties" class="nav-link" data-scroll-target="#properties"><span class="header-section-number">5.1.3</span> Properties</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">5.1.4</span> Exercises</a></li>
-  </ul></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">3.1</span> Introduction</a></li>
+  <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions"><span class="header-section-number">3.2</span> Definitions</a></li>
+  <li><a href="#properties" id="toc-properties" class="nav-link" data-scroll-target="#properties"><span class="header-section-number">3.3</span> Properties</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">3.4</span> Exercises</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ch02-spectral-theory/index.html">Spectral Theory</a></li><li class="breadcrumb-item"><a href="../ch02-spectral-theory/01-eigenvalues.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Eigenvalues and Eigenvectors</span></a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">2.1 Eigenvalues and Eigenvectors</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Eigenvalues and Eigenvectors</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -280,29 +286,27 @@ window.Quarto = {
 <p>% Linear Algebra </p>
 <p>% Operators $$</p>
 </div>
-<section id="eigenvalues-and-eigenvectors" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="eigenvalues-and-eigenvectors"><span class="header-section-number">5.1</span> Eigenvalues and Eigenvectors</h2>
-<section id="introduction" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">5.1.1</span> Introduction</h3>
+<section id="introduction" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">3.1</span> Introduction</h2>
 <p>Eigenvalues and eigenvectors reveal the intrinsic properties of linear transformations. They tell us about the directions in which a transformation acts by simple scaling.</p>
 </section>
-<section id="definitions" class="level3" data-number="5.1.2">
-<h3 data-number="5.1.2" class="anchored" data-anchor-id="definitions"><span class="header-section-number">5.1.2</span> Definitions</h3>
+<section id="definitions" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="definitions"><span class="header-section-number">3.2</span> Definitions</h2>
 <div id="def-eigenvalue" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 5.1 (Eigenvalue and Eigenvector)</strong></span> Let <span class="math inline">\(\mathbf{A}\in \mathbb{R}^{n \times n}\)</span>. A scalar <span class="math inline">\(\lambda \in \mathbb{C}\)</span> is called an <strong>eigenvalue</strong> of <span class="math inline">\(\mathbf{A}\)</span> if there exists a non-zero vector <span class="math inline">\(\mathbf{v}\in \mathbb{C}^n\)</span> such that: <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 3.1 (Eigenvalue and Eigenvector)</strong></span> Let <span class="math inline">\(\mathbf{A}\in \mathbb{R}^{n \times n}\)</span>. A scalar <span class="math inline">\(\lambda \in \mathbb{C}\)</span> is called an <strong>eigenvalue</strong> of <span class="math inline">\(\mathbf{A}\)</span> if there exists a non-zero vector <span class="math inline">\(\mathbf{v}\in \mathbb{C}^n\)</span> such that: <span class="math display">\[
 \mathbf{A}\mathbf{v}= \lambda\mathbf{v}
 \]</span> The vector <span class="math inline">\(\mathbf{v}\)</span> is called an <strong>eigenvector</strong> corresponding to <span class="math inline">\(\lambda\)</span>.</p>
 </div>
 <div id="def-characteristic" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 5.2 (Characteristic Polynomial)</strong></span> The <strong>characteristic polynomial</strong> of <span class="math inline">\(\mathbf{A}\)</span> is: <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 3.2 (Characteristic Polynomial)</strong></span> The <strong>characteristic polynomial</strong> of <span class="math inline">\(\mathbf{A}\)</span> is: <span class="math display">\[
 p(\lambda) = \det(\mathbf{A}- \lambda\mathbf{I})
 \]</span> The eigenvalues of <span class="math inline">\(\mathbf{A}\)</span> are the roots of <span class="math inline">\(p(\lambda)\)</span>.</p>
 </div>
 </section>
-<section id="properties" class="level3" data-number="5.1.3">
-<h3 data-number="5.1.3" class="anchored" data-anchor-id="properties"><span class="header-section-number">5.1.3</span> Properties</h3>
+<section id="properties" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="properties"><span class="header-section-number">3.3</span> Properties</h2>
 <div id="thm-symmetric-real" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 5.1 (Real Eigenvalues of Symmetric Matrices)</strong></span> If <span class="math inline">\(\mathbf{A}\in \mathbb{R}^{n \times n}\)</span> is symmetric, then all eigenvalues of <span class="math inline">\(\mathbf{A}\)</span> are real.</p>
+<p><span class="theorem-title"><strong>Theorem 3.1 (Real Eigenvalues of Symmetric Matrices)</strong></span> If <span class="math inline">\(\mathbf{A}\in \mathbb{R}^{n \times n}\)</span> is symmetric, then all eigenvalues of <span class="math inline">\(\mathbf{A}\)</span> are real.</p>
 </div>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>Let <span class="math inline">\(\lambda\)</span> be an eigenvalue with eigenvector <span class="math inline">\(\mathbf{v}\)</span>. Taking the conjugate transpose of <span class="math inline">\(\mathbf{A}\mathbf{v}= \lambda\mathbf{v}\)</span>: <span class="math display">\[
@@ -312,10 +316,10 @@ p(\lambda) = \det(\mathbf{A}- \lambda\mathbf{I})
 \]</span> But also <span class="math inline">\(\bar{\mathbf{v}}^\top \mathbf{A}\mathbf{v}= \bar{\mathbf{v}}^\top (\lambda \mathbf{v}) = \lambda \left\lVert\mathbf{v}\right\rVert^2\)</span>. Thus <span class="math inline">\(\lambda = \bar{\lambda}\)</span>, so <span class="math inline">\(\lambda \in \mathbb{R}\)</span>.</p>
 </div>
 </section>
-<section id="exercises" class="level3" data-number="5.1.4">
-<h3 data-number="5.1.4" class="anchored" data-anchor-id="exercises"><span class="header-section-number">5.1.4</span> Exercises</h3>
+<section id="exercises" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="exercises"><span class="header-section-number">3.4</span> Exercises</h2>
 <div id="exr-trace-det" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5.1 (Trace and Determinant)</strong></span> Prove that for any <span class="math inline">\(\mathbf{A}\in \mathbb{R}^{n \times n}\)</span>:</p>
+<p><span class="theorem-title"><strong>Exercise 3.1 (Trace and Determinant)</strong></span> Prove that for any <span class="math inline">\(\mathbf{A}\in \mathbb{R}^{n \times n}\)</span>:</p>
 <ol type="1">
 <li><span class="math inline">\(\text{tr}(\mathbf{A}) = \sum_{i=1}^n \lambda_i\)</span></li>
 <li><span class="math inline">\(\det(\mathbf{A}) = \prod_{i=1}^n \lambda_i\)</span></li>
@@ -326,7 +330,6 @@ p(\lambda) = \det(\mathbf{A}- \lambda\mathbf{I})
 
 <!-- -->
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -783,97 +786,115 @@ p(\lambda) = \det(\mathbf{A}- \lambda\mathbf{I})
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../ch02-spectral-theory/index.html" class="pagination-link" aria-label="Chapter 2: Spectral Theory">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Chapter 2: Spectral Theory</span></span>
+      <a href="../ch02-spectral-theory/index.html" class="pagination-link" aria-label="Spectral Theory">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Spectral Theory</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../ch02-spectral-theory/02-decompositions.html" class="pagination-link" aria-label="2.2 Matrix Decompositions">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">2.2 Matrix Decompositions</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../ch02-spectral-theory/02-decompositions.html" class="pagination-link" aria-label="Matrix Decompositions">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Matrix Decompositions</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "2.1 Eigenvalues and Eigenvectors"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">  pdf:</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">    documentclass: article</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: true</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">    pdf-engine: lualatex</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">    geometry:</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">      - top=30mm</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">      - left=25mm</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">      - right=25mm</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">      - bottom=30mm</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>{{&lt; include ../_common.qmd &gt;}}</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## Eigenvalues and Eigenvectors</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">### Introduction</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>Eigenvalues and eigenvectors reveal the intrinsic properties of linear transformations. They tell us about the directions in which a transformation acts by simple scaling.</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">### Definitions</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>::: {#def-eigenvalue}</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="fu">## Eigenvalue and Eigenvector</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>Let $\bA \in \R^{n \times n}$. A scalar $\lambda \in \C$ is called an **eigenvalue** of $\bA$ if there exists a non-zero vector $\bv \in \C^n$ such that:</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>\bA\bv = \lambda\bv</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>The vector $\bv$ is called an **eigenvector** corresponding to $\lambda$.</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">chapter-number:</span><span class="co"> 3</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">filters:</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">  - chapter-number</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">  pdf:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">    documentclass: memoir</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">    classoption: [12pt, letterpaper, oneside]</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: true</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">    pdf-engine: lualatex</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    geometry: [top=30mm, left=25mm, right=25mm, bottom=30mm]</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">      text: |</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">        \usepackage[quartoenv]{../assets/book-template}</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">        \def\R{\mathbb{R}}</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">        \def\C{\mathbb{C}}</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">        \def\N{\mathbb{N}}</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">        \def\bx{\mathbf{x}}</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">        \def\by{\mathbf{y}}</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">        \def\bu{\mathbf{u}}</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">        \def\bv{\mathbf{v}}</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">        \def\bA{\mathbf{A}}</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">        \def\bI{\mathbf{I}}</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">        \def\norm#1{\left\lVert#1\right\rVert}</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">        \def\trace{\text{tr}}</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>{{&lt; include ../_common.qmd &gt;}}</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="fu"># Eigenvalues and Eigenvectors</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>::: {#def-characteristic}</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">## Characteristic Polynomial</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>The **characteristic polynomial** of $\bA$ is:</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>p(\lambda) = \det(\bA - \lambda\bI)</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>The eigenvalues of $\bA$ are the roots of $p(\lambda)$.</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="fu">### Properties</span></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>::: {#thm-symmetric-real}</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="fu">## Real Eigenvalues of Symmetric Matrices</span></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>If $\bA \in \R^{n \times n}$ is symmetric, then all eigenvalues of $\bA$ are real.</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>::: {.proof}</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>Let $\lambda$ be an eigenvalue with eigenvector $\bv$. Taking the conjugate transpose of $\bA\bv = \lambda\bv$:</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>Eigenvalues and eigenvectors reveal the intrinsic properties of linear transformations. They tell us about the directions in which a transformation acts by simple scaling.</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## Definitions</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>::: {#def-eigenvalue}</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## Eigenvalue and Eigenvector</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>Let $\bA \in \R^{n \times n}$. A scalar $\lambda \in \C$ is called an **eigenvalue** of $\bA$ if there exists a non-zero vector $\bv \in \C^n$ such that:</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>\bA\bv = \lambda\bv</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>The vector $\bv$ is called an **eigenvector** corresponding to $\lambda$.</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>::: {#def-characteristic}</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="fu">## Characteristic Polynomial</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>The **characteristic polynomial** of $\bA$ is:</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>p(\lambda) = \det(\bA - \lambda\bI)</span>
 <span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>\bar{\bv}^\top \bA = \bar{\lambda} \bar{\bv}^\top</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>Multiplying both sides on the right by $\bv$ and using symmetry of $\bA$:</span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>\bar{\bv}^\top \bA \bv = \bar{\lambda} \bar{\bv}^\top \bv = \bar{\lambda} \norm{\bv}^2</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>But also $\bar{\bv}^\top \bA \bv = \bar{\bv}^\top (\lambda \bv) = \lambda \norm{\bv}^2$.</span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>Thus $\lambda = \bar{\lambda}$, so $\lambda \in \R$.</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>The eigenvalues of $\bA$ are the roots of $p(\lambda)$.</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="fu">## Properties</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>::: {#thm-symmetric-real}</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## Real Eigenvalues of Symmetric Matrices</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>If $\bA \in \R^{n \times n}$ is symmetric, then all eigenvalues of $\bA$ are real.</span>
 <span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="fu">### Exercises</span></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>::: {#exr-trace-det}</span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="fu">## Trace and Determinant</span></span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>Prove that for any $\bA \in \R^{n \times n}$:</span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>$\trace(\bA) = \sum_{i=1}^n \lambda_i$</span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>$\det(\bA) = \prod_{i=1}^n \lambda_i$</span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>where $\lambda_1, \ldots, \lambda_n$ are the eigenvalues of $\bA$ (counting multiplicity).</span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>::: {.proof}</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>Let $\lambda$ be an eigenvalue with eigenvector $\bv$. Taking the conjugate transpose of $\bA\bv = \lambda\bv$:</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>\bar{\bv}^\top \bA = \bar{\lambda} \bar{\bv}^\top</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>Multiplying both sides on the right by $\bv$ and using symmetry of $\bA$:</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>\bar{\bv}^\top \bA \bv = \bar{\lambda} \bar{\bv}^\top \bv = \bar{\lambda} \norm{\bv}^2</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>But also $\bar{\bv}^\top \bA \bv = \bar{\bv}^\top (\lambda \bv) = \lambda \norm{\bv}^2$.</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>Thus $\lambda = \bar{\lambda}$, so $\lambda \in \R$.</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercises</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>::: {#exr-trace-det}</span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="fu">## Trace and Determinant</span></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>Prove that for any $\bA \in \R^{n \times n}$:</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>$\trace(\bA) = \sum_{i=1}^n \lambda_i$</span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>$\det(\bA) = \prod_{i=1}^n \lambda_i$</span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>where $\lambda_1, \ldots, \lambda_n$ are the eigenvalues of $\bA$ (counting multiplicity).</span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <script>
-// Add PDF download link to each page
+// Add PDF download link to each page (skip index pages which have no PDFs)
 document.addEventListener('DOMContentLoaded', function() {
   var path = window.location.pathname;
-  var pdfPath = path.replace(/\.html$/, '.pdf').replace(/\/$/, '/index.pdf');
-  if (path.endsWith('/')) pdfPath = path + 'index.pdf';
+  
+  // Skip index pages - they don't have individual PDFs
+  if (path.endsWith('/') || path.endsWith('/index.html') || path === '/index.html') {
+    return;
+  }
+  
+  var pdfPath = path.replace(/\.html$/, '.pdf');
   
   var link = document.createElement('a');
   link.href = pdfPath;

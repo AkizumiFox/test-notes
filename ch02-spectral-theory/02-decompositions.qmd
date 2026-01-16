@@ -1,26 +1,32 @@
 ---
-title: "2.2 Matrix Decompositions"
+chapter-number: 4
+filters:
+  - chapter-number
 format:
   pdf:
-    documentclass: article
+    documentclass: memoir
+    classoption: [12pt, letterpaper, oneside]
     number-sections: true
     pdf-engine: lualatex
-    geometry:
-      - top=30mm
-      - left=25mm
-      - right=25mm
-      - bottom=30mm
+    geometry: [top=30mm, left=25mm, right=25mm, bottom=30mm]
+    include-in-header:
+      text: |
+        \usepackage[quartoenv]{../assets/book-template}
+        \def\R{\mathbb{R}}
+        \def\C{\mathbb{C}}
+        \def\bA{\mathbf{A}}
+        \def\diag{\text{diag}}
 ---
 
 {{< include ../_common.qmd >}}
 
-## Matrix Decompositions
+# Matrix Decompositions
 
-### Introduction
+## Introduction
 
 Matrix decompositions factor a matrix into products of simpler matrices. These factorizations reveal structure and enable efficient computation.
 
-### Spectral Decomposition
+## Spectral Decomposition
 
 ::: {#thm-spectral}
 ## Spectral Theorem
@@ -31,7 +37,7 @@ $$
 where $\mathbf{Q}$ is orthogonal (its columns are orthonormal eigenvectors of $\bA$) and $\mathbf{\Lambda} = \diag(\lambda_1, \ldots, \lambda_n)$ is diagonal (containing the eigenvalues).
 :::
 
-### Singular Value Decomposition
+## Singular Value Decomposition
 
 ::: {#def-svd}
 ## Singular Value Decomposition (SVD)
@@ -51,14 +57,14 @@ where:
 The rank of $\bA$ equals the number of non-zero singular values.
 :::
 
-### Applications
+## Applications
 
 ::: {#exm-pca}
 ## Principal Component Analysis
 PCA uses the SVD to find the directions of maximum variance in a dataset. If $\mathbf{X}$ is a centered data matrix, the principal components are the right singular vectors of $\mathbf{X}$.
 :::
 
-### Exercises
+## Exercises
 
 ::: {#exr-pseudo-inverse}
 ## Moore-Penrose Pseudoinverse

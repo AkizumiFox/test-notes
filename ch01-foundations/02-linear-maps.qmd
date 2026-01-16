@@ -1,26 +1,36 @@
 ---
-title: "1.2 Linear Maps"
+chapter-number: 2
+filters:
+  - chapter-number
 format:
   pdf:
-    documentclass: article
+    documentclass: memoir
+    classoption: [12pt, letterpaper, oneside]
     number-sections: true
     pdf-engine: lualatex
-    geometry:
-      - top=30mm
-      - left=25mm
-      - right=25mm
-      - bottom=30mm
+    geometry: [top=30mm, left=25mm, right=25mm, bottom=30mm]
+    include-in-header:
+      text: |
+        \usepackage[quartoenv]{../assets/book-template}
+        \def\R{\mathbb{R}}
+        \def\C{\mathbb{C}}
+        \def\N{\mathbb{N}}
+        \def\bx{\mathbf{x}}
+        \def\by{\mathbf{y}}
+        \def\bu{\mathbf{u}}
+        \def\bv{\mathbf{v}}
+        \def\bA{\mathbf{A}}
 ---
 
 {{< include ../_common.qmd >}}
 
-## Linear Maps
+# Linear Maps
 
-### Introduction
+## Introduction
 
 Linear maps are functions between vector spaces that preserve the linear structure. They are the natural morphisms in the category of vector spaces.
 
-### Definition
+## Definition
 
 ::: {#def-linear-map}
 ## Linear Map
@@ -32,7 +42,7 @@ Let $V$ and $W$ be vector spaces over $\R$. A function $T: V \to W$ is called a 
 
 Equivalently, $T$ is linear if and only if $T(a\bu + b\bv) = aT(\bu) + bT(\bv)$ for all vectors and scalars.
 
-### Fundamental Subspaces
+## Fundamental Subspaces
 
 ::: {#def-kernel}
 ## Kernel and Image
@@ -50,7 +60,7 @@ $$
 $$
 :::
 
-### Exercises
+## Exercises
 
 ::: {#exr-composition}
 ## Composition of Linear Maps

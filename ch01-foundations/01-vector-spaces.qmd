@@ -1,26 +1,36 @@
 ---
-title: "1.1 Vector Spaces"
+chapter-number: 1
+filters:
+  - chapter-number
 format:
   pdf:
-    documentclass: article
+    documentclass: memoir
+    classoption: [12pt, letterpaper, oneside]
     number-sections: true
     pdf-engine: lualatex
-    geometry:
-      - top=30mm
-      - left=25mm
-      - right=25mm
-      - bottom=30mm
+    geometry: [top=30mm, left=25mm, right=25mm, bottom=30mm]
+    include-in-header:
+      text: |
+        \usepackage[quartoenv]{../assets/book-template}
+        \def\R{\mathbb{R}}
+        \def\C{\mathbb{C}}
+        \def\N{\mathbb{N}}
+        \def\bx{\mathbf{x}}
+        \def\by{\mathbf{y}}
+        \def\bu{\mathbf{u}}
+        \def\bv{\mathbf{v}}
+        \def\bA{\mathbf{A}}
 ---
 
 {{< include ../_common.qmd >}}
 
-## Vector Spaces
+# Vector Spaces
 
-### Introduction
+## Introduction
 
 A vector space is one of the most fundamental structures in mathematics. It provides an abstract framework for studying objects that can be added together and scaled.
 
-### Definition
+## Definition
 
 ::: {#def-vector-space}
 ## Vector Space
@@ -40,14 +50,14 @@ satisfying the following axioms for all $\bu, \bv, \bw \in V$ and $a, b \in \R$:
 - Scalar identity: $1\bv = \bv$
 :::
 
-### Examples
+## Examples
 
 ::: {#exm-rn}
 ## Euclidean Space
 The set $\R^n$ with standard addition and scalar multiplication is a vector space.
 :::
 
-### Exercises
+## Exercises
 
 ::: {#exr-subspace}
 ## Subspace Criterion

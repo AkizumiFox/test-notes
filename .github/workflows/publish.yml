@@ -1,0 +1,97 @@
+name: Build and Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Install TinyTeX for PDF generation
+        run: |
+          quarto install tinytex
+
+      - name: Render HTML book
+        run: quarto render --to html
+
+      - name: Build individual chapter PDFs
+        run: |
+          # Create output directories
+          mkdir -p _book/ch01-foundations
+          mkdir -p _book/ch02-spectral-theory
+          mkdir -p _book/ch03-optimization
+          
+          # Create temp directory for isolated rendering
+          TMPDIR=$(mktemp -d)
+          
+          # Copy project structure to temp (without _quarto.yml)
+          cp -r assets "$TMPDIR/"
+          cp -r ch01-foundations "$TMPDIR/"
+          cp -r ch02-spectral-theory "$TMPDIR/"
+          cp -r ch03-optimization "$TMPDIR/"
+          cp _common.qmd "$TMPDIR/"
+          
+          # Copy _extensions into each chapter folder
+          cp -r _extensions "$TMPDIR/ch01-foundations/_extensions"
+          cp -r _extensions "$TMPDIR/ch02-spectral-theory/_extensions"
+          cp -r _extensions "$TMPDIR/ch03-optimization/_extensions"
+          
+          # Function to render PDF
+          render_pdf() {
+            local qmd_file="$1"
+            local output_dir=$(dirname "$qmd_file")
+            local basename=$(basename "$qmd_file" .qmd)
+            
+            echo "Rendering: $qmd_file"
+            (cd "$TMPDIR/$output_dir" && quarto render "$(basename "$qmd_file")" --to pdf) || true
+            
+            if [ -f "$TMPDIR/$output_dir/$basename.pdf" ]; then
+              mv "$TMPDIR/$output_dir/$basename.pdf" "_book/$output_dir/$basename.pdf"
+              echo "  -> _book/$output_dir/$basename.pdf"
+            fi
+          }
+          
+          # Render all chapter PDFs
+          for qmd in ch01-foundations/01-vector-spaces.qmd ch01-foundations/02-linear-maps.qmd \
+                     ch02-spectral-theory/01-eigenvalues.qmd ch02-spectral-theory/02-decompositions.qmd \
+                     ch03-optimization/01-convex-optimization.qmd; do
+            if [ -f "$qmd" ]; then
+              render_pdf "$qmd"
+            fi
+          done
+          
+          # Cleanup
+          rm -rf "$TMPDIR"
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _book
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

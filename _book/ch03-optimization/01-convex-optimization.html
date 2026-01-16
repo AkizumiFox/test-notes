@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8&nbsp; 3.1 Convex Optimization – Advanced Linear Algebra Notes</title>
+<title>5&nbsp; Convex Optimization – Advanced Linear Algebra Notes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../appendices/notation.html" rel="next">
 <link href="../ch03-optimization/index.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -148,7 +147,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ch03-optimization/01-convex-optimization.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">3.1 Convex Optimization</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ch03-optimization/index.html">Optimization</a></li><li class="breadcrumb-item"><a href="../ch03-optimization/01-convex-optimization.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Convex Optimization</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -179,60 +178,69 @@ window.Quarto = {
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ch01-foundations/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Chapter 1: Foundations</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../ch01-foundations/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ch01-foundations/01-vector-spaces.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">1.1 Vector Spaces</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Vector Spaces</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ch01-foundations/02-linear-maps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">1.2 Linear Maps</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Linear Maps</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ch02-spectral-theory/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Chapter 2: Spectral Theory</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../ch02-spectral-theory/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spectral Theory</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ch02-spectral-theory/01-eigenvalues.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">2.1 Eigenvalues and Eigenvectors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Eigenvalues and Eigenvectors</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ch02-spectral-theory/02-decompositions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">2.2 Matrix Decompositions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Matrix Decompositions</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ch03-optimization/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Chapter 3: Optimization</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../ch03-optimization/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Optimization</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ch03-optimization/01-convex-optimization.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">3.1 Convex Optimization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Convex Optimization</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../appendices/notation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Notation</span></a>
-  </div>
-</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -243,23 +251,20 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#convex-optimization" id="toc-convex-optimization" class="nav-link active" data-scroll-target="#convex-optimization"><span class="header-section-number">8.1</span> Convex Optimization</a>
-  <ul class="collapse">
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">8.1.1</span> Introduction</a></li>
-  <li><a href="#convex-sets-and-functions" id="toc-convex-sets-and-functions" class="nav-link" data-scroll-target="#convex-sets-and-functions"><span class="header-section-number">8.1.2</span> Convex Sets and Functions</a></li>
-  <li><a href="#optimality-conditions" id="toc-optimality-conditions" class="nav-link" data-scroll-target="#optimality-conditions"><span class="header-section-number">8.1.3</span> Optimality Conditions</a></li>
-  <li><a href="#quadratic-programming" id="toc-quadratic-programming" class="nav-link" data-scroll-target="#quadratic-programming"><span class="header-section-number">8.1.4</span> Quadratic Programming</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">8.1.5</span> Exercises</a></li>
-  </ul></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">5.1</span> Introduction</a></li>
+  <li><a href="#convex-sets-and-functions" id="toc-convex-sets-and-functions" class="nav-link" data-scroll-target="#convex-sets-and-functions"><span class="header-section-number">5.2</span> Convex Sets and Functions</a></li>
+  <li><a href="#optimality-conditions" id="toc-optimality-conditions" class="nav-link" data-scroll-target="#optimality-conditions"><span class="header-section-number">5.3</span> Optimality Conditions</a></li>
+  <li><a href="#quadratic-programming" id="toc-quadratic-programming" class="nav-link" data-scroll-target="#quadratic-programming"><span class="header-section-number">5.4</span> Quadratic Programming</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">5.5</span> Exercises</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ch03-optimization/index.html">Optimization</a></li><li class="breadcrumb-item"><a href="../ch03-optimization/01-convex-optimization.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Convex Optimization</span></a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">3.1 Convex Optimization</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Convex Optimization</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -281,42 +286,40 @@ window.Quarto = {
 <p>% Linear Algebra </p>
 <p>% Operators $$</p>
 </div>
-<section id="convex-optimization" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="convex-optimization"><span class="header-section-number">8.1</span> Convex Optimization</h2>
-<section id="introduction" class="level3" data-number="8.1.1">
-<h3 data-number="8.1.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">8.1.1</span> Introduction</h3>
+<section id="introduction" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">5.1</span> Introduction</h2>
 <p>Convex optimization is the study of minimizing convex functions over convex sets. The theory is elegant and the algorithms are efficient, making convex optimization a cornerstone of modern applied mathematics.</p>
 </section>
-<section id="convex-sets-and-functions" class="level3" data-number="8.1.2">
-<h3 data-number="8.1.2" class="anchored" data-anchor-id="convex-sets-and-functions"><span class="header-section-number">8.1.2</span> Convex Sets and Functions</h3>
+<section id="convex-sets-and-functions" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="convex-sets-and-functions"><span class="header-section-number">5.2</span> Convex Sets and Functions</h2>
 <div id="def-convex-set" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 8.1 (Convex Set)</strong></span> A set <span class="math inline">\(C \subseteq \mathbb{R}^n\)</span> is <strong>convex</strong> if for all <span class="math inline">\(\mathbf{x}, \mathbf{y}\in C\)</span> and <span class="math inline">\(\theta \in [0, 1]\)</span>: <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 5.1 (Convex Set)</strong></span> A set <span class="math inline">\(C \subseteq \mathbb{R}^n\)</span> is <strong>convex</strong> if for all <span class="math inline">\(\mathbf{x}, \mathbf{y}\in C\)</span> and <span class="math inline">\(\theta \in [0, 1]\)</span>: <span class="math display">\[
 \theta \mathbf{x}+ (1 - \theta) \mathbf{y}\in C
 \]</span></p>
 </div>
 <div id="def-convex-function" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 8.2 (Convex Function)</strong></span> A function <span class="math inline">\(f: \mathbb{R}^n \to \mathbb{R}\)</span> is <strong>convex</strong> if for all <span class="math inline">\(\mathbf{x}, \mathbf{y}\in \mathbb{R}^n\)</span> and <span class="math inline">\(\theta \in [0, 1]\)</span>: <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 5.2 (Convex Function)</strong></span> A function <span class="math inline">\(f: \mathbb{R}^n \to \mathbb{R}\)</span> is <strong>convex</strong> if for all <span class="math inline">\(\mathbf{x}, \mathbf{y}\in \mathbb{R}^n\)</span> and <span class="math inline">\(\theta \in [0, 1]\)</span>: <span class="math display">\[
 f(\theta \mathbf{x}+ (1 - \theta) \mathbf{y}) \leq \theta f(\mathbf{x}) + (1 - \theta) f(\mathbf{y})
 \]</span></p>
 </div>
 </section>
-<section id="optimality-conditions" class="level3" data-number="8.1.3">
-<h3 data-number="8.1.3" class="anchored" data-anchor-id="optimality-conditions"><span class="header-section-number">8.1.3</span> Optimality Conditions</h3>
+<section id="optimality-conditions" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="optimality-conditions"><span class="header-section-number">5.3</span> Optimality Conditions</h2>
 <div id="thm-first-order" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 8.1 (First-Order Optimality)</strong></span> Let <span class="math inline">\(f: \mathbb{R}^n \to \mathbb{R}\)</span> be convex and differentiable. Then <span class="math inline">\(\mathbf{x}^*\)</span> is a global minimizer if and only if: <span class="math display">\[
+<p><span class="theorem-title"><strong>Theorem 5.1 (First-Order Optimality)</strong></span> Let <span class="math inline">\(f: \mathbb{R}^n \to \mathbb{R}\)</span> be convex and differentiable. Then <span class="math inline">\(\mathbf{x}^*\)</span> is a global minimizer if and only if: <span class="math display">\[
 \nabla f(\mathbf{x}^*) = \mathbf{0}
 \]</span></p>
 </div>
 <div id="thm-second-order" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 8.2 (Second-Order Condition)</strong></span> A twice-differentiable function <span class="math inline">\(f\)</span> is convex if and only if its Hessian is positive semidefinite everywhere: <span class="math display">\[
+<p><span class="theorem-title"><strong>Theorem 5.2 (Second-Order Condition)</strong></span> A twice-differentiable function <span class="math inline">\(f\)</span> is convex if and only if its Hessian is positive semidefinite everywhere: <span class="math display">\[
 \nabla^2 f(\mathbf{x}) \succeq 0 \quad \text{for all } \mathbf{x}
 \]</span></p>
 </div>
 </section>
-<section id="quadratic-programming" class="level3" data-number="8.1.4">
-<h3 data-number="8.1.4" class="anchored" data-anchor-id="quadratic-programming"><span class="header-section-number">8.1.4</span> Quadratic Programming</h3>
+<section id="quadratic-programming" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="quadratic-programming"><span class="header-section-number">5.4</span> Quadratic Programming</h2>
 <div id="def-qp" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 8.3 (Quadratic Program)</strong></span> A <strong>quadratic program</strong> (QP) is an optimization problem of the form: <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 5.3 (Quadratic Program)</strong></span> A <strong>quadratic program</strong> (QP) is an optimization problem of the form: <span class="math display">\[
 \begin{aligned}
 \min_{\mathbf{x}} \quad &amp; \frac{1}{2} \mathbf{x}^\top \mathbf{P} \mathbf{x}+ \mathbf{q}^\top \mathbf{x}\\
 \text{s.t.} \quad &amp; \mathbf{A}\mathbf{x}= \mathbf{b} \\
@@ -325,16 +328,15 @@ f(\theta \mathbf{x}+ (1 - \theta) \mathbf{y}) \leq \theta f(\mathbf{x}) + (1 - \
 \]</span> The problem is convex if <span class="math inline">\(\mathbf{P} \succeq 0\)</span>.</p>
 </div>
 </section>
-<section id="exercises" class="level3" data-number="8.1.5">
-<h3 data-number="8.1.5" class="anchored" data-anchor-id="exercises"><span class="header-section-number">8.1.5</span> Exercises</h3>
+<section id="exercises" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="exercises"><span class="header-section-number">5.5</span> Exercises</h2>
 <div id="exr-least-squares" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 8.1 (Least Squares as QP)</strong></span> Show that the least squares problem <span class="math inline">\(\min_\mathbf{x}\left\lVert\mathbf{A}\mathbf{x}- \mathbf{b}\right\rVert^2\)</span> is a convex QP and derive the normal equations.</p>
+<p><span class="theorem-title"><strong>Exercise 5.1 (Least Squares as QP)</strong></span> Show that the least squares problem <span class="math inline">\(\min_\mathbf{x}\left\lVert\mathbf{A}\mathbf{x}- \mathbf{b}\right\rVert^2\)</span> is a convex QP and derive the normal equations.</p>
 </div>
 
 
 <!-- -->
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -791,103 +793,113 @@ f(\theta \mathbf{x}+ (1 - \theta) \mathbf{y}) \leq \theta f(\mathbf{x}) + (1 - \
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../ch03-optimization/index.html" class="pagination-link" aria-label="Chapter 3: Optimization">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Chapter 3: Optimization</span></span>
+      <a href="../ch03-optimization/index.html" class="pagination-link" aria-label="Optimization">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Optimization</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../appendices/notation.html" class="pagination-link" aria-label="Notation">
-        <span class="nav-page-text">Notation</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "3.1 Convex Optimization"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">  pdf:</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">    documentclass: article</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: true</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">    pdf-engine: lualatex</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">    geometry:</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">      - top=30mm</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">      - left=25mm</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">      - right=25mm</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">      - bottom=30mm</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>{{&lt; include ../_common.qmd &gt;}}</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## Convex Optimization</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">### Introduction</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>Convex optimization is the study of minimizing convex functions over convex sets. The theory is elegant and the algorithms are efficient, making convex optimization a cornerstone of modern applied mathematics.</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">chapter-number:</span><span class="co"> 5</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">filters:</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">  - chapter-number</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">  pdf:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">    documentclass: memoir</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">    classoption: [12pt, letterpaper, oneside]</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: true</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">    pdf-engine: lualatex</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    geometry: [top=30mm, left=25mm, right=25mm, bottom=30mm]</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">      text: |</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">        \usepackage[quartoenv]{../assets/book-template}</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">        \def\R{\mathbb{R}}</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">        \def\C{\mathbb{C}}</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">        \def\bx{\mathbf{x}}</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">        \def\by{\mathbf{y}}</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">        \def\bA{\mathbf{A}}</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">        \def\norm#1{\left\lVert#1\right\rVert}</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">### Convex Sets and Functions</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>{{&lt; include ../_common.qmd &gt;}}</span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>::: {#def-convex-set}</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="fu">## Convex Set</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>A set $C \subseteq \R^n$ is **convex** if for all $\bx, \by \in C$ and $\theta \in <span class="co">[</span><span class="ot">0, 1</span><span class="co">]</span>$:</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>\theta \bx + (1 - \theta) \by \in C</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="fu"># Convex Optimization</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>Convex optimization is the study of minimizing convex functions over convex sets. The theory is elegant and the algorithms are efficient, making convex optimization a cornerstone of modern applied mathematics.</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">## Convex Sets and Functions</span></span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>::: {#def-convex-function}</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## Convex Function</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>A function $f: \R^n \to \R$ is **convex** if for all $\bx, \by \in \R^n$ and $\theta \in <span class="co">[</span><span class="ot">0, 1</span><span class="co">]</span>$:</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>::: {#def-convex-set}</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## Convex Set</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>A set $C \subseteq \R^n$ is **convex** if for all $\bx, \by \in C$ and $\theta \in <span class="co">[</span><span class="ot">0, 1</span><span class="co">]</span>$:</span>
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>f(\theta \bx + (1 - \theta) \by) \leq \theta f(\bx) + (1 - \theta) f(\by)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>\theta \bx + (1 - \theta) \by \in C</span>
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="fu">### Optimality Conditions</span></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>::: {#thm-first-order}</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="fu">## First-Order Optimality</span></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>Let $f: \R^n \to \R$ be convex and differentiable. Then $\bx^*$ is a global minimizer if and only if:</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>::: {#def-convex-function}</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="fu">## Convex Function</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>A function $f: \R^n \to \R$ is **convex** if for all $\bx, \by \in \R^n$ and $\theta \in <span class="co">[</span><span class="ot">0, 1</span><span class="co">]</span>$:</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>f(\theta \bx + (1 - \theta) \by) \leq \theta f(\bx) + (1 - \theta) f(\by)</span>
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>\nabla f(\bx^*) = \mathbf{0}</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="fu">## Optimality Conditions</span></span>
 <span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>::: {#thm-second-order}</span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="fu">## Second-Order Condition</span></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>A twice-differentiable function $f$ is convex if and only if its Hessian is positive semidefinite everywhere:</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>::: {#thm-first-order}</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="fu">## First-Order Optimality</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>Let $f: \R^n \to \R$ be convex and differentiable. Then $\bx^*$ is a global minimizer if and only if:</span>
 <span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>\nabla^2 f(\bx) \succeq 0 \quad \text{for all } \bx</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>\nabla f(\bx^*) = \mathbf{0}</span>
 <span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="fu">### Quadratic Programming</span></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>::: {#def-qp}</span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="fu">## Quadratic Program</span></span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>A **quadratic program** (QP) is an optimization problem of the form:</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>::: {#thm-second-order}</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="fu">## Second-Order Condition</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>A twice-differentiable function $f$ is convex if and only if its Hessian is positive semidefinite everywhere:</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>\nabla^2 f(\bx) \succeq 0 \quad \text{for all } \bx</span>
 <span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>\min_{\bx} \quad &amp; \frac{1}{2} \bx^\top \mathbf{P} \bx + \mathbf{q}^\top \bx <span class="sc">\\</span></span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>\text{s.t.} \quad &amp; \bA \bx = \mathbf{b} <span class="sc">\\</span></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>&amp; \mathbf{G} \bx \leq \mathbf{h}</span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>The problem is convex if $\mathbf{P} \succeq 0$.</span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="fu">### Exercises</span></span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>::: {#exr-least-squares}</span>
-<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a><span class="fu">## Least Squares as QP</span></span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>Show that the least squares problem $\min_\bx \norm{\bA\bx - \mathbf{b}}^2$ is a convex QP and derive the normal equations.</span>
-<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="fu">## Quadratic Programming</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>::: {#def-qp}</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="fu">## Quadratic Program</span></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>A **quadratic program** (QP) is an optimization problem of the form:</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>\min_{\bx} \quad &amp; \frac{1}{2} \bx^\top \mathbf{P} \bx + \mathbf{q}^\top \bx <span class="sc">\\</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>\text{s.t.} \quad &amp; \bA \bx = \mathbf{b} <span class="sc">\\</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>&amp; \mathbf{G} \bx \leq \mathbf{h}</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>The problem is convex if $\mathbf{P} \succeq 0$.</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercises</span></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>::: {#exr-least-squares}</span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a><span class="fu">## Least Squares as QP</span></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>Show that the least squares problem $\min_\bx \norm{\bA\bx - \mathbf{b}}^2$ is a convex QP and derive the normal equations.</span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <script>
-// Add PDF download link to each page
+// Add PDF download link to each page (skip index pages which have no PDFs)
 document.addEventListener('DOMContentLoaded', function() {
   var path = window.location.pathname;
-  var pdfPath = path.replace(/\.html$/, '.pdf').replace(/\/$/, '/index.pdf');
-  if (path.endsWith('/')) pdfPath = path + 'index.pdf';
+  
+  // Skip index pages - they don't have individual PDFs
+  if (path.endsWith('/') || path.endsWith('/index.html') || path === '/index.html') {
+    return;
+  }
+  
+  var pdfPath = path.replace(/\.html$/, '.pdf');
   
   var link = document.createElement('a');
   link.href = pdfPath;

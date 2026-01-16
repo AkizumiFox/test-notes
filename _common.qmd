@@ -1,3 +1,4 @@
+::: {.content-visible when-format="html"}
 ::: {.hidden}
 $$
 % Sets
@@ -26,4 +27,5 @@ $$
 \def\diag{\text{diag}}
 \def\vspan{\text{span}}
 $$
+:::
 :::

@@ -1,2 +1,17 @@
+# Quarto
 /.quarto/
 **/*.quarto_ipynb
+_book/
+
+# LaTeX auxiliary files
+*.aux
+*.log
+*.out
+*.toc
+*.nav
+*.snm
+*.vrb
+*.tex
+
+# OS files
+.DS_Store

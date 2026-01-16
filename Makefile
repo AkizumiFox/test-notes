@@ -32,6 +32,7 @@ clean:
 	rm -rf _book
 	rm -rf .quarto
 	find . -name "*_files" -type d -exec rm -rf {} + 2>/dev/null || true
+	find . -maxdepth 2 \( -name "*.aux" -o -name "*.log" -o -name "*.out" -o -name "*.toc" \) -delete 2>/dev/null || true
 	@echo "Clean complete."
 
 # Help target
@@ -43,16 +44,3 @@ help:
 	@echo "  make preview  - Start live preview server"
 	@echo "  make clean    - Remove all generated files"
 	@echo "  make help     - Show this help message"
-	@echo ""
-	@echo "Book structure:"
-	@echo "  ch01-foundations/     - Chapter 1: Foundations"
-	@echo "    index.qmd           - Chapter intro"
-	@echo "    01-vector-spaces    - 1.1 Vector Spaces"
-	@echo "    02-linear-maps      - 1.2 Linear Maps"
-	@echo "  ch02-spectral-theory/ - Chapter 2: Spectral Theory"
-	@echo "    index.qmd           - Chapter intro"
-	@echo "    01-eigenvalues      - 2.1 Eigenvalues"
-	@echo "    02-decompositions   - 2.2 Decompositions"
-	@echo "  ch03-optimization/    - Chapter 3: Optimization"
-	@echo "    index.qmd           - Chapter intro"
-	@echo "    01-convex-optimization - 3.1 Convex Optimization"

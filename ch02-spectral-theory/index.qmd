@@ -1,22 +1,10 @@
----
-title: "Chapter 2: Spectral Theory"
-format:
-  pdf:
-    documentclass: article
-    number-sections: true
-    pdf-engine: lualatex
-    geometry:
-      - top=30mm
-      - left=25mm
-      - right=25mm
-      - bottom=30mm
----
+# Spectral Theory {.unnumbered}
 
-# Spectral Theory
+This part delves into spectral theory, one of the most powerful tools in linear algebra with applications across mathematics, physics, and engineering.
 
-This chapter delves into spectral theory, one of the most powerful tools in linear algebra with applications across mathematics, physics, and engineering.
+## Overview
 
-In this chapter, we will explore:
+In this part, we will explore:
 
 - **Eigenvalues and Eigenvectors**: The fundamental objects of spectral analysis
 - **Matrix Decompositions**: Factorizations that reveal the structure of linear operators
@@ -27,7 +15,7 @@ Spectral theory allows us to understand linear transformations by examining thei
 
 ## Applications
 
-The techniques in this chapter are essential for:
+The techniques in this part are essential for:
 
 - Principal Component Analysis (PCA)
 - Stability analysis of dynamical systems
