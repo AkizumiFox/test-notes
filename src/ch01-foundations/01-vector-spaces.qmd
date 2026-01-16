@@ -1,0 +1,59 @@
+---
+chapter-number: 1
+filters:
+  - chapter-number
+format:
+  pdf:
+    documentclass: memoir
+    classoption: [13pt, a4paper]
+    number-sections: true
+    pdf-engine: lualatex
+    geometry: [top=30mm, left=25mm, right=25mm, bottom=30mm]
+    include-in-header:
+      text: |
+        \usepackage[quartoenv]{../../config/latex-template}
+---
+
+{{< include ../../config/macros.qmd >}}
+
+# Vector Spaces
+
+## Introduction
+
+This chapter covers the essential background needed for the study of linear algebra. Feel free to skip sections that you are already familiar with. In addition to the following knowledge, basic knowledge of logic and proof techniques is recommended, including:
+
+A vector space is one of the most fundamental structures in mathematics. It provides an abstract framework for studying objects that can be added together and scaled.
+
+## Definition
+
+::: {#def-vector-space}
+## Vector Space
+A **vector space** over a field $\R$ (or $\C$) is a set $V$ & $\bI$ together with two operations:
+
+1. **Vector addition**: $+: V \times V \to V$
+2. **Scalar multiplication**: $\cdot: \R \times V \to V$
+
+satisfying the following axioms for all $\bu, \bv, \bw \in V$ and $a, b \in \R$:
+
+- Commutativity: $\bu + \bv = \bv + \bu$
+- Associativity: $(\bu + \bv) + \bw = \bu + (\bv + \bw)$
+- Additive identity: There exists $\mathbf{0} \in V$ such that $\bv + \mathbf{0} = \bv$
+- Additive inverse: For each $\bv$, there exists $-\bv$ such that $\bv + (-\bv) = \mathbf{0}$
+- Scalar associativity: $a(b\bv) = (ab)\bv$
+- Distributivity: $a(\bu + \bv) = a\bu + a\bv$ and $(a+b)\bv = a\bv + b\bv$
+- Scalar identity: $1\bv = \bv$
+:::
+
+## Examples
+
+::: {#exm-rn}
+## Euclidean Space
+The set $\R^n$ with standard addition and scalar multiplication is a vector space.
+:::
+
+## Exercises
+
+::: {#exr-subspace}
+## Subspace Criterion
+Prove that a non-empty subset $W \subseteq V$ is a subspace if and only if $a\bu + b\bv \in W$ for all $\bu, \bv \in W$ and $a, b \in \R$.
+:::

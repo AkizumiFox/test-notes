@@ -1,0 +1,60 @@
+---
+chapter-number: 2
+filters:
+  - chapter-number
+format:
+  pdf:
+    documentclass: memoir
+    classoption: [13pt, a4paper]
+    number-sections: true
+    pdf-engine: lualatex
+    geometry: [top=30mm, left=25mm, right=25mm, bottom=30mm]
+    include-in-header:
+      text: |
+        \usepackage[quartoenv]{../../config/latex-template}
+---
+
+{{< include ../../config/macros.qmd >}}
+
+# Linear Maps
+
+## Introduction
+
+Linear maps are functions between vector spaces that preserve the linear structure. They are the natural morphisms in the category of vector spaces.
+
+## Definition
+
+::: {#def-linear-map}
+## Linear Map
+Let $V$ and $W$ be vector spaces over $\R$. A function $T: V \to W$ is called a **linear map** (or linear transformation) if for all $\bu, \bv \in V$ and $a \in \R$:
+
+1. $T(\bu + \bv) = T(\bu) + T(\bv)$ (additivity)
+2. $T(a\bv) = aT(\bv)$ (homogeneity)
+:::
+
+Equivalently, $T$ is linear if and only if $T(a\bu + b\bv) = aT(\bu) + bT(\bv)$ for all vectors and scalars.
+
+## Fundamental Subspaces
+
+::: {#def-kernel}
+## Kernel and Image
+Let $T: V \to W$ be a linear map.
+
+- The **kernel** (or null space) of $T$ is $\ker(T) = \{\bv \in V : T(\bv) = \mathbf{0}\}$
+- The **image** (or range) of $T$ is $\text{im}(T) = \{T(\bv) : \bv \in V\}$
+:::
+
+::: {#thm-rank-nullity}
+## Rank-Nullity Theorem
+Let $T: V \to W$ be a linear map where $V$ is finite-dimensional. Then:
+$$
+\dim(V) = \dim(\ker(T)) + \dim(\text{im}(T))
+$$
+:::
+
+## Exercises
+
+::: {#exr-composition}
+## Composition of Linear Maps
+Prove that the composition of two linear maps is linear.
+:::

@@ -1,35 +1,29 @@
 {
   "index.qmd": {
-    "index.html": "bdf2a4df"
+    "index.html": "e8b41cde"
   },
-  "chapters/demo.qmd": {
-    "demo.html": "2c8e3e02"
+  "src/ch01-foundations/index.qmd": {
+    "index.html": "dc2b4f2e"
   },
-  "ch01-foundations/index.qmd": {
-    "index.html": "4b75a166"
+  "src/ch01-foundations/01-vector-spaces.qmd": {
+    "01-vector-spaces.html": "114fb1ba"
   },
-  "ch01-foundations/01-vector-spaces.qmd": {
-    "01-vector-spaces.html": "be9cfba6"
+  "src/ch01-foundations/02-linear-maps.qmd": {
+    "02-linear-maps.html": "8caeb41d"
   },
-  "ch01-foundations/02-linear-maps.qmd": {
-    "02-linear-maps.html": "9ab33f24"
+  "src/ch02-spectral-theory/index.qmd": {
+    "index.html": "882fd07f"
   },
-  "ch02-spectral-theory/index.qmd": {
-    "index.html": "6d9800f5"
+  "src/ch02-spectral-theory/01-eigenvalues.qmd": {
+    "01-eigenvalues.html": "93005762"
   },
-  "ch02-spectral-theory/01-eigenvalues.qmd": {
-    "01-eigenvalues.html": "ab999748"
+  "src/ch02-spectral-theory/02-decompositions.qmd": {
+    "02-decompositions.html": "e9ce748c"
   },
-  "ch02-spectral-theory/02-decompositions.qmd": {
-    "02-decompositions.html": "c360bfd8"
+  "src/ch03-optimization/index.qmd": {
+    "index.html": "db128898"
   },
-  "ch03-optimization/index.qmd": {
-    "index.html": "b9a2c751"
-  },
-  "ch03-optimization/01-convex-optimization.qmd": {
-    "01-convex-optimization.html": "c619810e"
-  },
-  "appendices/notation.qmd": {
-    "notation.html": "cde40833"
+  "src/ch03-optimization/01-convex-optimization.qmd": {
+    "01-convex-optimization.html": "517da0f0"
   }
 }

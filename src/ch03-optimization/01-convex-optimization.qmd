@@ -1,0 +1,81 @@
+---
+chapter-number: 5
+filters:
+  - chapter-number
+format:
+  pdf:
+    documentclass: memoir
+    classoption: [13pt, a4paper]
+    number-sections: true
+    pdf-engine: lualatex
+    geometry: [top=30mm, left=25mm, right=25mm, bottom=30mm]
+    include-in-header:
+      text: |
+        \usepackage[quartoenv]{../../config/latex-template}
+---
+
+{{< include ../../config/macros.qmd >}}
+
+# Convex Optimization
+
+## Introduction
+
+Convex optimization is the study of minimizing convex functions over convex sets. The theory is elegant and the algorithms are efficient, making convex optimization a cornerstone of modern applied mathematics.
+
+## Convex Sets and Functions
+
+::: {#def-convex-set}
+## Convex Set
+A set $C \subseteq \R^n$ is **convex** if for all $\bx, \by \in C$ and $\theta \in [0, 1]$:
+$$
+\theta \bx + (1 - \theta) \by \in C
+$$
+:::
+
+::: {#def-convex-function}
+## Convex Function
+A function $f: \R^n \to \R$ is **convex** if for all $\bx, \by \in \R^n$ and $\theta \in [0, 1]$:
+$$
+f(\theta \bx + (1 - \theta) \by) \leq \theta f(\bx) + (1 - \theta) f(\by)
+$$
+:::
+
+## Optimality Conditions
+
+::: {#thm-first-order}
+## First-Order Optimality
+Let $f: \R^n \to \R$ be convex and differentiable. Then $\bx^*$ is a global minimizer if and only if:
+$$
+\nabla f(\bx^*) = \mathbf{0}
+$$
+:::
+
+::: {#thm-second-order}
+## Second-Order Condition
+A twice-differentiable function $f$ is convex if and only if its Hessian is positive semidefinite everywhere:
+$$
+\nabla^2 f(\bx) \succeq 0 \quad \text{for all } \bx
+$$
+:::
+
+## Quadratic Programming
+
+::: {#def-qp}
+## Quadratic Program
+A **quadratic program** (QP) is an optimization problem of the form:
+$$
+\begin{aligned}
+\min_{\bx} \quad & \frac{1}{2} \bx^\top \mathbf{P} \bx + \mathbf{q}^\top \bx \\
+\text{s.t.} \quad & \bA \bx = \mathbf{b} \\
+& \mathbf{G} \bx \leq \mathbf{h}
+\end{aligned}
+$$
+The problem is convex if $\mathbf{P} \succeq 0$.
+:::
+
+## Exercises
+
+::: {#exr-least-squares}
+## Least Squares as QP
+Show that the least squares problem $\min_\bx \norm{\bA\bx - \mathbf{b}}^2$ is a convex QP and derive the normal equations.
+:::

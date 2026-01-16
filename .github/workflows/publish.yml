@@ -25,59 +25,37 @@ jobs:
         uses: quarto-dev/quarto-actions/setup@v2
 
       - name: Install TinyTeX for PDF generation
-        run: |
-          quarto install tinytex
+        run: quarto install tinytex
 
-      - name: Render HTML book
-        run: quarto render --to html
+      - name: Render HTML and full book PDF
+        run: quarto render
 
       - name: Build individual chapter PDFs
         run: |
-          # Create output directories
-          mkdir -p _book/ch01-foundations
-          mkdir -p _book/ch02-spectral-theory
-          mkdir -p _book/ch03-optimization
-          
-          # Create temp directory for isolated rendering
           TMPDIR=$(mktemp -d)
           
-          # Copy project structure to temp (without _quarto.yml)
-          cp -r assets "$TMPDIR/"
-          cp -r ch01-foundations "$TMPDIR/"
-          cp -r ch02-spectral-theory "$TMPDIR/"
-          cp -r ch03-optimization "$TMPDIR/"
-          cp _common.qmd "$TMPDIR/"
+          cp -r config "$TMPDIR/"
+          for dir in src/ch*-*/; do
+            dir_name="${dir%/}"
+            mkdir -p "$TMPDIR/$dir_name"
+            cp "$dir_name"/*.qmd "$TMPDIR/$dir_name/" 2>/dev/null || true
+            cp -r _extensions "$TMPDIR/$dir_name/_extensions" 2>/dev/null || true
+            mkdir -p "_book/$dir_name"
+          done
           
-          # Copy _extensions into each chapter folder
-          cp -r _extensions "$TMPDIR/ch01-foundations/_extensions"
-          cp -r _extensions "$TMPDIR/ch02-spectral-theory/_extensions"
-          cp -r _extensions "$TMPDIR/ch03-optimization/_extensions"
-          
-          # Function to render PDF
-          render_pdf() {
-            local qmd_file="$1"
-            local output_dir=$(dirname "$qmd_file")
-            local basename=$(basename "$qmd_file" .qmd)
-            
-            echo "Rendering: $qmd_file"
-            (cd "$TMPDIR/$output_dir" && quarto render "$(basename "$qmd_file")" --to pdf) || true
-            
-            if [ -f "$TMPDIR/$output_dir/$basename.pdf" ]; then
-              mv "$TMPDIR/$output_dir/$basename.pdf" "_book/$output_dir/$basename.pdf"
-              echo "  -> _book/$output_dir/$basename.pdf"
-            fi
-          }
-          
-          # Render all chapter PDFs
-          for qmd in ch01-foundations/01-vector-spaces.qmd ch01-foundations/02-linear-maps.qmd \
-                     ch02-spectral-theory/01-eigenvalues.qmd ch02-spectral-theory/02-decompositions.qmd \
-                     ch03-optimization/01-convex-optimization.qmd; do
+          for qmd in src/ch*-*/[0-9][0-9]-*.qmd; do
             if [ -f "$qmd" ]; then
-              render_pdf "$qmd"
+              output_dir=$(dirname "$qmd")
+              basename=$(basename "$qmd" .qmd)
+              
+              echo "Rendering: $qmd"
+              (cd "$TMPDIR/$output_dir" && quarto render "$basename.qmd" --to pdf --metadata standalone-pdf:true) || true
+              
+              [ -f "$TMPDIR/$output_dir/$basename.pdf" ] && \
+                mv "$TMPDIR/$output_dir/$basename.pdf" "_book/$output_dir/$basename.pdf"
             fi
           done
           
-          # Cleanup
           rm -rf "$TMPDIR"
 
       - name: Upload artifact

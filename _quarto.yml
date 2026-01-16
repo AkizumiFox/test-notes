@@ -5,24 +5,27 @@ project:
 book:
   title: "Advanced Linear Algebra Notes"
   subtitle: "Spectral Theory & Optimization"
-  author: "Your Name"
+  author: "Tzu-You Lin"
   date: last-modified
+  downloads: [pdf]
+  # AUTO-GENERATED CHAPTERS - Do not edit manually
+  # Run 'make update' to regenerate from src/ directory
   chapters:
     - index.qmd
-    
-    - part: ch01-foundations/index.qmd
+
+    - part: src/ch01-foundations/index.qmd
       chapters:
-        - ch01-foundations/01-vector-spaces.qmd
-        - ch01-foundations/02-linear-maps.qmd
-    
-    - part: ch02-spectral-theory/index.qmd
+        - src/ch01-foundations/01-vector-spaces.qmd
+        - src/ch01-foundations/02-linear-maps.qmd
+
+    - part: src/ch02-spectral-theory/index.qmd
       chapters:
-        - ch02-spectral-theory/01-eigenvalues.qmd
-        - ch02-spectral-theory/02-decompositions.qmd
-    
-    - part: ch03-optimization/index.qmd
+        - src/ch02-spectral-theory/01-eigenvalues.qmd
+        - src/ch02-spectral-theory/02-decompositions.qmd
+
+    - part: src/ch03-optimization/index.qmd
       chapters:
-        - ch03-optimization/01-convex-optimization.qmd
+        - src/ch03-optimization/01-convex-optimization.qmd
 
 filters:
   - shared-thm-counter
@@ -34,11 +37,11 @@ format:
     number-sections: true
     code-tools: true
     html-math-method: mathjax
-    css: assets/custom.css
+    css: config/html-styles.css
     include-after-body:
       text: |
         <script>
-        // Add PDF download link to each page (skip index pages which have no PDFs)
+        // Add PDF download link to right TOC sidebar (skip index pages)
         document.addEventListener('DOMContentLoaded', function() {
           var path = window.location.pathname;
           
@@ -49,27 +52,50 @@ format:
           
           var pdfPath = path.replace(/\.html$/, '.pdf');
           
-          var link = document.createElement('a');
-          link.href = pdfPath;
-          link.className = 'btn btn-outline-primary btn-sm pdf-download-btn';
-          link.innerHTML = '<i class="bi bi-file-pdf"></i> Download PDF';
-          link.style.cssText = 'position:fixed;bottom:20px;right:20px;z-index:1000;';
-          document.body.appendChild(link);
+          // Create "Other Formats" section for right sidebar
+          var section = document.createElement('div');
+          section.style.cssText = 'margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #dee2e6;';
+          section.innerHTML = 
+            '<h6 style="font-size:0.875rem;font-weight:600;margin-bottom:0.5rem;">Other Formats</h6>' +
+            '<a href="' + pdfPath + '" style="display:flex;align-items:center;gap:0.5rem;color:inherit;text-decoration:none;font-size:0.875rem;">' +
+            '<i class="bi bi-file-pdf" style="color:#dc3545;"></i> PDF</a>';
+          
+          // Find the right TOC sidebar
+          var tocSidebar = document.querySelector('#quarto-margin-sidebar') ||
+                           document.querySelector('.toc-active') ||
+                           document.querySelector('#TOC');
+          if (tocSidebar) {
+            tocSidebar.appendChild(section);
+          }
         });
         </script>
     
   pdf:
-    documentclass: book
+    documentclass: extbook
+    classoption: [13.5pt, a4paper, oneside, openany]
     number-sections: true
     colorlinks: true
     linkcolor: "blue"
     urlcolor: "blue"
     pdf-engine: lualatex
+    linestretch: 1.1
     include-in-header:
-      text: |
-        \usepackage[quarto]{assets/book-template}
+      - text: |
+          \usepackage[quartoenv]{./config/latex-template}
+          % Remove blank pages
+          \usepackage{etoolbox}
+          \makeatletter
+          \patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{\clearpage}{}{}
+          % Suppress title page
+          \AtBeginDocument{\let\maketitle\relax}
+          \makeatother
+          % List spacing (1.3x)
+          \usepackage{enumitem}
+          \setlist{itemsep=1.2em, parsep=0pt}
+          % Custom enumeration with prefix: \begin{customenum}{VS} gives VS1, VS2, ...
+          \newlist{customenum}{enumerate}{1}
+          \setlist[customenum,1]{label=\customenumprefix\arabic*, itemsep=1.2em}
+          \newcommand{\customenumprefix}{}
+      - file: config/chapter-style.tex
     geometry:
-      - top=30mm
-      - left=25mm
-      - right=25mm
-      - bottom=30mm
+      - margin=1.2in
