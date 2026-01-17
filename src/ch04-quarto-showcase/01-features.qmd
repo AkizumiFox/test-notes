@@ -388,3 +388,47 @@ The spectral theorem[^1] is one of the most important results in linear algebra.
 > "The eigenvalues of a matrix are the key to understanding its behavior."
 > 
 > — Gilbert Strang, *Linear Algebra and Its Applications*
+
+## Horizontal Rule
+
+---
+
+## Diagrams with Mermaid
+
+::: {.content-visible when-format="html"}
+```{mermaid}
+%%| fig-width: 6
+%%| fig-responsive: true
+flowchart LR
+    A[Matrix A] --> B{Is A symmetric?}
+    B -->|Yes| C[Real eigenvalues]
+    B -->|No| D{Is A normal?}
+    D -->|Yes| E[Orthogonal eigenvectors]
+    D -->|No| F[May not be diagonalizable]
+```
+:::
+
+::: {.content-visible when-format="pdf"}
+*Matrix Classification Flowchart:*
+
+Matrix A $\rightarrow$ Is A symmetric?
+
+- **Yes** $\rightarrow$ Real eigenvalues
+- **No** $\rightarrow$ Is A normal?
+  - **Yes** $\rightarrow$ Orthogonal eigenvectors
+  - **No** $\rightarrow$ May not be diagonalizable
+:::
+
+## Summary
+
+This chapter demonstrated:
+
+1. **Theorem environments**: definitions, theorems, lemmas, corollaries, examples, exercises, proofs, remarks
+2. **Callouts**: note, tip, warning, important, caution
+3. **Tables**: pipe tables, grid tables
+4. **Math**: aligned equations, matrices, cases
+5. **Code**: Python, R, Julia with syntax highlighting
+6. **Tabsets**: organized content in tabs
+7. **Cross-references**: linking to theorems, tables, equations
+8. **Lists**: ordered, unordered, nested, definition lists
+9. **Other**: footnotes, block quotes, diagrams
