@@ -1,38 +1,38 @@
 {
   "index.qmd": {
-    "index.html": "8d0098f1"
+    "index.html": "9788d1fb"
   },
   "src/ch01-foundations/index.qmd": {
-    "index.html": "324298bf"
+    "index.html": "957765ee"
   },
   "src/ch01-foundations/01-vector-spaces.qmd": {
-    "01-vector-spaces.html": "7124bd10"
+    "01-vector-spaces.html": "a0b8060c"
   },
   "src/ch01-foundations/02-linear-maps.qmd": {
-    "02-linear-maps.html": "0e4b5e1a"
+    "02-linear-maps.html": "154278c1"
   },
   "src/ch02-spectral-theory/index.qmd": {
-    "index.html": "e3f68034"
+    "index.html": "d1280a8b"
   },
   "src/ch02-spectral-theory/01-eigenvalues.qmd": {
-    "01-eigenvalues.html": "20ce292d"
+    "01-eigenvalues.html": "404cf293"
   },
   "src/ch02-spectral-theory/02-decompositions.qmd": {
-    "02-decompositions.html": "ca8a96c2"
+    "02-decompositions.html": "d463896c"
   },
   "src/ch03-optimization/index.qmd": {
-    "index.html": "80d4954a"
+    "index.html": "b8605cbc"
   },
   "src/ch03-optimization/01-convex-optimization.qmd": {
-    "01-convex-optimization.html": "f2aadc92"
+    "01-convex-optimization.html": "93f1481d"
   },
   "src/ch04-quarto-showcase/index.qmd": {
-    "index.html": "48d742e0"
+    "index.html": "7210a41f"
   },
   "src/ch04-quarto-showcase/01-features.qmd": {
-    "01-features.html": "313f47be"
+    "01-features.html": "26181602"
   },
   "src/ch04-quarto-showcase/02-interactive.qmd": {
-    "02-interactive.html": "d5f2a798"
+    "02-interactive.html": "923b2ab9"
   }
 }
