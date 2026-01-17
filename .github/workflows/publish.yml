@@ -53,17 +53,24 @@ jobs:
               output_dir=$(dirname "$qmd")
               basename=$(basename "$qmd" .qmd)
               
-              echo "Rendering: $qmd"
+              echo "=== Rendering: $qmd ==="
               mkdir -p "_book/$output_dir"
               
-              # Render with standalone metadata (outputs to _book/ due to project config)
+              # Render with standalone metadata
               quarto render "$qmd" --to pdf --output "$basename.pdf" \
                 --metadata standalone-pdf:true 2>&1 || echo "Warning: Failed to render $qmd"
               
-              # Move PDF from _book root to correct subdirectory
-              if [ -f "_book/$basename.pdf" ]; then
-                mv "_book/$basename.pdf" "_book/$output_dir/$basename.pdf"
-                echo "  -> Created _book/$output_dir/$basename.pdf"
+              # Debug: show where PDFs might be
+              echo "Looking for PDF..."
+              find . -name "$basename.pdf" -type f 2>/dev/null | head -5
+              
+              # Find and move the PDF to correct subdirectory
+              pdf_path=$(find . -name "$basename.pdf" -type f 2>/dev/null | head -1)
+              if [ -n "$pdf_path" ]; then
+                mv "$pdf_path" "_book/$output_dir/$basename.pdf"
+                echo "  -> Moved $pdf_path to _book/$output_dir/$basename.pdf"
+              else
+                echo "  -> Warning: PDF not found for $qmd"
               fi
             fi
           done
