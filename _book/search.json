@@ -657,7 +657,7 @@
     "href": "src/ch04-quarto-showcase/02-interactive.html#summary",
     "title": "7  Interactive Visualizations",
     "section": "7.7 Summary",
-    "text": "7.7 Summary\nThis chapter demonstrated:\n\nMatplotlib plots: Scatter plots, line plots, contours, heatmaps\nAlgorithm visualization: Power iteration, gradient descent\nInteractive analysis: Eigenvalue computation, spectral clustering\nInline Python: Computing values within text\nData tables: Using pandas DataFrames\n\n\n\n\n\n\n\nTipRunning the Code\n\n\n\nTo execute the Python code in this document, ensure you have Jupyter installed:\npip install jupyter matplotlib numpy scipy pandas",
+    "text": "7.7 Summary\nThis chapter demonstrated:\n\nMatplotlib plots: Scatter plots, line plots, contours, heatmaps\nAlgorithm visualization: Power iteration, gradient descent\nInteractive analysis: Eigenvalue computation, spectral clustering\nInline Python: Computing values within text\nData tables: Using pandas DataFrames\n\n\n\n\n\n\n\nTipRunning the Code\n\n\n\nTo execute the Python code in this document, ensure you have Jupyter installed:\npip install jupyter matplotlib numpy scipy pandas\n\n\nAs we saw in Definition 6.1, a metric space generalizes the notion of distance. The Theorem 6.1 is fundamental to the theory of inner product spaces.\nSee Table 6.2 for a comparison of matrix properties.\nThe Lemma 6.1 leads directly to Corollary 6.1.",
     "crumbs": [
       "Quarto Feature Showcase",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Interactive Visualizations</span>"

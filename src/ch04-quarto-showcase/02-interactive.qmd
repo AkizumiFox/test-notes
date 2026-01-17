@@ -383,3 +383,9 @@ To execute the Python code in this document, ensure you have Jupyter installed:
 pip install jupyter matplotlib numpy scipy pandas
 ```
 :::
+
+As we saw in @def-metric-space, a metric space generalizes the notion of distance. The @thm-cauchy-schwarz is fundamental to the theory of inner product spaces.
+
+See @tbl-matrix-props for a comparison of matrix properties.
+
+The @lem-parallelogram leads directly to @cor-triangle.
