@@ -48,32 +48,41 @@ jobs:
         timeout-minutes: 15
         continue-on-error: true
         run: |
+          # Create temp directory for individual PDFs (won't be cleaned by quarto)
+          PDFDIR=$(mktemp -d)
+          echo "Temp PDF dir: $PDFDIR"
+          
+          # Render each chapter
           for qmd in src/ch*-*/[0-9][0-9]-*.qmd; do
             if [ -f "$qmd" ]; then
               output_dir=$(dirname "$qmd")
               basename=$(basename "$qmd" .qmd)
               
               echo "=== Rendering: $qmd ==="
-              mkdir -p "_book/$output_dir"
               
-              # Render with standalone metadata
+              # Render (outputs to _book/ which may get cleaned)
               quarto render "$qmd" --to pdf --output "$basename.pdf" \
                 --metadata standalone-pdf:true 2>&1 || echo "Warning: Failed to render $qmd"
               
-              # Debug: show where PDFs might be
-              echo "Looking for PDF..."
-              find . -name "$basename.pdf" -type f 2>/dev/null | head -5
-              
-              # Find and move the PDF to correct subdirectory
+              # Find and copy to temp dir with path info
               pdf_path=$(find . -name "$basename.pdf" -type f 2>/dev/null | head -1)
               if [ -n "$pdf_path" ]; then
-                mv "$pdf_path" "_book/$output_dir/$basename.pdf"
-                echo "  -> Moved $pdf_path to _book/$output_dir/$basename.pdf"
-              else
-                echo "  -> Warning: PDF not found for $qmd"
+                mkdir -p "$PDFDIR/$output_dir"
+                cp "$pdf_path" "$PDFDIR/$output_dir/$basename.pdf"
+                echo "  -> Saved to $PDFDIR/$output_dir/$basename.pdf"
               fi
             fi
           done
+          
+          # Copy all PDFs to _book after all renders complete
+          echo "=== Copying PDFs to _book ==="
+          cp -r "$PDFDIR"/src/* _book/src/ 2>/dev/null || true
+          
+          # Cleanup
+          rm -rf "$PDFDIR"
+          
+          echo "=== Final PDF list ==="
+          find _book -name "*.pdf" -type f
 
       - name: Verify output
         run: |
