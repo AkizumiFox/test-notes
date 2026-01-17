@@ -503,7 +503,7 @@
     "href": "src/ch04-quarto-showcase/01-features.html#cross-references",
     "title": "6  Quarto Features Showcase",
     "section": "6.7 Cross-References",
-    "text": "6.7 Cross-References\nAs we saw in Definition 6.1, a metric space generalizes the notion of distance. The Theorem 6.1 is fundamental to the theory of inner product spaces.\nSee Table 6.2 for a comparison of matrix properties.\nThe Lemma 6.1 leads directly to Corollary 6.1.",
+    "text": "6.7 Cross-References\nCross to another chapter: Definition 1.1.\nAs we saw in Definition 6.1, a metric space generalizes the notion of distance. The Theorem 6.1 is fundamental to the theory of inner product spaces.\nSee Table 6.2 for a comparison of matrix properties.\nThe Lemma 6.1 leads directly to Corollary 6.1.",
     "crumbs": [
       "Quarto Feature Showcase",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Quarto Features Showcase</span>"

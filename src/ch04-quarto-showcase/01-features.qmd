@@ -340,6 +340,8 @@ The QR decomposition factors $\bA = \bQ\bR$ where:
 
 ## Cross-References
 
+Cross to another chapter: @def-vector-space.
+
 As we saw in @def-metric-space, a metric space generalizes the notion of distance. The @thm-cauchy-schwarz is fundamental to the theory of inner product spaces.
 
 See @tbl-matrix-props for a comparison of matrix properties.
