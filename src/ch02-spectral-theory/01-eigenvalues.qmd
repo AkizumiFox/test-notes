@@ -5,15 +5,22 @@ filters:
   - chapter-number
 format:
   pdf:
-    documentclass: memoir
-    classoption: [13pt, a4paper]
+    documentclass: extbook
+    classoption: [13.5pt, a4paper, oneside, openany]
     number-sections: true
+    colorlinks: true
+    linkcolor: "blue"
+    urlcolor: "blue"
     pdf-engine: lualatex
-    geometry: [top=30mm, left=25mm, right=25mm, bottom=30mm]
+    linestretch: 1.1
+    geometry: [margin=1.2in]
     include-in-header:
       text: |
         \usepackage[quartoenv]{../../config/latex-template}
         \directlua{require("../../config/strip-numbers")}
+        \usepackage{enumitem}
+        \setlist{itemsep=1.2em, parsep=0pt}
+        \usepackage{../../config/chapter-style}
 ---
 
 {{< include ../../config/macros.qmd >}}
