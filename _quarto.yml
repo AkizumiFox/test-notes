@@ -2,13 +2,9 @@ project:
   type: book
   output-dir: _book
 
-# Freeze computation results for faster CI builds
+# Don't re-execute code in CI - use frozen results
 execute:
-  freeze: auto
-
-# Mermaid diagram configuration
-mermaid:
-  theme: default
+  freeze: true
 
 book:
   title: "Advanced Linear Algebra Notes"
