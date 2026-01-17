@@ -75,6 +75,12 @@ jobs:
               # Copy _mermaid-cache to chapter dir (for mermaid-static filter)
               cp -r _mermaid-cache "$BUILDDIR/$output_dir/" 2>/dev/null || true
               
+              # Create minimal _quarto.yml with mermaid-static filter
+              cat > "$BUILDDIR/$output_dir/_quarto.yml" << 'YAML'
+filters:
+  - mermaid-static
+YAML
+              
               # Copy chapter resources
               cp -r "$output_dir/images" "$BUILDDIR/$output_dir/" 2>/dev/null || true
               cp -r "$output_dir"/*_files "$BUILDDIR/$output_dir/" 2>/dev/null || true
