@@ -1,6 +1,7 @@
 #!/bin/bash
-# Compile all mermaid-src blocks from qmd files to SVG
-# SVG files are stored in _mermaid-cache/ with ID-based filenames
+# Compile all mermaid-src blocks from qmd files to PNG
+# PNG files are stored in _mermaid-cache/ with ID-based filenames
+# PNG works for both HTML and PDF without needing rsvg-convert
 
 set -e
 
@@ -13,7 +14,7 @@ if ! command -v mmdc &> /dev/null; then
     npm install -g @mermaid-js/mermaid-cli
 fi
 
-echo "Compiling Mermaid diagrams..."
+echo "Compiling Mermaid diagrams to PNG..."
 
 # Find all qmd files and extract mermaid-src blocks with their IDs
 for qmd in $(find src -name "*.qmd" 2>/dev/null); do
@@ -50,18 +51,18 @@ for qmd in $(find src -name "*.qmd" 2>/dev/null); do
                 if [ -n "$mermaid_content" ]; then
                     # Use ID as filename, or generate hash if no ID
                     if [ -n "$mermaid_id" ]; then
-                        svg_file="$CACHE_DIR/${mermaid_id}.svg"
+                        img_file="$CACHE_DIR/${mermaid_id}.png"
                     else
                         hash=$(echo -n "$mermaid_content" | shasum -a 1 | cut -c1-8)
-                        svg_file="$CACHE_DIR/${hash}.svg"
+                        img_file="$CACHE_DIR/${hash}.png"
                     fi
                     
-                    echo "  Compiling: $(basename "$svg_file") (from $qmd)"
+                    echo "  Compiling: $(basename "$img_file") (from $qmd)"
                     # Write content to temp file
                     tmp_file=$(mktemp)
                     echo "$mermaid_content" > "$tmp_file"
-                    # Compile to SVG
-                    mmdc -i "$tmp_file" -o "$svg_file" -b transparent 2>/dev/null || echo "    Warning: failed to compile"
+                    # Compile to PNG with high resolution
+                    mmdc -i "$tmp_file" -o "$img_file" -b white -w 1600 -s 2 2>/dev/null || echo "    Warning: failed to compile"
                     rm -f "$tmp_file"
                 fi
                 mermaid_content=""
@@ -75,7 +76,7 @@ for qmd in $(find src -name "*.qmd" 2>/dev/null); do
 done
 
 echo ""
-echo "Done! SVGs are in $CACHE_DIR/"
+echo "Done! PNGs are in $CACHE_DIR/"
 ls -la "$CACHE_DIR/" 2>/dev/null || true
 echo ""
 echo "Commit _mermaid-cache/ to use pre-compiled diagrams in CI."

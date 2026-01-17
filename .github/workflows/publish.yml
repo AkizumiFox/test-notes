@@ -24,6 +24,11 @@ jobs:
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y librsvg2-bin
+
       - name: Install TinyTeX for PDF generation
         run: quarto install tinytex
 
@@ -52,6 +57,7 @@ jobs:
           TMPDIR=$(mktemp -d)
           
           cp -r config "$TMPDIR/"
+          cp -r _mermaid-cache "$TMPDIR/" 2>/dev/null || true
           for dir in src/ch*-*/; do
             dir_name="${dir%/}"
             mkdir -p "$TMPDIR/$dir_name"

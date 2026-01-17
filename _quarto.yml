@@ -181,6 +181,6 @@ format:
           \newlist{customenum}{enumerate}{1}
           \setlist[customenum,1]{label=\customenumprefix\arabic*, itemsep=1.2em}
           \newcommand{\customenumprefix}{}
-      - file: config/chapter-style.tex
+      - file: ./config/chapter-style.tex
     geometry:
       - margin=1.2in

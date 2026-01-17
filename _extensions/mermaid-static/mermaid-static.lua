@@ -1,7 +1,7 @@
 -- mermaid-static.lua
 -- Use ```{.mermaid-src #id} blocks that get transformed to:
 -- - Real mermaid blocks (locally) 
--- - SVG images (in CI)
+-- - Pre-compiled images (in CI): SVG for HTML, PNG for PDF
 -- This avoids Quarto initializing Chromium when it sees {mermaid} blocks
 
 local in_ci = os.getenv("GITHUB_ACTIONS") == "true" or os.getenv("CI") == "true"
@@ -30,27 +30,40 @@ function CodeBlock(el)
   local content = el.text
   
   if in_ci then
-    -- In CI: replace with pre-compiled SVG
+    -- In CI: replace with pre-compiled image
     -- Use the block's ID as the filename, or fall back to content hash
-    local svg_name = el.identifier
-    if svg_name == "" then
-      svg_name = pandoc.sha1(content):sub(1, 8)
+    local img_name = el.identifier
+    if img_name == "" then
+      img_name = pandoc.sha1(content):sub(1, 8)
     end
     
     local project_root = get_project_root()
-    local svg_path = project_root .. "_mermaid-cache/" .. svg_name .. ".svg"
     
-    -- Check if the SVG exists
-    local f = io.open(svg_path, "r")
+    -- Try PNG first (works for both HTML and PDF), then SVG
+    local png_path = project_root .. "_mermaid-cache/" .. img_name .. ".png"
+    local svg_path = project_root .. "_mermaid-cache/" .. img_name .. ".svg"
+    
+    local img_path = nil
+    local f = io.open(png_path, "r")
     if f then
       f:close()
-      -- Return an image element pointing to the SVG
-      local img = pandoc.Image({}, svg_path, "", {width = "100%"})
+      img_path = png_path
+    else
+      f = io.open(svg_path, "r")
+      if f then
+        f:close()
+        img_path = svg_path
+      end
+    end
+    
+    if img_path then
+      -- Return an image element
+      local img = pandoc.Image({}, img_path, "", {width = "100%"})
       return pandoc.Para({img})
     else
-      -- SVG not found - return a warning
-      quarto.log.warning("Mermaid SVG not found: " .. svg_path .. " - run 'make mermaid' locally")
-      return pandoc.Para({pandoc.Strong({pandoc.Str("[Mermaid diagram '" .. svg_name .. "' - run 'make mermaid' to compile]")})})
+      -- Image not found - return a warning
+      quarto.log.warning("Mermaid image not found: " .. png_path .. " or " .. svg_path .. " - run 'make mermaid' locally")
+      return pandoc.Para({pandoc.Strong({pandoc.Str("[Mermaid diagram '" .. img_name .. "' - run 'make mermaid' to compile]")})})
     end
   else
     -- Locally: convert to real mermaid block for Quarto to render
