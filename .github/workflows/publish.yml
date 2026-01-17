@@ -44,6 +44,30 @@ jobs:
         timeout-minutes: 20
         run: quarto render
 
+      - name: Build individual chapter PDFs
+        timeout-minutes: 15
+        continue-on-error: true
+        run: |
+          for qmd in src/ch*-*/[0-9][0-9]-*.qmd; do
+            if [ -f "$qmd" ]; then
+              output_dir=$(dirname "$qmd")
+              basename=$(basename "$qmd" .qmd)
+              
+              echo "Rendering: $qmd"
+              mkdir -p "_book/$output_dir"
+              
+              # Render with standalone metadata (outputs to _book/ due to project config)
+              quarto render "$qmd" --to pdf --output "$basename.pdf" \
+                --metadata standalone-pdf:true 2>&1 || echo "Warning: Failed to render $qmd"
+              
+              # Move PDF from _book root to correct subdirectory
+              if [ -f "_book/$basename.pdf" ]; then
+                mv "_book/$basename.pdf" "_book/$output_dir/$basename.pdf"
+                echo "  -> Created _book/$output_dir/$basename.pdf"
+              fi
+            fi
+          done
+
       - name: Verify output
         run: |
           echo "=== Checking _book contents ==="
@@ -51,6 +75,9 @@ jobs:
           echo ""
           echo "=== Checking for index.html ==="
           test -f _book/index.html && echo "index.html exists" || echo "ERROR: index.html missing!"
+          echo ""
+          echo "=== Individual PDFs ==="
+          find _book -name "*.pdf" -type f
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
