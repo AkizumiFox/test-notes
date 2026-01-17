@@ -24,12 +24,6 @@ jobs:
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      - name: Install Chromium for Mermaid diagrams
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y chromium-browser
-          echo "CHROMIUM_PATH=$(which chromium-browser)" >> $GITHUB_ENV
-
       - name: Install TinyTeX for PDF generation
         run: quarto install tinytex
 
@@ -56,6 +50,7 @@ jobs:
             dir_name="${dir%/}"
             mkdir -p "$TMPDIR/$dir_name"
             cp "$dir_name"/*.qmd "$TMPDIR/$dir_name/" 2>/dev/null || true
+            cp -r "$dir_name/images" "$TMPDIR/$dir_name/images" 2>/dev/null || true
             cp -r _extensions "$TMPDIR/$dir_name/_extensions" 2>/dev/null || true
             mkdir -p "_book/$dir_name"
           done

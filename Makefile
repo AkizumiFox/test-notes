@@ -111,6 +111,7 @@ pdfs:
 		mkdir -p "_book/$$dir_name"; \
 		mkdir -p "$$RENDER_TMPDIR/$$dir_name"; \
 		cp "$$dir_name"/*.qmd "$$RENDER_TMPDIR/$$dir_name/" 2>/dev/null || true; \
+		cp -r "$$dir_name/images" "$$RENDER_TMPDIR/$$dir_name/images" 2>/dev/null || true; \
 		cp -r _extensions "$$RENDER_TMPDIR/$$dir_name/_extensions" 2>/dev/null || true; \
 	done; \
 	\
@@ -282,6 +283,43 @@ endif
 	echo "Created: $$FILE_NAME"; \
 	echo ""; \
 	echo "Run 'make update' to add to _quarto.yml"
+
+# =============================================================================
+# Diagrams (pre-compile Mermaid to PNG for PDF output)
+# =============================================================================
+
+# Compile all .mmd files to high-res PNG
+diagrams:
+	@echo "Compiling Mermaid diagrams to PNG (high-res for PDF)..."
+	@command -v mmdc >/dev/null 2>&1 || { echo "Installing mermaid-cli..."; npm install -g @mermaid-js/mermaid-cli; }
+	@for mmd in $$(find src -name "*.mmd" 2>/dev/null); do \
+		png="$${mmd%.mmd}.png"; \
+		echo "  $$mmd -> $$png"; \
+		mmdc -i "$$mmd" -o "$$png" -b white -w 1600 -s 3 2>/dev/null; \
+	done
+	@echo "Done!"
+
+# Extract mermaid blocks from qmd files and save as .mmd, then compile
+# Usage: make sync-diagrams
+sync-diagrams:
+	@echo "Extracting Mermaid diagrams from qmd files..."
+	@for qmd in $$(find src -name "*.qmd" 2>/dev/null); do \
+		dir=$$(dirname "$$qmd"); \
+		if grep -q '```{mermaid}' "$$qmd" 2>/dev/null; then \
+			mkdir -p "$$dir/images"; \
+			base=$$(basename "$$qmd" .qmd); \
+			mmd="$$dir/images/$$base-diagram.mmd"; \
+			awk '/^```\{mermaid\}/,/^```$$/{if(!/^```/)print}' "$$qmd" | grep -v '^%%|' > "$$mmd"; \
+			if [ -s "$$mmd" ]; then \
+				echo "  $$qmd -> $$mmd"; \
+				mmdc -i "$$mmd" -o "$${mmd%.mmd}.png" -b white -w 1600 -s 3 2>/dev/null; \
+				echo "  -> $${mmd%.mmd}.png"; \
+			else \
+				rm -f "$$mmd"; \
+			fi; \
+		fi; \
+	done
+	@echo "Done! Remember to update the PDF image path in qmd if filename changed."
 
 # =============================================================================
 # Cleanup

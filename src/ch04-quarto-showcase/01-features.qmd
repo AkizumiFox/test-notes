@@ -395,9 +395,9 @@ The spectral theorem[^1] is one of the most important results in linear algebra.
 
 ## Diagrams with Mermaid
 
+::: {.content-visible when-format="html"}
 ```{mermaid}
 %%| fig-width: 6
-%%| fig-responsive: true
 flowchart LR
     A[Matrix A] --> B{Is A symmetric?}
     B -->|Yes| C[Real eigenvalues]
@@ -405,6 +405,11 @@ flowchart LR
     D -->|Yes| E[Orthogonal eigenvectors]
     D -->|No| F[May not be diagonalizable]
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+![Matrix Classification Flowchart](images/matrix-flowchart.png){#fig-matrix-flowchart width="100%"}
+:::
 
 ## Summary
 

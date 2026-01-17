@@ -2,6 +2,10 @@ project:
   type: book
   output-dir: _book
 
+# Freeze computation results for faster CI builds
+execute:
+  freeze: auto
+
 # Mermaid diagram configuration
 mermaid:
   theme: default

@@ -1,0 +1,6 @@
+flowchart LR
+    A[Matrix A] --> B{Is A symmetric?}
+    B -->|Yes| C[Real eigenvalues]
+    B -->|No| D{Is A normal?}
+    D -->|Yes| E[Orthogonal eigenvectors]
+    D -->|No| F[May not be diagonalizable]
