@@ -38,49 +38,19 @@ jobs:
           python-version: '3.11'
 
       - name: Install Python dependencies
+        run: pip install jupyter numpy matplotlib pandas scipy
+
+      - name: Render Quarto project
+        timeout-minutes: 20
+        run: quarto render
+
+      - name: Verify output
         run: |
-          pip install jupyter numpy matplotlib pandas scipy
-
-      - name: Render HTML only
-        timeout-minutes: 10
-        run: quarto render --to html
-
-      - name: Render PDF book
-        timeout-minutes: 15
-        run: quarto render --to pdf
-        continue-on-error: true
-
-      - name: Build individual chapter PDFs
-        timeout-minutes: 15
-        continue-on-error: true
-        run: |
-          TMPDIR=$(mktemp -d)
-          
-          cp -r config "$TMPDIR/"
-          cp -r _mermaid-cache "$TMPDIR/" 2>/dev/null || true
-          for dir in src/ch*-*/; do
-            dir_name="${dir%/}"
-            mkdir -p "$TMPDIR/$dir_name"
-            cp "$dir_name"/*.qmd "$TMPDIR/$dir_name/" 2>/dev/null || true
-            cp -r "$dir_name/images" "$TMPDIR/$dir_name/images" 2>/dev/null || true
-            cp -r _extensions "$TMPDIR/$dir_name/_extensions" 2>/dev/null || true
-            mkdir -p "_book/$dir_name"
-          done
-          
-          for qmd in src/ch*-*/[0-9][0-9]-*.qmd; do
-            if [ -f "$qmd" ]; then
-              output_dir=$(dirname "$qmd")
-              basename=$(basename "$qmd" .qmd)
-              
-              echo "Rendering: $qmd"
-              timeout 120 sh -c "cd \"$TMPDIR/$output_dir\" && quarto render \"$basename.qmd\" --to pdf --metadata standalone-pdf:true" || echo "Timeout or error for $qmd"
-              
-              [ -f "$TMPDIR/$output_dir/$basename.pdf" ] && \
-                mv "$TMPDIR/$output_dir/$basename.pdf" "_book/$output_dir/$basename.pdf"
-            fi
-          done
-          
-          rm -rf "$TMPDIR"
+          echo "=== Checking _book contents ==="
+          ls -la _book/
+          echo ""
+          echo "=== Checking for index.html ==="
+          test -f _book/index.html && echo "index.html exists" || echo "ERROR: index.html missing!"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
