@@ -993,33 +993,15 @@
 \if@quartoenv
 \AtBeginDocument{%
     % ==========================================================================
-    % SHARED COUNTER FOR THEOREM, LEMMA, COROLLARY, PROPOSITION
+    % COUNTER CONFIGURATION (Each type has its own independent counter)
     % ==========================================================================
-    % Create a shared counter that theorem, lemma, corollary, proposition will all use
-    \newcounter{sharedthm}[chapter]
-    \renewcommand{\thesharedthm}{\thechapter.\arabic{sharedthm}}
-    
-    % Make theorem, lemma, corollary, proposition all use the shared counter
-    % We alias their counters to sharedthm so they increment together
-    \@ifundefined{c@theorem}{}{%
-        \let\c@theorem\c@sharedthm
-        \renewcommand{\thetheorem}{\thesharedthm}%
-    }%
-    \@ifundefined{c@lemma}{}{%
-        \let\c@lemma\c@sharedthm
-        \renewcommand{\thelemma}{\thesharedthm}%
-    }%
-    \@ifundefined{c@corollary}{}{%
-        \let\c@corollary\c@sharedthm
-        \renewcommand{\thecorollary}{\thesharedthm}%
-    }%
-    \@ifundefined{c@proposition}{}{%
-        \let\c@proposition\c@sharedthm
-        \renewcommand{\theproposition}{\thesharedthm}%
-    }%
-    
-    % Definition gets its own counter (chapter.counter format)
+    % Definition counter (chapter.counter format)
     \@ifundefined{c@definition}{}{\renewcommand{\thedefinition}{\thechapter.\arabic{definition}}}%
+    % Theorem, Lemma, Corollary, Proposition each keep their own independent counter
+    \@ifundefined{c@theorem}{}{\renewcommand{\thetheorem}{\thechapter.\arabic{theorem}}}%
+    \@ifundefined{c@lemma}{}{\renewcommand{\thelemma}{\thechapter.\arabic{lemma}}}%
+    \@ifundefined{c@corollary}{}{\renewcommand{\thecorollary}{\thechapter.\arabic{corollary}}}%
+    \@ifundefined{c@proposition}{}{\renewcommand{\theproposition}{\thechapter.\arabic{proposition}}}%
     
     % Other environments: conjecture, example, exercise, solution, remark, algorithm - no numbers
     % Create a custom theorem style that shows no number (not even a space for it)
