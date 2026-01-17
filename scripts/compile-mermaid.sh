@@ -1,6 +1,6 @@
 #!/bin/bash
-# Compile all mermaid blocks from qmd files to SVG
-# SVG files are stored in _mermaid-cache/ with content-hash filenames
+# Compile all mermaid-src blocks from qmd files to SVG
+# SVG files are stored in _mermaid-cache/ with ID-based filenames
 
 set -e
 
@@ -15,50 +15,67 @@ fi
 
 echo "Compiling Mermaid diagrams..."
 
-# Find all qmd files and extract mermaid blocks
+# Find all qmd files and extract mermaid-src blocks with their IDs
 for qmd in $(find src -name "*.qmd" 2>/dev/null); do
-    # Extract mermaid blocks using awk
+    # Extract mermaid-src blocks with IDs using awk
     awk '
-    /^```\{mermaid\}/ { in_mermaid=1; content=""; next }
+    /^```\{\.mermaid-src/ { 
+        in_mermaid=1
+        content=""
+        # Extract ID from the line (e.g., ```{.mermaid-src #my-id})
+        id=""
+        if (match($0, /#([a-zA-Z0-9_-]+)/)) {
+            id=substr($0, RSTART+1, RLENGTH-1)
+        }
+        next 
+    }
     /^```$/ && in_mermaid { 
         in_mermaid=0
-        # Print the content (will be processed by while loop)
+        # Print ID and content
+        print "ID:" id
         print content
         print "---MERMAID_BLOCK_END---"
         next 
     }
     in_mermaid { 
-        # Skip mermaid options (lines starting with %%|)
-        if (!/^%%\|/) {
-            content = content $0 "\n"
-        }
+        content = content $0 "\n"
     }
-    ' "$qmd" | while IFS= read -r line; do
-        if [ "$line" = "---MERMAID_BLOCK_END---" ]; then
-            if [ -n "$mermaid_content" ]; then
-                # Compute hash of content
-                hash=$(echo -n "$mermaid_content" | shasum -a 1 | cut -c1-8)
-                svg_file="$CACHE_DIR/${hash}.svg"
-                
-                if [ ! -f "$svg_file" ]; then
-                    echo "  Compiling: $hash.svg"
+    ' "$qmd" | {
+        mermaid_content=""
+        mermaid_id=""
+        while IFS= read -r line; do
+            if [[ "$line" == ID:* ]]; then
+                mermaid_id="${line#ID:}"
+            elif [ "$line" = "---MERMAID_BLOCK_END---" ]; then
+                if [ -n "$mermaid_content" ]; then
+                    # Use ID as filename, or generate hash if no ID
+                    if [ -n "$mermaid_id" ]; then
+                        svg_file="$CACHE_DIR/${mermaid_id}.svg"
+                    else
+                        hash=$(echo -n "$mermaid_content" | shasum -a 1 | cut -c1-8)
+                        svg_file="$CACHE_DIR/${hash}.svg"
+                    fi
+                    
+                    echo "  Compiling: $(basename "$svg_file") (from $qmd)"
                     # Write content to temp file
                     tmp_file=$(mktemp)
                     echo "$mermaid_content" > "$tmp_file"
                     # Compile to SVG
-                    mmdc -i "$tmp_file" -o "$svg_file" -b transparent 2>/dev/null || echo "    Warning: failed to compile $hash"
+                    mmdc -i "$tmp_file" -o "$svg_file" -b transparent 2>/dev/null || echo "    Warning: failed to compile"
                     rm -f "$tmp_file"
-                else
-                    echo "  Cached: $hash.svg"
                 fi
-            fi
-            mermaid_content=""
-        else
-            mermaid_content="${mermaid_content}${line}
+                mermaid_content=""
+                mermaid_id=""
+            else
+                mermaid_content="${mermaid_content}${line}
 "
-        fi
-    done
+            fi
+        done
+    }
 done
 
+echo ""
 echo "Done! SVGs are in $CACHE_DIR/"
-echo "Commit this directory to use pre-compiled diagrams in CI."
+ls -la "$CACHE_DIR/" 2>/dev/null || true
+echo ""
+echo "Commit _mermaid-cache/ to use pre-compiled diagrams in CI."

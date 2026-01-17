@@ -558,7 +558,7 @@
     "href": "src/ch04-quarto-showcase/01-features.html#diagrams-with-mermaid",
     "title": "6  Quarto Features Showcase",
     "section": "6.12 Diagrams with Mermaid",
-    "text": "6.12 Diagrams with Mermaid\n\n\n\n\n\n\nflowchart LR\n    A[Matrix A] --&gt; B{Is A symmetric?}\n    B --&gt;|Yes| C[Real eigenvalues]\n    B --&gt;|No| D{Is A normal?}\n    D --&gt;|Yes| E[Orthogonal eigenvectors]\n    D --&gt;|No| F[May not be diagonalizable]\n\n\n\n\nFigure 6.1: Matrix Classification Flowchart",
+    "text": "6.12 Diagrams with Mermaid\nflowchart LR\n    A[Matrix A] --&gt; B{Is A symmetric?}\n    B --&gt;|Yes| C[Real eigenvalues]\n    B --&gt;|No| D{Is A normal?}\n    D --&gt;|Yes| E[Orthogonal eigenvectors]\n    D --&gt;|No| F[May not be diagonalizable]",
     "crumbs": [
       "Quarto Feature Showcase",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Quarto Features Showcase</span>"
