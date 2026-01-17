@@ -543,39 +543,6 @@
     ]
   },
   {
-    "objectID": "src/ch04-quarto-showcase/01-features.html#horizontal-rule",
-    "href": "src/ch04-quarto-showcase/01-features.html#horizontal-rule",
-    "title": "6  Quarto Features Showcase",
-    "section": "6.11 Horizontal Rule",
-    "text": "6.11 Horizontal Rule",
-    "crumbs": [
-      "Quarto Feature Showcase",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Quarto Features Showcase</span>"
-    ]
-  },
-  {
-    "objectID": "src/ch04-quarto-showcase/01-features.html#diagrams-with-mermaid",
-    "href": "src/ch04-quarto-showcase/01-features.html#diagrams-with-mermaid",
-    "title": "6  Quarto Features Showcase",
-    "section": "6.12 Diagrams with Mermaid",
-    "text": "6.12 Diagrams with Mermaid\n\n\n\n\n\nflowchart LR\n    A[Matrix A] --&gt; B{Is A symmetric?}\n    B --&gt;|Yes| C[Real eigenvalues]\n    B --&gt;|No| D{Is A normal?}\n    D --&gt;|Yes| E[Orthogonal eigenvectors]\n    D --&gt;|No| F[May not be diagonalizable]",
-    "crumbs": [
-      "Quarto Feature Showcase",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Quarto Features Showcase</span>"
-    ]
-  },
-  {
-    "objectID": "src/ch04-quarto-showcase/01-features.html#summary",
-    "href": "src/ch04-quarto-showcase/01-features.html#summary",
-    "title": "6  Quarto Features Showcase",
-    "section": "6.13 Summary",
-    "text": "6.13 Summary\nThis chapter demonstrated:\n\nTheorem environments: definitions, theorems, lemmas, corollaries, examples, exercises, proofs, remarks\nCallouts: note, tip, warning, important, caution\nTables: pipe tables, grid tables\nMath: aligned equations, matrices, cases\nCode: Python, R, Julia with syntax highlighting\nTabsets: organized content in tabs\nCross-references: linking to theorems, tables, equations\nLists: ordered, unordered, nested, definition lists\nOther: footnotes, block quotes, diagrams",
-    "crumbs": [
-      "Quarto Feature Showcase",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Quarto Features Showcase</span>"
-    ]
-  },
-  {
     "objectID": "src/ch04-quarto-showcase/02-interactive.html",
     "href": "src/ch04-quarto-showcase/02-interactive.html",
     "title": "7  Interactive Visualizations",
