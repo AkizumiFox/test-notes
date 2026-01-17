@@ -45,45 +45,57 @@ jobs:
         run: quarto render
 
       - name: Build individual chapter PDFs
-        timeout-minutes: 15
+        timeout-minutes: 20
         continue-on-error: true
         run: |
-          # Create temp directory for individual PDFs
-          PDFDIR=$(mktemp -d)
-          echo "Temp PDF dir: $PDFDIR"
+          # Create isolated build directory (outside project to avoid book config)
+          BUILDDIR=$(mktemp -d)
+          echo "Build dir: $BUILDDIR"
           
-          # Render each chapter to temp directory (avoids cleaning _book)
+          # Copy config at project level (for ../../config/ paths in qmd files)
+          cp -r config "$BUILDDIR/"
+          cp -r _mermaid-cache "$BUILDDIR/" 2>/dev/null || true
+          
           for qmd in src/ch*-*/[0-9][0-9]-*.qmd; do
             if [ -f "$qmd" ]; then
               output_dir=$(dirname "$qmd")
               basename=$(basename "$qmd" .qmd)
               
               echo "=== Rendering: $qmd ==="
-              mkdir -p "$PDFDIR/$output_dir"
               
-              # Render to temp dir using --output-dir to avoid cleaning _book
-              quarto render "$qmd" --to pdf --output "$basename.pdf" \
-                --output-dir "$PDFDIR/$output_dir" \
-                --metadata standalone-pdf:true 2>&1 || echo "Warning: Failed to render $qmd"
+              # Create chapter directory
+              mkdir -p "$BUILDDIR/$output_dir"
               
-              if [ -f "$PDFDIR/$output_dir/$basename.pdf" ]; then
-                echo "  -> Created $PDFDIR/$output_dir/$basename.pdf"
+              # Copy qmd file
+              cp "$qmd" "$BUILDDIR/$output_dir/"
+              
+              # Copy _extensions to chapter dir (where quarto looks for them)
+              cp -r _extensions "$BUILDDIR/$output_dir/" 2>/dev/null || true
+              
+              # Copy chapter resources
+              cp -r "$output_dir/images" "$BUILDDIR/$output_dir/" 2>/dev/null || true
+              cp -r "$output_dir"/*_files "$BUILDDIR/$output_dir/" 2>/dev/null || true
+              
+              # Copy frozen computations if they exist
+              if [ -d "_freeze/$output_dir/$basename" ]; then
+                mkdir -p "$BUILDDIR/_freeze/$output_dir"
+                cp -r "_freeze/$output_dir/$basename" "$BUILDDIR/_freeze/$output_dir/"
+              fi
+              
+              # Render in isolation (no book _quarto.yml)
+              (cd "$BUILDDIR/$output_dir" && quarto render "$basename.qmd" --to pdf) 2>&1 || echo "Warning: Failed to render $qmd"
+              
+              # Copy PDF to _book
+              if [ -f "$BUILDDIR/$output_dir/$basename.pdf" ]; then
+                mkdir -p "_book/$output_dir"
+                cp "$BUILDDIR/$output_dir/$basename.pdf" "_book/$output_dir/"
+                echo "  -> Created _book/$output_dir/$basename.pdf"
               fi
             fi
           done
           
-          # Copy all PDFs to _book
-          echo "=== Copying PDFs to _book ==="
-          for dir in "$PDFDIR"/src/ch*-*/; do
-            if [ -d "$dir" ]; then
-              dest_dir="_book/$(echo "$dir" | sed "s|$PDFDIR/||")"
-              mkdir -p "$dest_dir"
-              cp "$dir"*.pdf "$dest_dir" 2>/dev/null || true
-            fi
-          done
-          
           # Cleanup
-          rm -rf "$PDFDIR"
+          rm -rf "$BUILDDIR"
           
           echo "=== Final PDF list ==="
           find _book -name "*.pdf" -type f
