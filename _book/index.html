@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tzu-You Lin">
-<meta name="dcterms.date" content="2026-01-16">
+<meta name="dcterms.date" content="2026-01-17">
 
 <title>Advanced Linear Algebra Notes</title>
 <style>
@@ -217,6 +217,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./src/ch04-quarto-showcase/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quarto Feature Showcase</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./src/ch04-quarto-showcase/01-features.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Quarto Features Showcase</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./src/ch04-quarto-showcase/02-interactive.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Interactive Visualizations</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -260,7 +283,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 16, 2026</p>
+      <p class="date">January 17, 2026</p>
     </div>
   </div>
   
@@ -809,32 +832,103 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div></div></div></div></div>
 </div> <!-- /content -->
 <script>
-// Add PDF download link to right TOC sidebar (skip index pages)
 document.addEventListener('DOMContentLoaded', function() {
+  // ==========================================
+  // 1. Add PDF download link to right TOC sidebar
+  // ==========================================
   var path = window.location.pathname;
   
-  // Skip index pages - they don't have individual PDFs
-  if (path.endsWith('/') || path.endsWith('/index.html') || path === '/index.html') {
-    return;
+  if (!path.endsWith('/') && !path.endsWith('/index.html') && path !== '/index.html') {
+    var pdfPath = path.replace(/\.html$/, '.pdf');
+    var section = document.createElement('div');
+    section.style.cssText = 'margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #dee2e6;';
+    section.innerHTML = 
+      '<h6 style="font-size:0.875rem;font-weight:600;margin-bottom:0.5rem;">Other Formats</h6>' +
+      '<a href="' + pdfPath + '" style="display:flex;align-items:center;gap:0.5rem;color:inherit;text-decoration:none;font-size:0.875rem;">' +
+      '<i class="bi bi-file-pdf" style="color:#dc3545;"></i> PDF</a>';
+    
+    var tocSidebar = document.querySelector('#quarto-margin-sidebar') ||
+                     document.querySelector('.toc-active') ||
+                     document.querySelector('#TOC');
+    if (tocSidebar) {
+      tocSidebar.appendChild(section);
+    }
   }
   
-  var pdfPath = path.replace(/\.html$/, '.pdf');
+  // ==========================================
+  // 2. Shared theorem counter (Theorem, Lemma, Corollary, Proposition)
+  // ==========================================
+  var sharedCounter = 0;
+  var definitionCounter = 0;
+  var algorithmCounter = 0;
+  var currentChapter = 0;
   
-  // Create "Other Formats" section for right sidebar
-  var section = document.createElement('div');
-  section.style.cssText = 'margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #dee2e6;';
-  section.innerHTML = 
-    '<h6 style="font-size:0.875rem;font-weight:600;margin-bottom:0.5rem;">Other Formats</h6>' +
-    '<a href="' + pdfPath + '" style="display:flex;align-items:center;gap:0.5rem;color:inherit;text-decoration:none;font-size:0.875rem;">' +
-    '<i class="bi bi-file-pdf" style="color:#dc3545;"></i> PDF</a>';
+  // Types that share a counter
+  var sharedTypes = ['theorem', 'lemma', 'corollary', 'proposition'];
+  // Types with no counter (remove number)
+  var noCounterTypes = ['conjecture', 'example', 'exercise', 'solution', 'remark'];
   
-  // Find the right TOC sidebar
-  var tocSidebar = document.querySelector('#quarto-margin-sidebar') ||
-                   document.querySelector('.toc-active') ||
-                   document.querySelector('#TOC');
-  if (tocSidebar) {
-    tocSidebar.appendChild(section);
-  }
+  // Process all theorem divs in document order
+  document.querySelectorAll('div.theorem').forEach(function(div) {
+    var titleSpan = div.querySelector('.theorem-title strong');
+    if (!titleSpan) return;
+    
+    var text = titleSpan.textContent;
+    var match = text.match(/^(\w+)\s+(\d+)\.(\d+)(.*)$/);
+    if (!match) return;
+    
+    var typeName = match[1].toLowerCase();
+    var chapterNum = parseInt(match[2]);
+    var rest = match[4];
+    
+    // Reset counters on chapter change
+    if (chapterNum !== currentChapter) {
+      currentChapter = chapterNum;
+      sharedCounter = 0;
+      definitionCounter = 0;
+      algorithmCounter = 0;
+    }
+    
+    // Determine the specific type from classes
+    var classes = Array.from(div.classList);
+    var specificType = null;
+    
+    for (var i = 0; i < classes.length; i++) {
+      var cls = classes[i];
+      if (cls !== 'theorem' && (sharedTypes.indexOf(cls) >= 0 || cls === 'definition' || cls === 'algorithm' || noCounterTypes.indexOf(cls) >= 0)) {
+        specificType = cls;
+        break;
+      }
+    }
+    
+    // If no specific type found, it's a pure theorem
+    if (!specificType && classes.indexOf('theorem') >= 0) {
+      specificType = 'theorem';
+    }
+    
+    var newNum = null;
+    
+    if (specificType === 'definition') {
+      definitionCounter++;
+      newNum = currentChapter + '.' + definitionCounter;
+    } else if (specificType === 'algorithm') {
+      algorithmCounter++;
+      newNum = currentChapter + '.' + algorithmCounter;
+    } else if (sharedTypes.indexOf(specificType) >= 0) {
+      sharedCounter++;
+      newNum = currentChapter + '.' + sharedCounter;
+    } else if (noCounterTypes.indexOf(specificType) >= 0) {
+      // Remove number
+      var capitalType = specificType.charAt(0).toUpperCase() + specificType.slice(1);
+      titleSpan.textContent = capitalType + rest;
+      return;
+    }
+    
+    if (newNum) {
+      var capitalType = specificType.charAt(0).toUpperCase() + specificType.slice(1);
+      titleSpan.textContent = capitalType + ' ' + newNum + rest;
+    }
+  });
 });
 </script>
 

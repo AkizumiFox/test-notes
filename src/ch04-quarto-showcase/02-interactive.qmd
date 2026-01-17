@@ -1,0 +1,385 @@
+---
+chapter-number: 7
+filters:
+  - latex-environment
+  - chapter-number
+format:
+  pdf:
+    documentclass: memoir
+    classoption: [13pt, a4paper]
+    number-sections: true
+    pdf-engine: lualatex
+    geometry: [top=30mm, left=25mm, right=25mm, bottom=30mm]
+    include-in-header:
+      text: |
+        \usepackage[quartoenv]{../../config/latex-template}
+        \directlua{require("../../config/strip-numbers")}
+execute:
+  echo: true
+  warning: false
+jupyter: python3
+---
+
+{{< include ../../config/macros.qmd >}}
+
+# Interactive Visualizations
+
+This chapter demonstrates Python code execution and interactive visualizations in Quarto.
+
+## Matplotlib Visualizations
+
+### Eigenvalue Visualization
+
+```{python}
+#| label: fig-eigenvalues
+#| fig-cap: "Eigenvalues of a random matrix in the complex plane"
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Generate random matrix and compute eigenvalues
+np.random.seed(42)
+n = 100
+A = np.random.randn(n, n)
+eigenvalues = np.linalg.eigvals(A)
+
+# Plot
+fig, ax = plt.subplots(figsize=(8, 6))
+ax.scatter(eigenvalues.real, eigenvalues.imag, alpha=0.6, c='steelblue', s=30)
+ax.axhline(y=0, color='k', linewidth=0.5)
+ax.axvline(x=0, color='k', linewidth=0.5)
+ax.set_xlabel('Real part')
+ax.set_ylabel('Imaginary part')
+ax.set_title(f'Eigenvalues of a {n}×{n} Random Matrix')
+ax.grid(True, alpha=0.3)
+ax.set_aspect('equal')
+plt.tight_layout()
+plt.show()
+```
+
+### Singular Value Decay
+
+```{python}
+#| label: fig-svd-decay
+#| fig-cap: "Singular value decay for matrices of different ranks"
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(42)
+n = 50
+
+fig, axes = plt.subplots(1, 3, figsize=(12, 4))
+
+for idx, rank in enumerate([5, 15, 50]):
+    # Create low-rank matrix
+    U = np.random.randn(n, rank)
+    V = np.random.randn(rank, n)
+    A = U @ V + 0.1 * np.random.randn(n, n)  # Add noise
+    
+    # Compute SVD
+    _, s, _ = np.linalg.svd(A)
+    
+    axes[idx].semilogy(range(1, n+1), s, 'o-', markersize=4)
+    axes[idx].axvline(x=rank, color='r', linestyle='--', label=f'True rank = {rank}')
+    axes[idx].set_xlabel('Index')
+    axes[idx].set_ylabel('Singular value')
+    axes[idx].set_title(f'Approximate Rank {rank}')
+    axes[idx].legend()
+    axes[idx].grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+```
+
+### Power Iteration Convergence
+
+```{python}
+#| label: fig-power-iteration
+#| fig-cap: "Convergence of power iteration to dominant eigenvalue"
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+def power_iteration_history(A, max_iter=50):
+    """Power iteration with convergence history."""
+    n = A.shape[0]
+    v = np.random.rand(n)
+    v = v / np.linalg.norm(v)
+    
+    eigenvalue_estimates = []
+    
+    for _ in range(max_iter):
+        Av = A @ v
+        v_new = Av / np.linalg.norm(Av)
+        eigenvalue = v_new @ A @ v_new
+        eigenvalue_estimates.append(eigenvalue)
+        v = v_new
+    
+    return eigenvalue_estimates
+
+# Test matrix
+np.random.seed(42)
+A = np.array([[4, 1, 0], [1, 3, 1], [0, 1, 2]])
+true_eigenvalues = np.linalg.eigvals(A)
+dominant = np.max(np.abs(true_eigenvalues))
+
+# Run power iteration
+estimates = power_iteration_history(A, max_iter=30)
+
+# Plot
+fig, ax = plt.subplots(figsize=(8, 5))
+ax.plot(estimates, 'b-o', label='Power iteration estimate', markersize=5)
+ax.axhline(y=dominant, color='r', linestyle='--', label=f'True dominant eigenvalue = {dominant:.4f}')
+ax.set_xlabel('Iteration')
+ax.set_ylabel('Eigenvalue estimate')
+ax.set_title('Power Iteration Convergence')
+ax.legend()
+ax.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
+```
+
+## Gradient Descent Visualization
+
+```{python}
+#| label: fig-gradient-descent
+#| fig-cap: "Gradient descent on a quadratic function"
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+def gradient_descent_2d(A, b, x0, alpha, n_iter):
+    """Gradient descent for minimizing 0.5*x'Ax - b'x."""
+    path = [x0.copy()]
+    x = x0.copy()
+    
+    for _ in range(n_iter):
+        grad = A @ x - b
+        x = x - alpha * grad
+        path.append(x.copy())
+    
+    return np.array(path)
+
+# Define quadratic function
+A = np.array([[3, 1], [1, 2]])
+b = np.array([1, 1])
+x_opt = np.linalg.solve(A, b)
+
+# Run gradient descent with different step sizes
+x0 = np.array([-2, 2])
+alphas = [0.1, 0.3, 0.5]
+
+# Create contour plot
+fig, ax = plt.subplots(figsize=(10, 8))
+
+x1 = np.linspace(-3, 2, 100)
+x2 = np.linspace(-1, 3, 100)
+X1, X2 = np.meshgrid(x1, x2)
+Z = np.zeros_like(X1)
+for i in range(X1.shape[0]):
+    for j in range(X1.shape[1]):
+        x = np.array([X1[i,j], X2[i,j]])
+        Z[i,j] = 0.5 * x @ A @ x - b @ x
+
+contour = ax.contour(X1, X2, Z, levels=20, cmap='viridis', alpha=0.5)
+ax.clabel(contour, inline=True, fontsize=8)
+
+colors = ['red', 'blue', 'green']
+for alpha, color in zip(alphas, colors):
+    path = gradient_descent_2d(A, b, x0, alpha, 20)
+    ax.plot(path[:, 0], path[:, 1], f'{color[0]}o-', markersize=4, 
+            label=f'α = {alpha}', alpha=0.7)
+
+ax.plot(x_opt[0], x_opt[1], 'k*', markersize=15, label='Optimum')
+ax.plot(x0[0], x0[1], 'ko', markersize=10, label='Start')
+ax.set_xlabel('$x_1$')
+ax.set_ylabel('$x_2$')
+ax.set_title('Gradient Descent Trajectories')
+ax.legend()
+ax.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
+```
+
+## Matrix Heatmaps
+
+```{python}
+#| label: fig-matrix-heatmap
+#| fig-cap: "Visualization of matrix structure"
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+fig, axes = plt.subplots(2, 3, figsize=(12, 8))
+
+np.random.seed(42)
+n = 20
+
+# Different matrix types
+matrices = {
+    'Random': np.random.randn(n, n),
+    'Symmetric': None,  # Will be created
+    'Diagonal': np.diag(np.random.randn(n)),
+    'Tridiagonal': None,
+    'Low Rank (r=3)': None,
+    'Sparse (10%)': None
+}
+
+# Create symmetric
+A = np.random.randn(n, n)
+matrices['Symmetric'] = (A + A.T) / 2
+
+# Create tridiagonal
+matrices['Tridiagonal'] = np.diag(np.ones(n-1), -1) + 2*np.eye(n) + np.diag(np.ones(n-1), 1)
+
+# Create low rank
+U = np.random.randn(n, 3)
+matrices['Low Rank (r=3)'] = U @ U.T
+
+# Create sparse
+sparse = np.zeros((n, n))
+mask = np.random.rand(n, n) < 0.1
+sparse[mask] = np.random.randn(np.sum(mask))
+matrices['Sparse (10%)'] = sparse
+
+for ax, (name, M) in zip(axes.flat, matrices.items()):
+    im = ax.imshow(M, cmap='RdBu', aspect='equal', vmin=-3, vmax=3)
+    ax.set_title(name)
+    ax.set_xticks([])
+    ax.set_yticks([])
+    plt.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
+
+plt.tight_layout()
+plt.show()
+```
+
+## Spectral Clustering Example
+
+```{python}
+#| label: fig-spectral-clustering
+#| fig-cap: "Spectral clustering on synthetic data"
+
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.linalg import eigh
+
+np.random.seed(42)
+
+# Generate two moons-like data
+n_points = 200
+t = np.linspace(0, np.pi, n_points // 2)
+x1 = np.column_stack([np.cos(t), np.sin(t)])
+x2 = np.column_stack([1 - np.cos(t), 0.5 - np.sin(t)])
+X = np.vstack([x1, x2]) + 0.1 * np.random.randn(n_points, 2)
+
+# Build similarity graph (Gaussian kernel)
+def gaussian_kernel(X, sigma=0.5):
+    n = X.shape[0]
+    K = np.zeros((n, n))
+    for i in range(n):
+        for j in range(n):
+            K[i, j] = np.exp(-np.linalg.norm(X[i] - X[j])**2 / (2 * sigma**2))
+    return K
+
+W = gaussian_kernel(X, sigma=0.3)
+D = np.diag(W.sum(axis=1))
+L = D - W  # Unnormalized Laplacian
+
+# Compute eigenvectors
+eigenvalues, eigenvectors = eigh(L, D)
+
+# Use second smallest eigenvector for clustering
+fiedler = eigenvectors[:, 1]
+labels = (fiedler > 0).astype(int)
+
+# Plot results
+fig, axes = plt.subplots(1, 3, figsize=(14, 4))
+
+# Original data
+axes[0].scatter(X[:, 0], X[:, 1], c='steelblue', s=20)
+axes[0].set_title('Original Data')
+axes[0].set_xlabel('$x_1$')
+axes[0].set_ylabel('$x_2$')
+
+# Eigenvalue spectrum
+axes[1].plot(eigenvalues[:20], 'o-')
+axes[1].set_xlabel('Index')
+axes[1].set_ylabel('Eigenvalue')
+axes[1].set_title('Laplacian Eigenvalues')
+axes[1].axhline(y=0, color='k', linewidth=0.5)
+axes[1].grid(True, alpha=0.3)
+
+# Clustered data
+axes[2].scatter(X[labels==0, 0], X[labels==0, 1], c='red', s=20, label='Cluster 1')
+axes[2].scatter(X[labels==1, 0], X[labels==1, 1], c='blue', s=20, label='Cluster 2')
+axes[2].set_title('Spectral Clustering Result')
+axes[2].set_xlabel('$x_1$')
+axes[2].set_ylabel('$x_2$')
+axes[2].legend()
+
+plt.tight_layout()
+plt.show()
+```
+
+## Inline Computations
+
+We can also compute values inline. For example, the largest eigenvalue of $\begin{pmatrix} 4 & 1 \\ 1 & 3 \end{pmatrix}$ is:
+
+```{python}
+#| echo: false
+import numpy as np
+A = np.array([[4, 1], [1, 3]])
+max_eig = np.max(np.linalg.eigvals(A))
+print(f"{max_eig:.4f}")
+```
+
+And its condition number is:
+
+```{python}
+#| echo: false
+print(f"{np.linalg.cond(A):.4f}")
+```
+
+## Data Tables
+
+```{python}
+#| label: tbl-eigenvalue-comparison
+#| tbl-cap: "Eigenvalue computation methods comparison"
+
+import pandas as pd
+import numpy as np
+
+np.random.seed(42)
+sizes = [10, 50, 100, 500]
+methods = ['NumPy eig', 'NumPy eigvals', 'SciPy eigh']
+
+# Simulate timing data (not actual benchmarks)
+data = {
+    'Matrix Size': [f'{n}×{n}' for n in sizes],
+    'NumPy eig (ms)': [0.1, 0.8, 3.2, 45.0],
+    'NumPy eigvals (ms)': [0.08, 0.6, 2.5, 38.0],
+    'SciPy eigh (ms)': [0.05, 0.3, 1.2, 15.0],
+}
+
+df = pd.DataFrame(data)
+df
+```
+
+## Summary
+
+This chapter demonstrated:
+
+1. **Matplotlib plots**: Scatter plots, line plots, contours, heatmaps
+2. **Algorithm visualization**: Power iteration, gradient descent
+3. **Interactive analysis**: Eigenvalue computation, spectral clustering
+4. **Inline Python**: Computing values within text
+5. **Data tables**: Using pandas DataFrames
+
+::: {.callout-tip}
+## Running the Code
+To execute the Python code in this document, ensure you have Jupyter installed:
+```bash
+pip install jupyter matplotlib numpy scipy pandas
+```
+:::

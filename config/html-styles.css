@@ -101,12 +101,23 @@
 /* --- Titles for all environments --- */
 .theorem-title, .lemma-title, .corollary-title, .proposition-title, 
 .conjecture-title, .definition-title, .example-title, .exercise-title, 
-.solution-title, .remark-title, .algorithm-title, .proof-title {
+.algorithm-title {
   font-weight: bold;
   display: block;
   margin-bottom: 0.5rem;
   color: inherit;
   font-style: normal;
+}
+
+/* Proof, Solution, Remark titles: inline (no line break after title) */
+.proof .proof-title,
+.solution .proof-title,
+.remark .proof-title {
+  font-weight: normal;
+  font-style: italic;
+  display: inline;
+  margin-bottom: 0;
+  color: inherit;
 }
 
 /* --- 修正 Tippy.js Tooltip 樣式 (Quarto 使用 Tippy.js，不是 Bootstrap Popover) --- */

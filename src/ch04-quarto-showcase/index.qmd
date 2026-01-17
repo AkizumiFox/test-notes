@@ -1,0 +1,12 @@
+# Quarto Feature Showcase {.unnumbered}
+
+This part demonstrates various Quarto features for creating rich mathematical documents.
+
+## What's Included
+
+- **Environments**: Theorems, definitions, examples, proofs, and more
+- **Interactive Code**: Python visualizations with Matplotlib and Plotly
+- **Tables**: Various table formats
+- **Callouts**: Notes, warnings, tips
+- **Cross-references**: Linking between elements
+- **Advanced Math**: Equations, aligned environments, matrices

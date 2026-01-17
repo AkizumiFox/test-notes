@@ -1,154 +1,141 @@
 -- shared-thm-counter.lua
--- Makes Theorem, Lemma, Corollary, and Proposition share a single counter
--- Removes counters from Conjecture, Example, Exercise, Solution
+-- Debug version
 
--- Track the shared counter per chapter.section
-local shared_counter = {}
+local shared_counter = 0
+local definition_counter = 0
 local current_chapter = 0
-local current_section = 0
 
--- Environment types that share the counter
 local shared_types = {
-  theorem = true,
   lemma = true,
   corollary = true,
   proposition = true
 }
 
--- Environment types that should have NO counter
 local no_counter_types = {
   conjecture = true,
   example = true,
   exercise = true,
-  solution = true
+  solution = true,
+  remark = true,
+  algorithm = true
 }
 
--- Function to get counter key based on chapter.section
-local function get_counter_key()
-  return string.format("%d.%d", current_chapter, current_section)
-end
-
--- Function to increment and get the next number
-local function get_next_number()
-  local key = get_counter_key()
-  if not shared_counter[key] then
-    shared_counter[key] = 0
+local function get_env_type(classes)
+  local has_theorem = false
+  
+  for _, class in ipairs(classes) do
+    if class == "theorem" then
+      has_theorem = true
+    elseif class == "definition" then
+      return "definition"
+    elseif shared_types[class] then
+      return class
+    elseif no_counter_types[class] then
+      return class
+    end
   end
-  shared_counter[key] = shared_counter[key] + 1
-  return shared_counter[key]
+  
+  if has_theorem then
+    return "theorem_shared"
+  end
+  
+  return nil
 end
 
--- Track section numbers from headers
 function Header(el)
   if el.level == 1 then
     current_chapter = current_chapter + 1
-    current_section = 0
-  elseif el.level == 2 then
-    current_section = current_section + 1
+    shared_counter = 0
+    definition_counter = 0
+    io.stderr:write("[shared-thm-counter] Chapter " .. current_chapter .. "\n")
   end
   return el
 end
 
--- Process theorem divs
 function Div(el)
-  -- Check if this is a shared counter type
-  local is_shared = false
-  local is_no_counter = false
-  local env_type = nil
+  local env_type = get_env_type(el.classes)
   
-  for _, class in ipairs(el.classes) do
-    if shared_types[class] then
-      is_shared = true
-      env_type = class
-      break
-    elseif no_counter_types[class] then
-      is_no_counter = true
-      env_type = class
-      break
+  if not env_type then
+    return el
+  end
+  
+  io.stderr:write("[shared-thm-counter] Found " .. env_type .. "\n")
+  
+  local new_num = nil
+  
+  if env_type == "definition" then
+    definition_counter = definition_counter + 1
+    new_num = string.format("%d.%d", current_chapter, definition_counter)
+  elseif env_type == "theorem_shared" or shared_types[env_type] then
+    shared_counter = shared_counter + 1
+    new_num = string.format("%d.%d", current_chapter, shared_counter)
+  elseif no_counter_types[env_type] then
+    new_num = ""
+  end
+  
+  io.stderr:write("[shared-thm-counter] New num: " .. (new_num or "nil") .. "\n")
+  
+  if new_num == nil then
+    return el
+  end
+  
+  -- Walk and modify
+  el = el:walk({
+    Span = function(span)
+      local is_title = false
+      for _, class in ipairs(span.classes) do
+        if class == "theorem-title" then
+          is_title = true
+          break
+        end
+      end
+      
+      if not is_title then
+        return span
+      end
+      
+      io.stderr:write("[shared-thm-counter] Found theorem-title span\n")
+      
+      local new_content = pandoc.List()
+      for _, child in ipairs(span.content) do
+        if child.t == "Strong" then
+          local parts = {}
+          for _, c in ipairs(child.content) do
+            if c.t == "Str" then
+              table.insert(parts, c.text)
+            elseif c.t == "Space" then
+              table.insert(parts, " ")
+            end
+          end
+          local full_text = table.concat(parts)
+          io.stderr:write("[shared-thm-counter] Original text: " .. full_text .. "\n")
+          
+          local type_name, rest = full_text:match("^(%a+)%s+%d+%.%d+(.*)$")
+          
+          if type_name then
+            local new_text
+            if new_num == "" then
+              if rest and rest:match("^%s*%(") then
+                new_text = type_name .. rest:gsub("^%s*", " ")
+              else
+                new_text = type_name .. (rest or "")
+              end
+            else
+              new_text = type_name .. " " .. new_num .. (rest or "")
+            end
+            io.stderr:write("[shared-thm-counter] New text: " .. new_text .. "\n")
+            new_content:insert(pandoc.Strong(pandoc.Str(new_text)))
+          else
+            new_content:insert(child)
+          end
+        else
+          new_content:insert(child)
+        end
+      end
+      span.content = new_content
+      return span
     end
-  end
-  
-  if is_shared then
-    -- Get the next shared number
-    local num = get_next_number()
-    local full_num = string.format("%d.%d.%d", current_chapter, current_section, num)
-    
-    -- Find and update the theorem title span
-    el = el:walk({
-      Span = function(span)
-        for _, class in ipairs(span.classes) do
-          if class:match("%-title$") then
-            -- Rebuild content with new number
-            local new_content = {}
-            local in_number = false
-            local number_done = false
-            
-            for _, item in ipairs(span.content) do
-              if item.t == "Str" then
-                local text = item.text
-                if not number_done and text:match("^%d") then
-                  -- This is the number - replace it
-                  table.insert(new_content, pandoc.Str(full_num))
-                  number_done = true
-                  in_number = true
-                elseif in_number and text:match("^%.%d") then
-                  -- Skip continuation of old number
-                elseif in_number and not text:match("^[%.%d]") then
-                  -- End of number
-                  in_number = false
-                  table.insert(new_content, item)
-                elseif not in_number then
-                  table.insert(new_content, item)
-                end
-              else
-                if in_number then
-                  in_number = false
-                end
-                table.insert(new_content, item)
-              end
-            end
-            span.content = new_content
-            return span
-          end
-        end
-        return span
-      end
-    })
-  elseif is_no_counter then
-    -- Remove the number from title
-    el = el:walk({
-      Span = function(span)
-        for _, class in ipairs(span.classes) do
-          if class:match("%-title$") then
-            local new_content = {}
-            local skip_number = true
-            
-            for _, item in ipairs(span.content) do
-              if item.t == "Str" then
-                local text = item.text
-                if skip_number and text:match("^%d") then
-                  -- Skip the number
-                elseif skip_number and text:match("^[%.%d]") then
-                  -- Skip continuation of number
-                else
-                  skip_number = false
-                  table.insert(new_content, item)
-                end
-              elseif item.t == "Space" and skip_number then
-                -- Skip space after number
-                skip_number = false
-              else
-                table.insert(new_content, item)
-              end
-            end
-            span.content = new_content
-            return span
-          end
-        end
-        return span
-      end
-    })
-  end
+  })
   
   return el
 end

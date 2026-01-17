@@ -1,0 +1,421 @@
+---
+chapter-number: 6
+filters:
+  - latex-environment
+  - chapter-number
+format:
+  pdf:
+    documentclass: memoir
+    classoption: [13pt, a4paper]
+    number-sections: true
+    pdf-engine: lualatex
+    geometry: [top=30mm, left=25mm, right=25mm, bottom=30mm]
+    include-in-header:
+      text: |
+        \usepackage[quartoenv]{../../config/latex-template}
+        \directlua{require("../../config/strip-numbers")}
+---
+
+{{< include ../../config/macros.qmd >}}
+
+# Quarto Features Showcase
+
+This chapter demonstrates various Quarto features for creating mathematical documents.
+
+## Theorem-like Environments
+
+Quarto supports the following theorem-like environments with cross-referenceable IDs.
+
+### Definition (`#def-`)
+
+::: {#def-metric-space}
+## Metric Space
+A **metric space** is a pair $(X, d)$ where $X$ is a set and $d: X \times X \to \R$ is a function satisfying:
+
+1. **Positivity**: $d(x, y) \geq 0$ with equality iff $x = y$
+2. **Symmetry**: $d(x, y) = d(y, x)$
+3. **Triangle inequality**: $d(x, z) \leq d(x, y) + d(y, z)$
+:::
+
+### Theorem (`#thm-`)
+
+::: {#thm-cauchy-schwarz}
+## Cauchy-Schwarz Inequality
+For any vectors $\bu, \bv$ in an inner product space:
+$$|\langle \bu, \bv \rangle| \leq \|\bu\| \cdot \|\bv\|$$
+with equality if and only if $\bu$ and $\bv$ are linearly dependent.
+:::
+
+::: {.proof}
+By the properties of inner products, for any $t \in \R$:
+$$0 \leq \|\bu + t\bv\|^2 = \|\bu\|^2 + 2t\langle \bu, \bv \rangle + t^2\|\bv\|^2$$
+This quadratic in $t$ is non-negative, so its discriminant must be non-positive:
+$$4\langle \bu, \bv \rangle^2 - 4\|\bu\|^2\|\bv\|^2 \leq 0$$
+which gives the result.
+:::
+
+### Lemma (`#lem-`)
+
+::: {#lem-parallelogram}
+## Parallelogram Law
+In any inner product space:
+$$\|\bu + \bv\|^2 + \|\bu - \bv\|^2 = 2\|\bu\|^2 + 2\|\bv\|^2$$
+:::
+
+### Corollary (`#cor-`)
+
+::: {#cor-triangle}
+## Triangle Inequality
+For any vectors $\bu, \bv$:
+$$\|\bu + \bv\| \leq \|\bu\| + \|\bv\|$$
+:::
+
+### Proposition (`#prp-`)
+
+::: {#prp-norm-properties}
+## Norm Properties
+Every norm $\|\cdot\|$ on a vector space $V$ satisfies:
+
+1. $\|\bv\| \geq 0$ for all $\bv \in V$, with $\|\bv\| = 0$ iff $\bv = \mathbf{0}$
+2. $\|\alpha \bv\| = |\alpha| \|\bv\|$ for all $\alpha \in \R$ and $\bv \in V$
+3. $\|\bu + \bv\| \leq \|\bu\| + \|\bv\|$ for all $\bu, \bv \in V$
+:::
+
+### Conjecture (`#cnj-`)
+
+::: {#cnj-riemann}
+## Riemann Hypothesis
+All non-trivial zeros of the Riemann zeta function $\zeta(s)$ have real part equal to $\frac{1}{2}$.
+:::
+
+### Example (`#exm-`)
+
+::: {#exm-l2-space}
+## $L^2$ Space
+The space $L^2([0,1])$ of square-integrable functions with inner product
+$$\langle f, g \rangle = \int_0^1 f(x)g(x)\,dx$$
+is a Hilbert space.
+:::
+
+### Exercise (`#exr-`)
+
+::: {#exr-orthogonal}
+## Orthogonal Complement
+Let $W$ be a subspace of an inner product space $V$. Prove that $W^{\perp} = \{v \in V : \langle v, w \rangle = 0 \text{ for all } w \in W\}$ is also a subspace.
+:::
+
+### Solution (`#sol-`)
+
+::: {#sol-orthogonal}
+## Solution to Orthogonal Complement
+To show $W^{\perp}$ is a subspace:
+
+1. **Zero vector**: $\langle \mathbf{0}, w \rangle = 0$ for all $w \in W$, so $\mathbf{0} \in W^{\perp}$.
+
+2. **Closure under addition**: If $u_1, u_2 \in W^{\perp}$, then for all $w \in W$:
+   $$\langle u_1 + u_2, w \rangle = \langle u_1, w \rangle + \langle u_2, w \rangle = 0 + 0 = 0$$
+
+3. **Closure under scalar multiplication**: If $u \in W^{\perp}$ and $\alpha \in \R$, then:
+   $$\langle \alpha u, w \rangle = \alpha \langle u, w \rangle = \alpha \cdot 0 = 0$$
+
+Therefore $W^{\perp}$ is a subspace. $\square$
+:::
+
+### Remark (`#rem-`)
+
+::: {#rem-cauchy-schwarz}
+The Cauchy-Schwarz inequality is fundamental to many areas of mathematics, including probability theory where it implies $|\text{Cov}(X,Y)| \leq \sigma_X \sigma_Y$.
+:::
+
+### Algorithm (`#alg-`)
+
+::: {#alg-power-iteration}
+## Power Iteration
+**Input**: Matrix $\bA \in \R^{n \times n}$, initial vector $\bv_0$, tolerance $\epsilon$
+
+**Output**: Dominant eigenvalue $\lambda$ and eigenvector $\bv$
+
+1. $\bv \leftarrow \bv_0 / \|\bv_0\|$
+2. **repeat**
+   - $\bw \leftarrow \bA \bv$
+   - $\lambda \leftarrow \bv^T \bw$
+   - $\bv_{\text{new}} \leftarrow \bw / \|\bw\|$
+   - **if** $\|\bv_{\text{new}} - \bv\| < \epsilon$ **then break**
+   - $\bv \leftarrow \bv_{\text{new}}$
+3. **return** $\lambda, \bv$
+:::
+
+### Environment Summary
+
+| Prefix | Environment | Use Case |
+|--------|-------------|----------|
+| `#def-` | Definition | Formal definitions |
+| `#thm-` | Theorem | Main results |
+| `#lem-` | Lemma | Supporting results |
+| `#cor-` | Corollary | Direct consequences |
+| `#prp-` | Proposition | Intermediate results |
+| `#cnj-` | Conjecture | Unproven statements |
+| `#exm-` | Example | Illustrative examples |
+| `#exr-` | Exercise | Practice problems |
+| `#sol-` | Solution | Exercise solutions |
+| `#rem-` | Remark | Additional comments |
+| `#alg-` | Algorithm | Pseudocode/algorithms |
+
+: Theorem-like Environment Reference {#tbl-environments}
+
+## Callout Blocks
+
+::: {.callout-note}
+## Note
+This is a note callout. Use it for additional information that supplements the main content.
+:::
+
+::: {.callout-tip}
+## Tip
+When computing eigenvalues, always check if the matrix has special structure (symmetric, triangular, etc.) that can simplify calculations.
+:::
+
+::: {.callout-warning}
+## Warning
+Not all matrices are diagonalizable! A matrix is diagonalizable if and only if it has $n$ linearly independent eigenvectors.
+:::
+
+::: {.callout-important}
+## Important
+The spectral theorem only applies to **normal** matrices (matrices where $A^*A = AA^*$).
+:::
+
+::: {.callout-caution collapse="true"}
+## Caution (Click to expand)
+Be careful with numerical stability when computing eigenvalues of ill-conditioned matrices.
+:::
+
+## Tables
+
+### Basic Table
+
+| Property | Symmetric | Orthogonal | Unitary |
+|----------|-----------|------------|---------|
+| $A = A^T$ | ✓ | | |
+| $A^T A = I$ | | ✓ | |
+| $A^* A = I$ | | | ✓ |
+| Real eigenvalues | ✓ | | |
+| $|\lambda| = 1$ | | ✓ | ✓ |
+
+: Properties of Special Matrices {#tbl-matrix-props}
+
+### Grid Table
+
++---------------+---------------+--------------------+
+| Matrix Type   | Definition    | Eigenvalue Property|
++===============+===============+====================+
+| Symmetric     | $A = A^T$     | All real           |
++---------------+---------------+--------------------+
+| Skew-symmetric| $A = -A^T$    | All purely         |
+|               |               | imaginary          |
++---------------+---------------+--------------------+
+| Orthogonal    | $A^T A = I$   | $|\lambda| = 1$    |
++---------------+---------------+--------------------+
+
+## Mathematics
+
+### Aligned Equations
+
+The gradient descent update rule:
+\begin{align}
+\bx_{k+1} &= \bx_k - \alpha \nabla f(\bx_k) \\
+&= \bx_k - \alpha \bA^T(\bA\bx_k - \bb) \\
+&= (\bI - \alpha \bA^T\bA)\bx_k + \alpha \bA^T\bb
+\end{align}
+
+### Matrices
+
+The Jacobian matrix of a transformation $\bff: \R^n \to \R^m$:
+$$
+\bJ = \begin{pmatrix}
+\frac{\partial f_1}{\partial x_1} & \cdots & \frac{\partial f_1}{\partial x_n} \\
+\vdots & \ddots & \vdots \\
+\frac{\partial f_m}{\partial x_1} & \cdots & \frac{\partial f_m}{\partial x_n}
+\end{pmatrix}
+$$
+
+### Cases
+
+The sign function:
+$$
+\text{sgn}(x) = \begin{cases}
+1 & \text{if } x > 0 \\
+0 & \text{if } x = 0 \\
+-1 & \text{if } x < 0
+\end{cases}
+$$
+
+## Code Blocks
+
+### Python with Syntax Highlighting
+
+```python
+import numpy as np
+from numpy.linalg import eig, svd
+
+def power_iteration(A, num_iterations=100):
+    """Compute dominant eigenvalue using power iteration."""
+    n = A.shape[0]
+    v = np.random.rand(n)
+    v = v / np.linalg.norm(v)
+    
+    for _ in range(num_iterations):
+        Av = A @ v
+        v = Av / np.linalg.norm(Av)
+    
+    eigenvalue = v @ A @ v
+    return eigenvalue, v
+
+# Example usage
+A = np.array([[4, 1], [2, 3]])
+lam, v = power_iteration(A)
+print(f"Dominant eigenvalue: {lam:.4f}")
+```
+
+### R Code
+
+```r
+# Eigenvalue decomposition in R
+A <- matrix(c(4, 2, 1, 3), nrow=2, byrow=TRUE)
+eigen_result <- eigen(A)
+
+print("Eigenvalues:")
+print(eigen_result$values)
+
+print("Eigenvectors:")
+print(eigen_result$vectors)
+```
+
+### Julia Code
+
+```julia
+using LinearAlgebra
+
+# Define a symmetric matrix
+A = [4 1 2; 1 3 1; 2 1 5]
+
+# Compute eigendecomposition
+F = eigen(A)
+
+println("Eigenvalues: ", F.values)
+println("Eigenvectors:\n", F.vectors)
+
+# Verify: A * v = λ * v
+for i in 1:3
+    λ, v = F.values[i], F.vectors[:, i]
+    println("||Av - λv|| = ", norm(A*v - λ*v))
+end
+```
+
+## Tabsets
+
+::: {.panel-tabset}
+
+### Eigenvalues
+
+The eigenvalues of a matrix $\bA$ are the roots of the characteristic polynomial:
+$$\det(\bA - \lambda \bI) = 0$$
+
+### SVD
+
+The singular value decomposition writes $\bA = \bU \bSigma \bV^T$ where:
+
+- $\bU$: left singular vectors
+- $\bSigma$: diagonal matrix of singular values
+- $\bV$: right singular vectors
+
+### QR
+
+The QR decomposition factors $\bA = \bQ\bR$ where:
+
+- $\bQ$: orthogonal matrix
+- $\bR$: upper triangular matrix
+
+:::
+
+## Cross-References
+
+As we saw in @def-metric-space, a metric space generalizes the notion of distance. The @thm-cauchy-schwarz is fundamental to the theory of inner product spaces.
+
+See @tbl-matrix-props for a comparison of matrix properties.
+
+The @lem-parallelogram leads directly to @cor-triangle.
+
+## Lists
+
+### Ordered List with Custom Start
+
+3. Third item (starting from 3)
+4. Fourth item
+5. Fifth item
+
+### Nested Lists
+
+- **Decompositions**
+  - Eigendecomposition
+    - Only for square matrices
+    - Requires $n$ linearly independent eigenvectors
+  - SVD
+    - Works for any matrix
+    - Always exists
+  - QR
+    - Useful for solving least squares
+    
+### Definition List
+
+Eigenvalue
+: A scalar $\lambda$ such that $\bA\bv = \lambda\bv$ for some nonzero $\bv$
+
+Eigenvector
+: A nonzero vector $\bv$ such that $\bA\bv = \lambda\bv$ for some scalar $\lambda$
+
+Spectrum
+: The set of all eigenvalues of a matrix
+
+## Footnotes
+
+The spectral theorem[^1] is one of the most important results in linear algebra.
+
+[^1]: Named because eigenvalues are sometimes called the "spectrum" of a matrix.
+
+## Block Quotes
+
+> "The eigenvalues of a matrix are the key to understanding its behavior."
+> 
+> — Gilbert Strang, *Linear Algebra and Its Applications*
+
+## Horizontal Rule
+
+---
+
+## Diagrams with Mermaid
+
+```{mermaid}
+%%| fig-width: 6
+%%| fig-responsive: true
+flowchart LR
+    A[Matrix A] --> B{Is A symmetric?}
+    B -->|Yes| C[Real eigenvalues]
+    B -->|No| D{Is A normal?}
+    D -->|Yes| E[Orthogonal eigenvectors]
+    D -->|No| F[May not be diagonalizable]
+```
+
+## Summary
+
+This chapter demonstrated:
+
+1. **Theorem environments**: definitions, theorems, lemmas, corollaries, examples, exercises, proofs, remarks
+2. **Callouts**: note, tip, warning, important, caution
+3. **Tables**: pipe tables, grid tables
+4. **Math**: aligned equations, matrices, cases
+5. **Code**: Python, R, Julia with syntax highlighting
+6. **Tabsets**: organized content in tabs
+7. **Cross-references**: linking to theorems, tables, equations
+8. **Lists**: ordered, unordered, nested, definition lists
+9. **Other**: footnotes, block quotes, diagrams

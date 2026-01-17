@@ -226,15 +226,64 @@ $$
 \def\e{\ve}
 
 % --- Backward Compatibility (old style) ---
-\def\bx{\mathbf{x}}
-\def\by{\mathbf{y}}
-\def\bz{\mathbf{z}}
+% Lowercase bold
+\def\ba{\mathbf{a}}
+\def\bb{\mathbf{b}}
+\def\bc{\mathbf{c}}
+\def\bd{\mathbf{d}}
+\def\be{\mathbf{e}}
+\def\bff{\mathbf{f}}
+\def\bg{\mathbf{g}}
+\def\bh{\mathbf{h}}
+\def\bi{\mathbf{i}}
+\def\bj{\mathbf{j}}
+\def\bk{\mathbf{k}}
+\def\bl{\mathbf{l}}
+\def\bm{\mathbf{m}}
+\def\bn{\mathbf{n}}
+\def\bo{\mathbf{o}}
+\def\bp{\mathbf{p}}
+\def\bq{\mathbf{q}}
+\def\br{\mathbf{r}}
+\def\bs{\mathbf{s}}
+\def\bt{\mathbf{t}}
 \def\bu{\mathbf{u}}
 \def\bv{\mathbf{v}}
 \def\bw{\mathbf{w}}
+\def\bx{\mathbf{x}}
+\def\by{\mathbf{y}}
+\def\bz{\mathbf{z}}
+% Uppercase bold
 \def\bA{\mathbf{A}}
 \def\bB{\mathbf{B}}
+\def\bC{\mathbf{C}}
+\def\bD{\mathbf{D}}
+\def\bE{\mathbf{E}}
+\def\bF{\mathbf{F}}
+\def\bG{\mathbf{G}}
+\def\bH{\mathbf{H}}
 \def\bI{\mathbf{I}}
+\def\bJ{\mathbf{J}}
+\def\bK{\mathbf{K}}
+\def\bL{\mathbf{L}}
+\def\bM{\mathbf{M}}
+\def\bN{\mathbf{N}}
+\def\bO{\mathbf{O}}
+\def\bP{\mathbf{P}}
+\def\bQ{\mathbf{Q}}
+\def\bR{\mathbf{R}}
+\def\bS{\mathbf{S}}
+\def\bT{\mathbf{T}}
+\def\bU{\mathbf{U}}
+\def\bV{\mathbf{V}}
+\def\bW{\mathbf{W}}
+\def\bX{\mathbf{X}}
+\def\bY{\mathbf{Y}}
+\def\bZ{\mathbf{Z}}
+% Greek bold (use \symbf for compatibility)
+\def\bSigma{\mathbf{\Sigma}}
+\def\bLambda{\mathbf{\Lambda}}
+\def\bOmega{\mathbf{\Omega}}
 $$
 :::
 :::

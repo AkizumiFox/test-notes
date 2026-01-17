@@ -267,7 +267,7 @@
     "href": "src/ch02-spectral-theory/02-decompositions.html#spectral-decomposition",
     "title": "4  Matrix Decompositions",
     "section": "4.2 Spectral Decomposition",
-    "text": "4.2 Spectral Decomposition\n\nTheorem 4.1 (Spectral Theorem) Let \\(\\mathbf{A}\\in \\mathbf{R}^{n \\times n}\\) be symmetric. Then \\(\\mathbf{A}\\) can be decomposed as: \\[\n\\mathbf{A}= \\mathbf{Q} \\mathbf{\\Lambda} \\mathbf{Q}^\\top\n\\] where \\(\\mathbf{Q}\\) is orthogonal (its columns are orthonormal eigenvectors of \\(\\mathbf{A}\\)) and \\(\\mathbf{\\Lambda} = \\operatorname{diag}(\\lambda_1, \\ldots, \\lambda_n)\\) is diagonal (containing the eigenvalues).",
+    "text": "4.2 Spectral Decomposition\n\nTheorem 4.1 (Spectral Theorem) Let \\(\\mathbf{A}\\in \\mathbf{R}^{n \\times n}\\) be symmetric. Then \\(\\mathbf{A}\\) can be decomposed as: \\[\n\\mathbf{A}= \\mathbf{Q}\\mathbf{\\Lambda}\\mathbf{Q}^\\top\n\\] where \\(\\mathbf{Q}\\) is orthogonal (its columns are orthonormal eigenvectors of \\(\\mathbf{A}\\)) and \\(\\mathbf{\\Lambda}= \\operatorname{diag}(\\lambda_1, \\ldots, \\lambda_n)\\) is diagonal (containing the eigenvalues).",
     "crumbs": [
       "Spectral Theory",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Matrix Decompositions</span>"
@@ -278,7 +278,7 @@
     "href": "src/ch02-spectral-theory/02-decompositions.html#singular-value-decomposition",
     "title": "4  Matrix Decompositions",
     "section": "4.3 Singular Value Decomposition",
-    "text": "4.3 Singular Value Decomposition\n\nDefinition 4.1 (Singular Value Decomposition (SVD)) Every matrix \\(\\mathbf{A}\\in \\mathbf{R}^{m \\times n}\\) can be factored as: \\[\n\\mathbf{A}= \\mathbf{U} \\mathbf{\\Sigma} \\mathbf{V}^\\top\n\\] where:\n\n\\(\\mathbf{U} \\in \\mathbf{R}^{m \\times m}\\) is orthogonal (left singular vectors)\n\\(\\mathbf{\\Sigma} \\in \\mathbf{R}^{m \\times n}\\) is diagonal with non-negative entries (singular values)\n\\(\\mathbf{V} \\in \\mathbf{R}^{n \\times n}\\) is orthogonal (right singular vectors)\n\n\n\nTheorem 4.2 (SVD and Rank) The rank of \\(\\mathbf{A}\\) equals the number of non-zero singular values.",
+    "text": "4.3 Singular Value Decomposition\n\nDefinition 4.1 (Singular Value Decomposition (SVD)) Every matrix \\(\\mathbf{A}\\in \\mathbf{R}^{m \\times n}\\) can be factored as: \\[\n\\mathbf{A}= \\mathbf{U}\\mathbf{\\Sigma}\\mathbf{V}^\\top\n\\] where:\n\n\\(\\mathbf{U}\\in \\mathbf{R}^{m \\times m}\\) is orthogonal (left singular vectors)\n\\(\\mathbf{\\Sigma}\\in \\mathbf{R}^{m \\times n}\\) is diagonal with non-negative entries (singular values)\n\\(\\mathbf{V}\\in \\mathbf{R}^{n \\times n}\\) is orthogonal (right singular vectors)\n\n\n\nTheorem 4.2 (SVD and Rank) The rank of \\(\\mathbf{A}\\) equals the number of non-zero singular values.",
     "crumbs": [
       "Spectral Theory",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Matrix Decompositions</span>"
@@ -300,7 +300,7 @@
     "href": "src/ch02-spectral-theory/02-decompositions.html#exercises",
     "title": "4  Matrix Decompositions",
     "section": "4.5 Exercises",
-    "text": "4.5 Exercises\n\nExercise 4.1 (Moore-Penrose Pseudoinverse) Using the SVD \\(\\mathbf{A}= \\mathbf{U} \\mathbf{\\Sigma} \\mathbf{V}^\\top\\), show that the pseudoinverse is given by \\(\\mathbf{A}^+ = \\mathbf{V} \\mathbf{\\Sigma}^+ \\mathbf{U}^\\top\\).",
+    "text": "4.5 Exercises\n\nExercise 4.1 (Moore-Penrose Pseudoinverse) Using the SVD \\(\\mathbf{A}= \\mathbf{U}\\mathbf{\\Sigma}\\mathbf{V}^\\top\\), show that the pseudoinverse is given by \\(\\mathbf{A}^+ = \\mathbf{V}\\mathbf{\\Sigma}^+ \\mathbf{U}^\\top\\).",
     "crumbs": [
       "Spectral Theory",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Matrix Decompositions</span>"
@@ -399,6 +399,268 @@
     "crumbs": [
       "Optimization",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Convex Optimization</span>"
+    ]
+  },
+  {
+    "objectID": "src/ch04-quarto-showcase/index.html",
+    "href": "src/ch04-quarto-showcase/index.html",
+    "title": "Quarto Feature Showcase",
+    "section": "",
+    "text": "What’s Included\nThis part demonstrates various Quarto features for creating rich mathematical documents.",
+    "crumbs": [
+      "Quarto Feature Showcase"
+    ]
+  },
+  {
+    "objectID": "src/ch04-quarto-showcase/index.html#whats-included",
+    "href": "src/ch04-quarto-showcase/index.html#whats-included",
+    "title": "Quarto Feature Showcase",
+    "section": "",
+    "text": "Environments: Theorems, definitions, examples, proofs, and more\nInteractive Code: Python visualizations with Matplotlib and Plotly\nTables: Various table formats\nCallouts: Notes, warnings, tips\nCross-references: Linking between elements\nAdvanced Math: Equations, aligned environments, matrices",
+    "crumbs": [
+      "Quarto Feature Showcase"
+    ]
+  },
+  {
+    "objectID": "src/ch04-quarto-showcase/01-features.html",
+    "href": "src/ch04-quarto-showcase/01-features.html",
+    "title": "6  Quarto Features Showcase",
+    "section": "",
+    "text": "6.1 Theorem-like Environments\nThis chapter demonstrates various Quarto features for creating mathematical documents.\nQuarto supports the following theorem-like environments with cross-referenceable IDs.",
+    "crumbs": [
+      "Quarto Feature Showcase",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Quarto Features Showcase</span>"
+    ]
+  },
+  {
+    "objectID": "src/ch04-quarto-showcase/01-features.html#theorem-like-environments",
+    "href": "src/ch04-quarto-showcase/01-features.html#theorem-like-environments",
+    "title": "6  Quarto Features Showcase",
+    "section": "",
+    "text": "6.1.1 Definition (#def-)\n\nDefinition 6.1 (Metric Space) A metric space is a pair \\((X, d)\\) where \\(X\\) is a set and \\(d: X \\times X \\to \\mathbf{R}\\) is a function satisfying:\n\nPositivity: \\(d(x, y) \\geq 0\\) with equality iff \\(x = y\\)\nSymmetry: \\(d(x, y) = d(y, x)\\)\nTriangle inequality: \\(d(x, z) \\leq d(x, y) + d(y, z)\\)\n\n\n\n\n6.1.2 Theorem (#thm-)\n\nTheorem 6.1 (Cauchy-Schwarz Inequality) For any vectors \\(\\mathbf{u}, \\mathbf{v}\\) in an inner product space: \\[|\\langle \\mathbf{u}, \\mathbf{v}\\rangle| \\leq \\|\\mathbf{u}\\| \\cdot \\|\\mathbf{v}\\|\\] with equality if and only if \\(\\mathbf{u}\\) and \\(\\mathbf{v}\\) are linearly dependent.\n\n\nProof. By the properties of inner products, for any \\(t \\in \\mathbf{R}\\): \\[0 \\leq \\|\\mathbf{u}+ t\\mathbf{v}\\|^2 = \\|\\mathbf{u}\\|^2 + 2t\\langle \\mathbf{u}, \\mathbf{v}\\rangle + t^2\\|\\mathbf{v}\\|^2\\] This quadratic in \\(t\\) is non-negative, so its discriminant must be non-positive: \\[4\\langle \\mathbf{u}, \\mathbf{v}\\rangle^2 - 4\\|\\mathbf{u}\\|^2\\|\\mathbf{v}\\|^2 \\leq 0\\] which gives the result.\n\n\n\n6.1.3 Lemma (#lem-)\n\nLemma 6.1 (Parallelogram Law) In any inner product space: \\[\\|\\mathbf{u}+ \\mathbf{v}\\|^2 + \\|\\mathbf{u}- \\mathbf{v}\\|^2 = 2\\|\\mathbf{u}\\|^2 + 2\\|\\mathbf{v}\\|^2\\]\n\n\n\n6.1.4 Corollary (#cor-)\n\nCorollary 6.1 (Triangle Inequality) For any vectors \\(\\mathbf{u}, \\mathbf{v}\\): \\[\\|\\mathbf{u}+ \\mathbf{v}\\| \\leq \\|\\mathbf{u}\\| + \\|\\mathbf{v}\\|\\]\n\n\n\n6.1.5 Proposition (#prp-)\n\nProposition 6.1 (Norm Properties) Every norm \\(\\|\\cdot\\|\\) on a vector space \\(V\\) satisfies:\n\n\\(\\|\\mathbf{v}\\| \\geq 0\\) for all \\(\\mathbf{v}\\in V\\), with \\(\\|\\mathbf{v}\\| = 0\\) iff \\(\\mathbf{v}= \\mathbf{0}\\)\n\\(\\|\\alpha \\mathbf{v}\\| = |\\alpha| \\|\\mathbf{v}\\|\\) for all \\(\\alpha \\in \\mathbf{R}\\) and \\(\\mathbf{v}\\in V\\)\n\\(\\|\\mathbf{u}+ \\mathbf{v}\\| \\leq \\|\\mathbf{u}\\| + \\|\\mathbf{v}\\|\\) for all \\(\\mathbf{u}, \\mathbf{v}\\in V\\)\n\n\n\n\n6.1.6 Conjecture (#cnj-)\n\nConjecture 6.1 (Riemann Hypothesis) All non-trivial zeros of the Riemann zeta function \\(\\zeta(s)\\) have real part equal to \\(\\frac{1}{2}\\).\n\n\n\n6.1.7 Example (#exm-)\n\nExample 6.1 (\\(L^2\\) Space) The space \\(L^2([0,1])\\) of square-integrable functions with inner product \\[\\langle f, g \\rangle = \\int_0^1 f(x)g(x)\\,dx\\] is a Hilbert space.\n\n\n\n6.1.8 Exercise (#exr-)\n\nExercise 6.1 (Orthogonal Complement) Let \\(W\\) be a subspace of an inner product space \\(V\\). Prove that \\(W^{\\perp} = \\{v \\in V : \\langle v, w \\rangle = 0 \\text{ for all } w \\in W\\}\\) is also a subspace.\n\n\n\n6.1.9 Solution (#sol-)\n\nSolution 6.1 (Solution to Orthogonal Complement). To show \\(W^{\\perp}\\) is a subspace:\n\nZero vector: \\(\\langle \\mathbf{0}, w \\rangle = 0\\) for all \\(w \\in W\\), so \\(\\mathbf{0} \\in W^{\\perp}\\).\nClosure under addition: If \\(u_1, u_2 \\in W^{\\perp}\\), then for all \\(w \\in W\\): \\[\\langle u_1 + u_2, w \\rangle = \\langle u_1, w \\rangle + \\langle u_2, w \\rangle = 0 + 0 = 0\\]\nClosure under scalar multiplication: If \\(u \\in W^{\\perp}\\) and \\(\\alpha \\in \\mathbf{R}\\), then: \\[\\langle \\alpha u, w \\rangle = \\alpha \\langle u, w \\rangle = \\alpha \\cdot 0 = 0\\]\n\nTherefore \\(W^{\\perp}\\) is a subspace. \\(\\square\\)\n\n\n\n6.1.10 Remark (#rem-)\n\nRemark 6.1. The Cauchy-Schwarz inequality is fundamental to many areas of mathematics, including probability theory where it implies \\(|\\text{Cov}(X,Y)| \\leq \\sigma_X \\sigma_Y\\).\n\n\n\n6.1.11 Algorithm (#alg-)\n\nAlgorithm 6.1 (Power Iteration) Input: Matrix \\(\\mathbf{A}\\in \\mathbf{R}^{n \\times n}\\), initial vector \\(\\mathbf{v}_0\\), tolerance \\(\\epsilon\\)\nOutput: Dominant eigenvalue \\(\\lambda\\) and eigenvector \\(\\mathbf{v}\\)\n\n\\(\\mathbf{v}\\leftarrow \\mathbf{v}_0 / \\|\\mathbf{v}_0\\|\\)\nrepeat\n\n\\(\\mathbf{w}\\leftarrow \\mathbf{A}\\mathbf{v}\\)\n\\(\\lambda \\leftarrow \\mathbf{v}^T \\mathbf{w}\\)\n\\(\\mathbf{v}_{\\text{new}} \\leftarrow \\mathbf{w}/ \\|\\mathbf{w}\\|\\)\nif \\(\\|\\mathbf{v}_{\\text{new}} - \\mathbf{v}\\| &lt; \\epsilon\\) then break\n\\(\\mathbf{v}\\leftarrow \\mathbf{v}_{\\text{new}}\\)\n\nreturn \\(\\lambda, \\mathbf{v}\\)\n\n\n\n\n6.1.12 Environment Summary\n\n\n\nTable 6.1: Theorem-like Environment Reference\n\n\n\n\n\nPrefix\nEnvironment\nUse Case\n\n\n\n\n#def-\nDefinition\nFormal definitions\n\n\n#thm-\nTheorem\nMain results\n\n\n#lem-\nLemma\nSupporting results\n\n\n#cor-\nCorollary\nDirect consequences\n\n\n#prp-\nProposition\nIntermediate results\n\n\n#cnj-\nConjecture\nUnproven statements\n\n\n#exm-\nExample\nIllustrative examples\n\n\n#exr-\nExercise\nPractice problems\n\n\n#sol-\nSolution\nExercise solutions\n\n\n#rem-\nRemark\nAdditional comments\n\n\n#alg-\nAlgorithm\nPseudocode/algorithms",
+    "crumbs": [
+      "Quarto Feature Showcase",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Quarto Features Showcase</span>"
+    ]
+  },
+  {
+    "objectID": "src/ch04-quarto-showcase/01-features.html#callout-blocks",
+    "href": "src/ch04-quarto-showcase/01-features.html#callout-blocks",
+    "title": "6  Quarto Features Showcase",
+    "section": "6.2 Callout Blocks",
+    "text": "6.2 Callout Blocks\n\n\n\n\n\n\nNoteNote\n\n\n\nThis is a note callout. Use it for additional information that supplements the main content.\n\n\n\n\n\n\n\n\nTipTip\n\n\n\nWhen computing eigenvalues, always check if the matrix has special structure (symmetric, triangular, etc.) that can simplify calculations.\n\n\n\n\n\n\n\n\nWarningWarning\n\n\n\nNot all matrices are diagonalizable! A matrix is diagonalizable if and only if it has \\(n\\) linearly independent eigenvectors.\n\n\n\n\n\n\n\n\nImportantImportant\n\n\n\nThe spectral theorem only applies to normal matrices (matrices where \\(A^*A = AA^*\\)).\n\n\n\n\n\n\n\n\nCautionCaution (Click to expand)\n\n\n\n\n\nBe careful with numerical stability when computing eigenvalues of ill-conditioned matrices.",
+    "crumbs": [
+      "Quarto Feature Showcase",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Quarto Features Showcase</span>"
+    ]
+  },
+  {
+    "objectID": "src/ch04-quarto-showcase/01-features.html#tables",
+    "href": "src/ch04-quarto-showcase/01-features.html#tables",
+    "title": "6  Quarto Features Showcase",
+    "section": "6.3 Tables",
+    "text": "6.3 Tables\n\n6.3.1 Basic Table\n\n\n\nTable 6.2: Properties of Special Matrices\n\n\n\n\n\nProperty\nSymmetric\nOrthogonal\nUnitary\n\n\n\n\n\\(A = A^T\\)\n✓\n\n\n\n\n\\(A^T A = I\\)\n\n✓\n\n\n\n\\(A^* A = I\\)\n\n\n✓\n\n\nReal eigenvalues\n✓\n\n\n\n\n\\(|\\lambda| = 1\\)\n\n✓\n✓\n\n\n\n\n\n\n\n\n6.3.2 Grid Table\n\n\n\n\n\n\n\n\nMatrix Type\nDefinition\nEigenvalue Property\n\n\n\n\nSymmetric\n\\(A = A^T\\)\nAll real\n\n\nSkew-symmetric\n\\(A = -A^T\\)\nAll purely imaginary\n\n\nOrthogonal\n\\(A^T A = I\\)\n\\(|\\lambda| = 1\\)",
+    "crumbs": [
+      "Quarto Feature Showcase",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Quarto Features Showcase</span>"
+    ]
+  },
+  {
+    "objectID": "src/ch04-quarto-showcase/01-features.html#mathematics",
+    "href": "src/ch04-quarto-showcase/01-features.html#mathematics",
+    "title": "6  Quarto Features Showcase",
+    "section": "6.4 Mathematics",
+    "text": "6.4 Mathematics\n\n6.4.1 Aligned Equations\nThe gradient descent update rule: \\[\\begin{align}\n\\mathbf{x}_{k+1} &= \\mathbf{x}_k - \\alpha \\nabla f(\\mathbf{x}_k) \\\\\n&= \\mathbf{x}_k - \\alpha \\mathbf{A}^T(\\mathbf{A}\\mathbf{x}_k - \\mathbf{b}) \\\\\n&= (\\mathbf{I}- \\alpha \\mathbf{A}^T\\mathbf{A})\\mathbf{x}_k + \\alpha \\mathbf{A}^T\\mathbf{b}\n\\end{align}\\]\n\n\n6.4.2 Matrices\nThe Jacobian matrix of a transformation \\(\\mathbf{f}: \\mathbf{R}^n \\to \\mathbf{R}^m\\): \\[\n\\mathbf{J}= \\begin{pmatrix}\n\\frac{\\partial f_1}{\\partial x_1} & \\cdots & \\frac{\\partial f_1}{\\partial x_n} \\\\\n\\vdots & \\ddots & \\vdots \\\\\n\\frac{\\partial f_m}{\\partial x_1} & \\cdots & \\frac{\\partial f_m}{\\partial x_n}\n\\end{pmatrix}\n\\]\n\n\n6.4.3 Cases\nThe sign function: \\[\n\\text{sgn}(x) = \\begin{cases}\n1 & \\text{if } x &gt; 0 \\\\\n0 & \\text{if } x = 0 \\\\\n-1 & \\text{if } x &lt; 0\n\\end{cases}\n\\]",
+    "crumbs": [
+      "Quarto Feature Showcase",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Quarto Features Showcase</span>"
+    ]
+  },
+  {
+    "objectID": "src/ch04-quarto-showcase/01-features.html#code-blocks",
+    "href": "src/ch04-quarto-showcase/01-features.html#code-blocks",
+    "title": "6  Quarto Features Showcase",
+    "section": "6.5 Code Blocks",
+    "text": "6.5 Code Blocks\n\n6.5.1 Python with Syntax Highlighting\nimport numpy as np\nfrom numpy.linalg import eig, svd\n\ndef power_iteration(A, num_iterations=100):\n    \"\"\"Compute dominant eigenvalue using power iteration.\"\"\"\n    n = A.shape[0]\n    v = np.random.rand(n)\n    v = v / np.linalg.norm(v)\n    \n    for _ in range(num_iterations):\n        Av = A @ v\n        v = Av / np.linalg.norm(Av)\n    \n    eigenvalue = v @ A @ v\n    return eigenvalue, v\n\n# Example usage\nA = np.array([[4, 1], [2, 3]])\nlam, v = power_iteration(A)\nprint(f\"Dominant eigenvalue: {lam:.4f}\")\n\n\n6.5.2 R Code\n# Eigenvalue decomposition in R\nA &lt;- matrix(c(4, 2, 1, 3), nrow=2, byrow=TRUE)\neigen_result &lt;- eigen(A)\n\nprint(\"Eigenvalues:\")\nprint(eigen_result$values)\n\nprint(\"Eigenvectors:\")\nprint(eigen_result$vectors)\n\n\n6.5.3 Julia Code\nusing LinearAlgebra\n\n# Define a symmetric matrix\nA = [4 1 2; 1 3 1; 2 1 5]\n\n# Compute eigendecomposition\nF = eigen(A)\n\nprintln(\"Eigenvalues: \", F.values)\nprintln(\"Eigenvectors:\\n\", F.vectors)\n\n# Verify: A * v = λ * v\nfor i in 1:3\n    λ, v = F.values[i], F.vectors[:, i]\n    println(\"||Av - λv|| = \", norm(A*v - λ*v))\nend",
+    "crumbs": [
+      "Quarto Feature Showcase",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Quarto Features Showcase</span>"
+    ]
+  },
+  {
+    "objectID": "src/ch04-quarto-showcase/01-features.html#tabsets",
+    "href": "src/ch04-quarto-showcase/01-features.html#tabsets",
+    "title": "6  Quarto Features Showcase",
+    "section": "6.6 Tabsets",
+    "text": "6.6 Tabsets\n\nEigenvaluesSVDQR\n\n\nThe eigenvalues of a matrix \\(\\mathbf{A}\\) are the roots of the characteristic polynomial: \\[\\det(\\mathbf{A}- \\lambda \\mathbf{I}) = 0\\]\n\n\nThe singular value decomposition writes \\(\\mathbf{A}= \\mathbf{U}\\mathbf{\\Sigma}\\mathbf{V}^T\\) where:\n\n\\(\\mathbf{U}\\): left singular vectors\n\\(\\mathbf{\\Sigma}\\): diagonal matrix of singular values\n\\(\\mathbf{V}\\): right singular vectors\n\n\n\nThe QR decomposition factors \\(\\mathbf{A}= \\mathbf{Q}\\mathbf{R}\\) where:\n\n\\(\\mathbf{Q}\\): orthogonal matrix\n\\(\\mathbf{R}\\): upper triangular matrix",
+    "crumbs": [
+      "Quarto Feature Showcase",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Quarto Features Showcase</span>"
+    ]
+  },
+  {
+    "objectID": "src/ch04-quarto-showcase/01-features.html#cross-references",
+    "href": "src/ch04-quarto-showcase/01-features.html#cross-references",
+    "title": "6  Quarto Features Showcase",
+    "section": "6.7 Cross-References",
+    "text": "6.7 Cross-References\nAs we saw in Definition 6.1, a metric space generalizes the notion of distance. The Theorem 6.1 is fundamental to the theory of inner product spaces.\nSee Table 6.2 for a comparison of matrix properties.\nThe Lemma 6.1 leads directly to Corollary 6.1.",
+    "crumbs": [
+      "Quarto Feature Showcase",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Quarto Features Showcase</span>"
+    ]
+  },
+  {
+    "objectID": "src/ch04-quarto-showcase/01-features.html#lists",
+    "href": "src/ch04-quarto-showcase/01-features.html#lists",
+    "title": "6  Quarto Features Showcase",
+    "section": "6.8 Lists",
+    "text": "6.8 Lists\n\n6.8.1 Ordered List with Custom Start\n\nThird item (starting from 3)\nFourth item\nFifth item\n\n\n\n6.8.2 Nested Lists\n\nDecompositions\n\nEigendecomposition\n\nOnly for square matrices\nRequires \\(n\\) linearly independent eigenvectors\n\nSVD\n\nWorks for any matrix\nAlways exists\n\nQR\n\nUseful for solving least squares\n\n\n\n\n\n6.8.3 Definition List\n\nEigenvalue\n\nA scalar \\(\\lambda\\) such that \\(\\mathbf{A}\\mathbf{v}= \\lambda\\mathbf{v}\\) for some nonzero \\(\\mathbf{v}\\)\n\nEigenvector\n\nA nonzero vector \\(\\mathbf{v}\\) such that \\(\\mathbf{A}\\mathbf{v}= \\lambda\\mathbf{v}\\) for some scalar \\(\\lambda\\)\n\nSpectrum\n\nThe set of all eigenvalues of a matrix",
+    "crumbs": [
+      "Quarto Feature Showcase",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Quarto Features Showcase</span>"
+    ]
+  },
+  {
+    "objectID": "src/ch04-quarto-showcase/01-features.html#footnotes",
+    "href": "src/ch04-quarto-showcase/01-features.html#footnotes",
+    "title": "6  Quarto Features Showcase",
+    "section": "",
+    "text": "Named because eigenvalues are sometimes called the “spectrum” of a matrix.↩︎",
+    "crumbs": [
+      "Quarto Feature Showcase",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Quarto Features Showcase</span>"
+    ]
+  },
+  {
+    "objectID": "src/ch04-quarto-showcase/01-features.html#block-quotes",
+    "href": "src/ch04-quarto-showcase/01-features.html#block-quotes",
+    "title": "6  Quarto Features Showcase",
+    "section": "6.10 Block Quotes",
+    "text": "6.10 Block Quotes\n\n“The eigenvalues of a matrix are the key to understanding its behavior.”\n— Gilbert Strang, Linear Algebra and Its Applications",
+    "crumbs": [
+      "Quarto Feature Showcase",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Quarto Features Showcase</span>"
+    ]
+  },
+  {
+    "objectID": "src/ch04-quarto-showcase/01-features.html#horizontal-rule",
+    "href": "src/ch04-quarto-showcase/01-features.html#horizontal-rule",
+    "title": "6  Quarto Features Showcase",
+    "section": "6.11 Horizontal Rule",
+    "text": "6.11 Horizontal Rule",
+    "crumbs": [
+      "Quarto Feature Showcase",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Quarto Features Showcase</span>"
+    ]
+  },
+  {
+    "objectID": "src/ch04-quarto-showcase/01-features.html#diagrams-with-mermaid",
+    "href": "src/ch04-quarto-showcase/01-features.html#diagrams-with-mermaid",
+    "title": "6  Quarto Features Showcase",
+    "section": "6.12 Diagrams with Mermaid",
+    "text": "6.12 Diagrams with Mermaid\n\n\n\n\n\nflowchart LR\n    A[Matrix A] --&gt; B{Is A symmetric?}\n    B --&gt;|Yes| C[Real eigenvalues]\n    B --&gt;|No| D{Is A normal?}\n    D --&gt;|Yes| E[Orthogonal eigenvectors]\n    D --&gt;|No| F[May not be diagonalizable]",
+    "crumbs": [
+      "Quarto Feature Showcase",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Quarto Features Showcase</span>"
+    ]
+  },
+  {
+    "objectID": "src/ch04-quarto-showcase/01-features.html#summary",
+    "href": "src/ch04-quarto-showcase/01-features.html#summary",
+    "title": "6  Quarto Features Showcase",
+    "section": "6.13 Summary",
+    "text": "6.13 Summary\nThis chapter demonstrated:\n\nTheorem environments: definitions, theorems, lemmas, corollaries, examples, exercises, proofs, remarks\nCallouts: note, tip, warning, important, caution\nTables: pipe tables, grid tables\nMath: aligned equations, matrices, cases\nCode: Python, R, Julia with syntax highlighting\nTabsets: organized content in tabs\nCross-references: linking to theorems, tables, equations\nLists: ordered, unordered, nested, definition lists\nOther: footnotes, block quotes, diagrams",
+    "crumbs": [
+      "Quarto Feature Showcase",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Quarto Features Showcase</span>"
+    ]
+  },
+  {
+    "objectID": "src/ch04-quarto-showcase/02-interactive.html",
+    "href": "src/ch04-quarto-showcase/02-interactive.html",
+    "title": "7  Interactive Visualizations",
+    "section": "",
+    "text": "7.1 Matplotlib Visualizations\nThis chapter demonstrates Python code execution and interactive visualizations in Quarto.",
+    "crumbs": [
+      "Quarto Feature Showcase",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Interactive Visualizations</span>"
+    ]
+  },
+  {
+    "objectID": "src/ch04-quarto-showcase/02-interactive.html#matplotlib-visualizations",
+    "href": "src/ch04-quarto-showcase/02-interactive.html#matplotlib-visualizations",
+    "title": "7  Interactive Visualizations",
+    "section": "",
+    "text": "7.1.1 Eigenvalue Visualization\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# Generate random matrix and compute eigenvalues\nnp.random.seed(42)\nn = 100\nA = np.random.randn(n, n)\neigenvalues = np.linalg.eigvals(A)\n\n# Plot\nfig, ax = plt.subplots(figsize=(8, 6))\nax.scatter(eigenvalues.real, eigenvalues.imag, alpha=0.6, c='steelblue', s=30)\nax.axhline(y=0, color='k', linewidth=0.5)\nax.axvline(x=0, color='k', linewidth=0.5)\nax.set_xlabel('Real part')\nax.set_ylabel('Imaginary part')\nax.set_title(f'Eigenvalues of a {n}×{n} Random Matrix')\nax.grid(True, alpha=0.3)\nax.set_aspect('equal')\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\nFigure 7.1: Eigenvalues of a random matrix in the complex plane\n\n\n\n\n\n\n\n7.1.2 Singular Value Decay\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nnp.random.seed(42)\nn = 50\n\nfig, axes = plt.subplots(1, 3, figsize=(12, 4))\n\nfor idx, rank in enumerate([5, 15, 50]):\n    # Create low-rank matrix\n    U = np.random.randn(n, rank)\n    V = np.random.randn(rank, n)\n    A = U @ V + 0.1 * np.random.randn(n, n)  # Add noise\n    \n    # Compute SVD\n    _, s, _ = np.linalg.svd(A)\n    \n    axes[idx].semilogy(range(1, n+1), s, 'o-', markersize=4)\n    axes[idx].axvline(x=rank, color='r', linestyle='--', label=f'True rank = {rank}')\n    axes[idx].set_xlabel('Index')\n    axes[idx].set_ylabel('Singular value')\n    axes[idx].set_title(f'Approximate Rank {rank}')\n    axes[idx].legend()\n    axes[idx].grid(True, alpha=0.3)\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\nFigure 7.2: Singular value decay for matrices of different ranks\n\n\n\n\n\n\n\n7.1.3 Power Iteration Convergence\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\ndef power_iteration_history(A, max_iter=50):\n    \"\"\"Power iteration with convergence history.\"\"\"\n    n = A.shape[0]\n    v = np.random.rand(n)\n    v = v / np.linalg.norm(v)\n    \n    eigenvalue_estimates = []\n    \n    for _ in range(max_iter):\n        Av = A @ v\n        v_new = Av / np.linalg.norm(Av)\n        eigenvalue = v_new @ A @ v_new\n        eigenvalue_estimates.append(eigenvalue)\n        v = v_new\n    \n    return eigenvalue_estimates\n\n# Test matrix\nnp.random.seed(42)\nA = np.array([[4, 1, 0], [1, 3, 1], [0, 1, 2]])\ntrue_eigenvalues = np.linalg.eigvals(A)\ndominant = np.max(np.abs(true_eigenvalues))\n\n# Run power iteration\nestimates = power_iteration_history(A, max_iter=30)\n\n# Plot\nfig, ax = plt.subplots(figsize=(8, 5))\nax.plot(estimates, 'b-o', label='Power iteration estimate', markersize=5)\nax.axhline(y=dominant, color='r', linestyle='--', label=f'True dominant eigenvalue = {dominant:.4f}')\nax.set_xlabel('Iteration')\nax.set_ylabel('Eigenvalue estimate')\nax.set_title('Power Iteration Convergence')\nax.legend()\nax.grid(True, alpha=0.3)\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\nFigure 7.3: Convergence of power iteration to dominant eigenvalue",
+    "crumbs": [
+      "Quarto Feature Showcase",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Interactive Visualizations</span>"
+    ]
+  },
+  {
+    "objectID": "src/ch04-quarto-showcase/02-interactive.html#gradient-descent-visualization",
+    "href": "src/ch04-quarto-showcase/02-interactive.html#gradient-descent-visualization",
+    "title": "7  Interactive Visualizations",
+    "section": "7.2 Gradient Descent Visualization",
+    "text": "7.2 Gradient Descent Visualization\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\ndef gradient_descent_2d(A, b, x0, alpha, n_iter):\n    \"\"\"Gradient descent for minimizing 0.5*x'Ax - b'x.\"\"\"\n    path = [x0.copy()]\n    x = x0.copy()\n    \n    for _ in range(n_iter):\n        grad = A @ x - b\n        x = x - alpha * grad\n        path.append(x.copy())\n    \n    return np.array(path)\n\n# Define quadratic function\nA = np.array([[3, 1], [1, 2]])\nb = np.array([1, 1])\nx_opt = np.linalg.solve(A, b)\n\n# Run gradient descent with different step sizes\nx0 = np.array([-2, 2])\nalphas = [0.1, 0.3, 0.5]\n\n# Create contour plot\nfig, ax = plt.subplots(figsize=(10, 8))\n\nx1 = np.linspace(-3, 2, 100)\nx2 = np.linspace(-1, 3, 100)\nX1, X2 = np.meshgrid(x1, x2)\nZ = np.zeros_like(X1)\nfor i in range(X1.shape[0]):\n    for j in range(X1.shape[1]):\n        x = np.array([X1[i,j], X2[i,j]])\n        Z[i,j] = 0.5 * x @ A @ x - b @ x\n\ncontour = ax.contour(X1, X2, Z, levels=20, cmap='viridis', alpha=0.5)\nax.clabel(contour, inline=True, fontsize=8)\n\ncolors = ['red', 'blue', 'green']\nfor alpha, color in zip(alphas, colors):\n    path = gradient_descent_2d(A, b, x0, alpha, 20)\n    ax.plot(path[:, 0], path[:, 1], f'{color[0]}o-', markersize=4, \n            label=f'α = {alpha}', alpha=0.7)\n\nax.plot(x_opt[0], x_opt[1], 'k*', markersize=15, label='Optimum')\nax.plot(x0[0], x0[1], 'ko', markersize=10, label='Start')\nax.set_xlabel('$x_1$')\nax.set_ylabel('$x_2$')\nax.set_title('Gradient Descent Trajectories')\nax.legend()\nax.grid(True, alpha=0.3)\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\nFigure 7.4: Gradient descent on a quadratic function",
+    "crumbs": [
+      "Quarto Feature Showcase",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Interactive Visualizations</span>"
+    ]
+  },
+  {
+    "objectID": "src/ch04-quarto-showcase/02-interactive.html#matrix-heatmaps",
+    "href": "src/ch04-quarto-showcase/02-interactive.html#matrix-heatmaps",
+    "title": "7  Interactive Visualizations",
+    "section": "7.3 Matrix Heatmaps",
+    "text": "7.3 Matrix Heatmaps\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nfig, axes = plt.subplots(2, 3, figsize=(12, 8))\n\nnp.random.seed(42)\nn = 20\n\n# Different matrix types\nmatrices = {\n    'Random': np.random.randn(n, n),\n    'Symmetric': None,  # Will be created\n    'Diagonal': np.diag(np.random.randn(n)),\n    'Tridiagonal': None,\n    'Low Rank (r=3)': None,\n    'Sparse (10%)': None\n}\n\n# Create symmetric\nA = np.random.randn(n, n)\nmatrices['Symmetric'] = (A + A.T) / 2\n\n# Create tridiagonal\nmatrices['Tridiagonal'] = np.diag(np.ones(n-1), -1) + 2*np.eye(n) + np.diag(np.ones(n-1), 1)\n\n# Create low rank\nU = np.random.randn(n, 3)\nmatrices['Low Rank (r=3)'] = U @ U.T\n\n# Create sparse\nsparse = np.zeros((n, n))\nmask = np.random.rand(n, n) &lt; 0.1\nsparse[mask] = np.random.randn(np.sum(mask))\nmatrices['Sparse (10%)'] = sparse\n\nfor ax, (name, M) in zip(axes.flat, matrices.items()):\n    im = ax.imshow(M, cmap='RdBu', aspect='equal', vmin=-3, vmax=3)\n    ax.set_title(name)\n    ax.set_xticks([])\n    ax.set_yticks([])\n    plt.colorbar(im, ax=ax, fraction=0.046, pad=0.04)\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\nFigure 7.5: Visualization of matrix structure",
+    "crumbs": [
+      "Quarto Feature Showcase",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Interactive Visualizations</span>"
+    ]
+  },
+  {
+    "objectID": "src/ch04-quarto-showcase/02-interactive.html#spectral-clustering-example",
+    "href": "src/ch04-quarto-showcase/02-interactive.html#spectral-clustering-example",
+    "title": "7  Interactive Visualizations",
+    "section": "7.4 Spectral Clustering Example",
+    "text": "7.4 Spectral Clustering Example\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom scipy.linalg import eigh\n\nnp.random.seed(42)\n\n# Generate two moons-like data\nn_points = 200\nt = np.linspace(0, np.pi, n_points // 2)\nx1 = np.column_stack([np.cos(t), np.sin(t)])\nx2 = np.column_stack([1 - np.cos(t), 0.5 - np.sin(t)])\nX = np.vstack([x1, x2]) + 0.1 * np.random.randn(n_points, 2)\n\n# Build similarity graph (Gaussian kernel)\ndef gaussian_kernel(X, sigma=0.5):\n    n = X.shape[0]\n    K = np.zeros((n, n))\n    for i in range(n):\n        for j in range(n):\n            K[i, j] = np.exp(-np.linalg.norm(X[i] - X[j])**2 / (2 * sigma**2))\n    return K\n\nW = gaussian_kernel(X, sigma=0.3)\nD = np.diag(W.sum(axis=1))\nL = D - W  # Unnormalized Laplacian\n\n# Compute eigenvectors\neigenvalues, eigenvectors = eigh(L, D)\n\n# Use second smallest eigenvector for clustering\nfiedler = eigenvectors[:, 1]\nlabels = (fiedler &gt; 0).astype(int)\n\n# Plot results\nfig, axes = plt.subplots(1, 3, figsize=(14, 4))\n\n# Original data\naxes[0].scatter(X[:, 0], X[:, 1], c='steelblue', s=20)\naxes[0].set_title('Original Data')\naxes[0].set_xlabel('$x_1$')\naxes[0].set_ylabel('$x_2$')\n\n# Eigenvalue spectrum\naxes[1].plot(eigenvalues[:20], 'o-')\naxes[1].set_xlabel('Index')\naxes[1].set_ylabel('Eigenvalue')\naxes[1].set_title('Laplacian Eigenvalues')\naxes[1].axhline(y=0, color='k', linewidth=0.5)\naxes[1].grid(True, alpha=0.3)\n\n# Clustered data\naxes[2].scatter(X[labels==0, 0], X[labels==0, 1], c='red', s=20, label='Cluster 1')\naxes[2].scatter(X[labels==1, 0], X[labels==1, 1], c='blue', s=20, label='Cluster 2')\naxes[2].set_title('Spectral Clustering Result')\naxes[2].set_xlabel('$x_1$')\naxes[2].set_ylabel('$x_2$')\naxes[2].legend()\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\nFigure 7.6: Spectral clustering on synthetic data",
+    "crumbs": [
+      "Quarto Feature Showcase",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Interactive Visualizations</span>"
+    ]
+  },
+  {
+    "objectID": "src/ch04-quarto-showcase/02-interactive.html#inline-computations",
+    "href": "src/ch04-quarto-showcase/02-interactive.html#inline-computations",
+    "title": "7  Interactive Visualizations",
+    "section": "7.5 Inline Computations",
+    "text": "7.5 Inline Computations\nWe can also compute values inline. For example, the largest eigenvalue of \\(\\begin{pmatrix} 4 & 1 \\\\ 1 & 3 \\end{pmatrix}\\) is:\n\n\n4.6180\n\n\nAnd its condition number is:\n\n\n1.9387",
+    "crumbs": [
+      "Quarto Feature Showcase",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Interactive Visualizations</span>"
+    ]
+  },
+  {
+    "objectID": "src/ch04-quarto-showcase/02-interactive.html#data-tables",
+    "href": "src/ch04-quarto-showcase/02-interactive.html#data-tables",
+    "title": "7  Interactive Visualizations",
+    "section": "7.6 Data Tables",
+    "text": "7.6 Data Tables\n\nimport pandas as pd\nimport numpy as np\n\nnp.random.seed(42)\nsizes = [10, 50, 100, 500]\nmethods = ['NumPy eig', 'NumPy eigvals', 'SciPy eigh']\n\n# Simulate timing data (not actual benchmarks)\ndata = {\n    'Matrix Size': [f'{n}×{n}' for n in sizes],\n    'NumPy eig (ms)': [0.1, 0.8, 3.2, 45.0],\n    'NumPy eigvals (ms)': [0.08, 0.6, 2.5, 38.0],\n    'SciPy eigh (ms)': [0.05, 0.3, 1.2, 15.0],\n}\n\ndf = pd.DataFrame(data)\ndf\n\n\n\nTable 7.1: Eigenvalue computation methods comparison\n\n\n\n\n\n\n\n\n\n\nMatrix Size\nNumPy eig (ms)\nNumPy eigvals (ms)\nSciPy eigh (ms)\n\n\n\n\n0\n10×10\n0.1\n0.08\n0.05\n\n\n1\n50×50\n0.8\n0.60\n0.30\n\n\n2\n100×100\n3.2\n2.50\n1.20\n\n\n3\n500×500\n45.0\n38.00\n15.00",
+    "crumbs": [
+      "Quarto Feature Showcase",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Interactive Visualizations</span>"
+    ]
+  },
+  {
+    "objectID": "src/ch04-quarto-showcase/02-interactive.html#summary",
+    "href": "src/ch04-quarto-showcase/02-interactive.html#summary",
+    "title": "7  Interactive Visualizations",
+    "section": "7.7 Summary",
+    "text": "7.7 Summary\nThis chapter demonstrated:\n\nMatplotlib plots: Scatter plots, line plots, contours, heatmaps\nAlgorithm visualization: Power iteration, gradient descent\nInteractive analysis: Eigenvalue computation, spectral clustering\nInline Python: Computing values within text\nData tables: Using pandas DataFrames\n\n\n\n\n\n\n\nTipRunning the Code\n\n\n\nTo execute the Python code in this document, ensure you have Jupyter installed:\npip install jupyter matplotlib numpy scipy pandas",
+    "crumbs": [
+      "Quarto Feature Showcase",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Interactive Visualizations</span>"
     ]
   }
 ]

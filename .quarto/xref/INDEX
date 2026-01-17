@@ -25,5 +25,14 @@
   },
   "src/ch03-optimization/01-convex-optimization.qmd": {
     "01-convex-optimization.html": "517da0f0"
+  },
+  "src/ch04-quarto-showcase/index.qmd": {
+    "index.html": "daa8e086"
+  },
+  "src/ch04-quarto-showcase/01-features.qmd": {
+    "01-features.html": "bbd0ca0c"
+  },
+  "src/ch04-quarto-showcase/02-interactive.qmd": {
+    "02-interactive.html": "626cb67e"
   }
 }

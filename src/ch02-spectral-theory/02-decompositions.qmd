@@ -1,6 +1,7 @@
 ---
 chapter-number: 4
 filters:
+  - latex-environment
   - chapter-number
 format:
   pdf:
@@ -12,6 +13,7 @@ format:
     include-in-header:
       text: |
         \usepackage[quartoenv]{../../config/latex-template}
+        \directlua{require("../../config/strip-numbers")}
 ---
 
 {{< include ../../config/macros.qmd >}}
@@ -28,9 +30,9 @@ Matrix decompositions factor a matrix into products of simpler matrices. These f
 ## Spectral Theorem
 Let $\bA \in \R^{n \times n}$ be symmetric. Then $\bA$ can be decomposed as:
 $$
-\bA = \mathbf{Q} \mathbf{\Lambda} \mathbf{Q}^\top
+\bA = \bQ \bLambda \bQ^\top
 $$
-where $\mathbf{Q}$ is orthogonal (its columns are orthonormal eigenvectors of $\bA$) and $\mathbf{\Lambda} = \diag(\lambda_1, \ldots, \lambda_n)$ is diagonal (containing the eigenvalues).
+where $\bQ$ is orthogonal (its columns are orthonormal eigenvectors of $\bA$) and $\bLambda = \diag(\lambda_1, \ldots, \lambda_n)$ is diagonal (containing the eigenvalues).
 :::
 
 ## Singular Value Decomposition
@@ -39,13 +41,13 @@ where $\mathbf{Q}$ is orthogonal (its columns are orthonormal eigenvectors of $\
 ## Singular Value Decomposition (SVD)
 Every matrix $\bA \in \R^{m \times n}$ can be factored as:
 $$
-\bA = \mathbf{U} \mathbf{\Sigma} \mathbf{V}^\top
+\bA = \bU \bSigma \bV^\top
 $$
 where:
 
-- $\mathbf{U} \in \R^{m \times m}$ is orthogonal (left singular vectors)
-- $\mathbf{\Sigma} \in \R^{m \times n}$ is diagonal with non-negative entries (singular values)
-- $\mathbf{V} \in \R^{n \times n}$ is orthogonal (right singular vectors)
+- $\bU \in \R^{m \times m}$ is orthogonal (left singular vectors)
+- $\bSigma \in \R^{m \times n}$ is diagonal with non-negative entries (singular values)
+- $\bV \in \R^{n \times n}$ is orthogonal (right singular vectors)
 :::
 
 ::: {#thm-svd-rank}
@@ -57,12 +59,12 @@ The rank of $\bA$ equals the number of non-zero singular values.
 
 ::: {#exm-pca}
 ## Principal Component Analysis
-PCA uses the SVD to find the directions of maximum variance in a dataset. If $\mathbf{X}$ is a centered data matrix, the principal components are the right singular vectors of $\mathbf{X}$.
+PCA uses the SVD to find the directions of maximum variance in a dataset. If $\bX$ is a centered data matrix, the principal components are the right singular vectors of $\bX$.
 :::
 
 ## Exercises
 
 ::: {#exr-pseudo-inverse}
 ## Moore-Penrose Pseudoinverse
-Using the SVD $\bA = \mathbf{U} \mathbf{\Sigma} \mathbf{V}^\top$, show that the pseudoinverse is given by $\bA^+ = \mathbf{V} \mathbf{\Sigma}^+ \mathbf{U}^\top$.
+Using the SVD $\bA = \bU \bSigma \bV^\top$, show that the pseudoinverse is given by $\bA^+ = \bV \bSigma^+ \bU^\top$.
 :::

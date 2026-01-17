@@ -472,7 +472,7 @@
 % Define a unified grey color for the bar
 \definecolor{greybarcolor}{RGB}{189,189,189}  % #bdbdbd - same as HTML
 
-% Proof environment (grey background, colored left line)
+% Proof environment (thin grey left line, no background)
 \renewcommand{\proofname}{\bfseries Proof}
 \newmdenv[skipabove=10pt,
     skipbelow=2pt,
@@ -480,14 +480,13 @@
     leftline=true,
     topline=false,
     bottomline=false,
-    linecolor=proofcolor,
-    backgroundcolor=thmboxbg,
+    linecolor=greybarcolor,
     innerleftmargin=15pt,
     innerrightmargin=20pt,
     innertopmargin=10pt,
     leftmargin=0cm,
     rightmargin=0cm,
-    linewidth=4pt,
+    linewidth=2pt,
     innerbottommargin=10pt,
     splittopskip=\topskip,
     splitbottomskip=0.3\topskip,
@@ -539,21 +538,20 @@
     \endclaimbox%
 }
 
-% Remark environment (grey bar style - matching theorem box parameters EXACTLY)
+% Remark environment (thin grey left line, no background)
 \newmdenv[skipabove=10pt,
     skipbelow=2pt,
     rightline=false,
     leftline=true,
     topline=false,
     bottomline=false,
-    linecolor=remarkcolor,
-    backgroundcolor=thmboxbg,
+    linecolor=greybarcolor,
     innerleftmargin=15pt,
     innerrightmargin=20pt,
     innertopmargin=10pt,
     leftmargin=0cm,
     rightmargin=0cm,
-    linewidth=4pt,
+    linewidth=2pt,
     innerbottommargin=10pt,
     splittopskip=\topskip,
     splitbottomskip=0.3\topskip,
@@ -574,8 +572,8 @@
 \fi
 
 % Example environment (grey background, colored left line)
-\newmdenv[skipabove=7pt,
-    skipbelow=13pt,
+\newmdenv[skipabove=10pt,
+    skipbelow=2pt,
     rightline=false,
     leftline=true,
     topline=false,
@@ -608,8 +606,8 @@
 \fi
 
 % Problem environment (grey background, colored left line)
-\newmdenv[skipabove=7pt,
-    skipbelow=13pt,
+\newmdenv[skipabove=10pt,
+    skipbelow=2pt,
     rightline=false,
     leftline=true,
     topline=false,
@@ -637,21 +635,20 @@
     \endproblembox%
 }
 
-% Solution environment (grey background, colored left line)
+% Solution environment (thin grey left line, no background)
 \newmdenv[skipabove=10pt,
     skipbelow=2pt,
     rightline=false,
     leftline=true,
     topline=false,
     bottomline=false,
-    linecolor=solutioncolor,
-    backgroundcolor=thmboxbg,
+    linecolor=greybarcolor,
     innerleftmargin=15pt,
     innerrightmargin=20pt,
     innertopmargin=10pt,
     leftmargin=0cm,
     rightmargin=0cm,
-    linewidth=4pt,
+    linewidth=2pt,
     innerbottommargin=10pt,
     splittopskip=\topskip,
     splitbottomskip=0.3\topskip,
@@ -694,8 +691,8 @@
     secondextra={}]{algorithmbox}
 
 % Conclusion environment (grey background, colored left line)
-\newmdenv[skipabove=7pt,
-    skipbelow=13pt,
+\newmdenv[skipabove=10pt,
+    skipbelow=2pt,
     rightline=false,
     leftline=true,
     topline=false,
@@ -995,29 +992,120 @@
 
 \if@quartoenv
 \AtBeginDocument{%
-    % Override Quarto's theorem numbering to use chapter.counter format (not chapter.section.counter)
-    % Only redefine if the counter exists (Quarto only creates counters for environments used)
-    % Quarto theorem environments: theorem, lemma, corollary, proposition, conjecture,
-    %                              definition, example, exercise, solution, remark
-    \@ifundefined{c@theorem}{}{\renewcommand{\thetheorem}{\thechapter.\arabic{theorem}}}%
-    \@ifundefined{c@lemma}{}{\renewcommand{\thelemma}{\thechapter.\arabic{lemma}}}%
-    \@ifundefined{c@corollary}{}{\renewcommand{\thecorollary}{\thechapter.\arabic{corollary}}}%
-    \@ifundefined{c@proposition}{}{\renewcommand{\theproposition}{\thechapter.\arabic{proposition}}}%
-    \@ifundefined{c@conjecture}{}{\renewcommand{\theconjecture}{\thechapter.\arabic{conjecture}}}%
+    % ==========================================================================
+    % SHARED COUNTER FOR THEOREM, LEMMA, COROLLARY, PROPOSITION
+    % ==========================================================================
+    % Create a shared counter that theorem, lemma, corollary, proposition will all use
+    \newcounter{sharedthm}[chapter]
+    \renewcommand{\thesharedthm}{\thechapter.\arabic{sharedthm}}
+    
+    % Make theorem, lemma, corollary, proposition all use the shared counter
+    % We alias their counters to sharedthm so they increment together
+    \@ifundefined{c@theorem}{}{%
+        \let\c@theorem\c@sharedthm
+        \renewcommand{\thetheorem}{\thesharedthm}%
+    }%
+    \@ifundefined{c@lemma}{}{%
+        \let\c@lemma\c@sharedthm
+        \renewcommand{\thelemma}{\thesharedthm}%
+    }%
+    \@ifundefined{c@corollary}{}{%
+        \let\c@corollary\c@sharedthm
+        \renewcommand{\thecorollary}{\thesharedthm}%
+    }%
+    \@ifundefined{c@proposition}{}{%
+        \let\c@proposition\c@sharedthm
+        \renewcommand{\theproposition}{\thesharedthm}%
+    }%
+    
+    % Definition gets its own counter (chapter.counter format)
     \@ifundefined{c@definition}{}{\renewcommand{\thedefinition}{\thechapter.\arabic{definition}}}%
-    \@ifundefined{c@example}{}{\renewcommand{\theexample}{\thechapter.\arabic{example}}}%
-    \@ifundefined{c@exercise}{}{\renewcommand{\theexercise}{\thechapter.\arabic{exercise}}}%
-    \@ifundefined{c@solution}{}{\renewcommand{\thesolution}{\thechapter.\arabic{solution}}}%
-    \@ifundefined{c@remark}{}{\renewcommand{\theremark}{\thechapter.\arabic{remark}}}%
+    
+    % Other environments: conjecture, example, exercise, solution, remark, algorithm - no numbers
+    % Create a custom theorem style that shows no number (not even a space for it)
+    % Note: space above is 3pt to match numbered theorem spacing (box provides innertopmargin)
+    \newtheoremstyle{unnumbered}%
+        {7pt}% space above (small, box provides most padding)
+        {0pt}% space below
+        {\normalfont}% body font
+        {}% indent
+        {\bfseries}% theorem head font
+        {.}% punctuation after theorem head
+        { }% space after theorem head (single space)
+        {\thmname{#1}\thmnote{ \normalfont(#3)}}% theorem head spec (no number)
+    %
+    % Redefine BOTH the regular and "ref" versions of unnumbered environments
+    % Regular versions (without cross-reference): example, exercise, conjecture, etc.
+    \@ifundefined{example}{}{%
+        \let\oldexample\example
+        \let\endoldexample\endexample
+        \theoremstyle{unnumbered}%
+        \newtheorem*{exampleunnumbered}{Example}%
+        \renewenvironment{example}{\exampleunnumbered}{\endexampleunnumbered}%
+    }%
+    \@ifundefined{exercise}{}{%
+        \let\oldexercise\exercise
+        \let\endoldexercise\endexercise
+        \theoremstyle{unnumbered}%
+        \newtheorem*{exerciseunnumbered}{Exercise}%
+        \renewenvironment{exercise}{\exerciseunnumbered}{\endexerciseunnumbered}%
+    }%
+    \@ifundefined{conjecture}{}{%
+        \let\oldconjecture\conjecture
+        \let\endoldconjecture\endconjecture
+        \theoremstyle{unnumbered}%
+        \newtheorem*{conjectureunnumbered}{Conjecture}%
+        \renewenvironment{conjecture}{\conjectureunnumbered}{\endconjectureunnumbered}%
+    }%
+    % Algorithm keeps its own independent counter (not unnumbered, not shared)
+    \@ifundefined{c@algorithm}{}{\renewcommand{\thealgorithm}{\thechapter.\arabic{algorithm}}}%
+    \@ifundefined{c@algorithm}{}{\@removefromreset{algorithm}{section}\@addtoreset{algorithm}{chapter}}%
+    % Note: remark and solution may already be unnumbered (*) in Quarto, check if needed
+    %
+    % Redefine the "ref" versions (for cross-referenced environments)
+    \@ifundefined{refremark}{}{%
+        \let\oldrefremark\refremark
+        \let\endoldrefremark\endrefremark
+        \theoremstyle{unnumbered}%
+        \newtheorem*{refremarkunnumbered}{Remark}%
+        \renewenvironment{refremark}{\refremarkunnumbered}{\endrefremarkunnumbered}%
+    }%
+    \@ifundefined{refsolution}{}{%
+        \let\oldrefsolution\refsolution
+        \let\endoldrefsolution\endrefsolution
+        \theoremstyle{unnumbered}%
+        \newtheorem*{refsolutionunnumbered}{Solution}%
+        \renewenvironment{refsolution}{\refsolutionunnumbered}{\endrefsolutionunnumbered}%
+    }%
+    \@ifundefined{refconjecture}{}{%
+        \let\oldrefconjecture\refconjecture
+        \let\endoldrefconjecture\endrefconjecture
+        \theoremstyle{unnumbered}%
+        \newtheorem*{refconjectureunnumbered}{Conjecture}%
+        \renewenvironment{refconjecture}{\refconjectureunnumbered}{\endrefconjectureunnumbered}%
+    }%
+    \@ifundefined{refexample}{}{%
+        \let\oldrefexample\refexample
+        \let\endoldrefexample\endrefexample
+        \theoremstyle{unnumbered}%
+        \newtheorem*{refexampleunnumbered}{Example}%
+        \renewenvironment{refexample}{\refexampleunnumbered}{\endrefexampleunnumbered}%
+    }%
+    \@ifundefined{refexercise}{}{%
+        \let\oldrefexercise\refexercise
+        \let\endoldrefexercise\endrefexercise
+        \theoremstyle{unnumbered}%
+        \newtheorem*{refexerciseunnumbered}{Exercise}%
+        \renewenvironment{refexercise}{\refexerciseunnumbered}{\endrefexerciseunnumbered}%
+    }%
+    % refalgorithm keeps its own independent counter
+    \@ifundefined{c@refalgorithm}{}{\renewcommand{\therefalgorithm}{\thechapter.\arabic{refalgorithm}}}%
+    \@ifundefined{c@refalgorithm}{}{\@removefromreset{refalgorithm}{section}\@addtoreset{refalgorithm}{chapter}}%
     %
     % Remove counters from section reset (Quarto defaults to numberwithin{section})
     % and add them to chapter reset instead
-    \@ifundefined{c@theorem}{}{\@removefromreset{theorem}{section}\@addtoreset{theorem}{chapter}}%
-    \@ifundefined{c@lemma}{}{\@removefromreset{lemma}{section}\@addtoreset{lemma}{chapter}}%
-    \@ifundefined{c@corollary}{}{\@removefromreset{corollary}{section}\@addtoreset{corollary}{chapter}}%
-    \@ifundefined{c@proposition}{}{\@removefromreset{proposition}{section}\@addtoreset{proposition}{chapter}}%
-    \@ifundefined{c@conjecture}{}{\@removefromreset{conjecture}{section}\@addtoreset{conjecture}{chapter}}%
     \@ifundefined{c@definition}{}{\@removefromreset{definition}{section}\@addtoreset{definition}{chapter}}%
+    \@ifundefined{c@conjecture}{}{\@removefromreset{conjecture}{section}\@addtoreset{conjecture}{chapter}}%
     \@ifundefined{c@example}{}{\@removefromreset{example}{section}\@addtoreset{example}{chapter}}%
     \@ifundefined{c@exercise}{}{\@removefromreset{exercise}{section}\@addtoreset{exercise}{chapter}}%
     \@ifundefined{c@solution}{}{\@removefromreset{solution}{section}\@addtoreset{solution}{chapter}}%
@@ -1073,158 +1161,28 @@
     \BeforeBeginEnvironment{remark}{\par\addvspace{0.8em}\begin{remarkbox}}%
     \AfterEndEnvironment{remark}{\end{remarkbox}}%
     
+    % Refremark (grey) - wrap with remarkbox (used for cross-referenced remarks)
+    \BeforeBeginEnvironment{refremark}{\par\addvspace{0.8em}\begin{remarkbox}}%
+    \AfterEndEnvironment{refremark}{\end{remarkbox}}%
+    
+    % Refsolution (grey) - wrap with solutionbox (used for cross-referenced solutions)
+    \BeforeBeginEnvironment{refsolution}{\par\addvspace{0.8em}\begin{solutionbox}}%
+    \AfterEndEnvironment{refsolution}{\end{solutionbox}}%
+    
+    % Algorithm - wrap with algorithmbox
+    \BeforeBeginEnvironment{algorithm}{\par\addvspace{0.8em}\begin{algorithmbox}}%
+    \AfterEndEnvironment{algorithm}{\end{algorithmbox}}%
+    
+    % Refalgorithm - wrap with algorithmbox (used for cross-referenced algorithms)
+    \BeforeBeginEnvironment{refalgorithm}{\par\addvspace{0.8em}\begin{algorithmbox}}%
+    \AfterEndEnvironment{refalgorithm}{\end{algorithmbox}}%
+    
     % --- Minimal grey bar style for proof environment ---
     % Proof (grey bar) - standard amsthm, use Before/After hooks
     \BeforeBeginEnvironment{proof}{\begin{proofbox}}%
     \AfterEndEnvironment{proof}{\end{proofbox}}%
 }
 \fi
-
-% ======================================================================================
-% MATH MACROS (AUTOMATED GENERATION)
-% ======================================================================================
-
-% --- Mode Selection (Default: Engineering Mode) ---
-\newif\ifSemanticMode\SemanticModefalse
-
-% --- Core Logic Definitions (Engineering Mode - Upright Bold for all) ---
-\providecommand{\defvec}[1]{\mathbf{#1}}
-\providecommand{\defmat}[1]{\mathbf{#1}}
-\providecommand{\defrvec}[1]{\mathbf{#1}}
-\providecommand{\defrmat}[1]{\mathbf{#1}}
-\providecommand{\defrscal}[1]{#1}
-\providecommand{\defgvec}[1]{\boldsymbol{#1}}
-\providecommand{\defgmat}[1]{\boldsymbol{#1}}
-
-% --- Latin Vectors (\va ... \vz) ---
-\foreach \letter in {a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z}{%
-    \expandafter\xdef\csname v\letter\endcsname{\noexpand\defvec{\letter}}
-}
-
-% --- Latin Matrices (\A ... \Z) - skip conflicts ---
-\foreach \letter in {A,B,D,E,F,G,J,K,M,N,Q,R,T,U,V,W,X,Y,Z}{%
-    \expandafter\xdef\csname \letter\endcsname{\noexpand\defmat{\letter}}
-}
-% Define conflicting letters with different names
-\newcommand{\mC}{\defmat{C}}
-\newcommand{\mH}{\defmat{H}}
-\newcommand{\mI}{\defmat{I}}
-\newcommand{\mL}{\defmat{L}}
-\newcommand{\mO}{\defmat{O}}
-\newcommand{\mP}{\defmat{P}}
-\newcommand{\mS}{\defmat{S}}
-
-% --- Capital Latin Vectors (\vA ... \vZ) ---
-\foreach \letter in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z}{%
-    \expandafter\xdef\csname v\letter\endcsname{\noexpand\defvec{\letter}}
-}
-
-% --- Greek Vectors (\valpha ... \vomega) ---
-\foreach \gletter in {alpha,beta,gamma,delta,epsilon,zeta,eta,theta,iota,kappa,lambda,mu,nu,xi,pi,rho,sigma,tau,upsilon,phi,chi,psi,omega,varepsilon,vartheta,varpi,varrho,varsigma,varphi}{%
-    \expandafter\xdef\csname v\gletter\endcsname{\noexpand\defgvec{\gletter}}
-}
-
-% --- Greek Matrices (\vGamma ... \vOmega) ---
-\foreach \gletter in {Gamma,Delta,Theta,Lambda,Xi,Pi,Sigma,Upsilon,Phi,Psi,Omega}{%
-    \expandafter\xdef\csname v\gletter\endcsname{\noexpand\defgmat{\gletter}}
-}
-
-% --- Random Variables (\rx, \rX) ---
-\foreach \letter in {a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z}{%
-    \expandafter\xdef\csname r\letter\endcsname{\noexpand\defrvec{\letter}}
-}
-\foreach \letter in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z}{%
-    \expandafter\xdef\csname r\letter\endcsname{\noexpand\defrmat{\letter}}
-}
-
-% --- Calligraphic Sets (\sA -> \mathcal{A}) ---
-\foreach \letter in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z}{%
-    \expandafter\xdef\csname s\letter\endcsname{\noexpand\mathcal{\letter}}
-}
-
-% --- Blackboard Sets (\nA -> \mathbb{A}) ---
-\foreach \letter in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z}{%
-    \expandafter\xdef\csname n\letter\endcsname{\noexpand\mathbb{\letter}}
-}
-
-% --- Special Definitions ---
-\def\vzero{\defvec{0}}
-\def\vone{\defvec{1}}
-\def\dd{\mathrm{d}}
-\def\transpose{^\top}
-\def\inv{^{-1}}
-
-% --- Backward Compatibility (old \bx, \bA style) ---
-\providecommand{\bx}{\mathbf{x}}
-\providecommand{\by}{\mathbf{y}}
-\providecommand{\bz}{\mathbf{z}}
-\providecommand{\bu}{\mathbf{u}}
-\providecommand{\bv}{\mathbf{v}}
-\providecommand{\bw}{\mathbf{w}}
-\providecommand{\bA}{\mathbf{A}}
-\providecommand{\bB}{\mathbf{B}}
-\providecommand{\bI}{\mathbf{I}}
-
-% --- Probability & Statistics (only define if not already defined) ---
-\@ifundefined{Ev}{\DeclareMathOperator*{\Ev}{\mathbb{E}}}{}
-\let\Pr\relax \DeclareMathOperator{\Pr}{Pr}
-\@ifundefined{Var}{\DeclareMathOperator*{\Var}{Var}}{}
-\@ifundefined{Cov}{\DeclareMathOperator*{\Cov}{Cov}}{}
-\@ifundefined{Cor}{\DeclareMathOperator*{\Cor}{Cor}}{}
-\@ifundefined{Corr}{\DeclareMathOperator*{\Corr}{Corr}}{}
-
-% --- Distributions ---
-\@ifundefined{distBern}{\DeclareMathOperator{\distBern}{Ber}}{}
-\@ifundefined{distBin}{\DeclareMathOperator{\distBin}{Bin}}{}
-\@ifundefined{distGeom}{\DeclareMathOperator{\distGeom}{Geo}}{}
-\@ifundefined{distNB}{\DeclareMathOperator{\distNB}{NB}}{}
-\@ifundefined{distPois}{\DeclareMathOperator{\distPois}{Poi}}{}
-\@ifundefined{distHyp}{\DeclareMathOperator{\distHyp}{Hyp}}{}
-\@ifundefined{distUnif}{\DeclareMathOperator{\distUnif}{Unif}}{}
-\@ifundefined{distExp}{\DeclareMathOperator{\distExp}{Exp}}{}
-\@ifundefined{distGamma}{\DeclareMathOperator{\distGamma}{Gamma}}{}
-\@ifundefined{distN}{\DeclareMathOperator{\distN}{\mathcal{N}}}{}
-\@ifundefined{distBeta}{\DeclareMathOperator{\distBeta}{Beta}}{}
-\@ifundefined{distCauchy}{\DeclareMathOperator{\distCauchy}{Cauchy}}{}
-\@ifundefined{distLognormal}{\DeclareMathOperator{\distLognormal}{Lognormal}}{}
-\@ifundefined{distWeibull}{\DeclareMathOperator{\distWeibull}{Weibull}}{}
-\@ifundefined{distPareto}{\DeclareMathOperator{\distPareto}{Pareto}}{}
-\@ifundefined{distDir}{\DeclareMathOperator{\distDir}{Dir}}{}
-\@ifundefined{distMult}{\DeclareMathOperator{\distMult}{Mult}}{}
-\@ifundefined{distWishart}{\DeclareMathOperator{\distWishart}{Wishart}}{}
-\@ifundefined{distInvWishart}{\DeclareMathOperator{\distInvWishart}{InvWishart}}{}
-
-% --- Linear Algebra & Analysis ---
-\let\tr\relax \DeclareMathOperator{\tr}{tr}
-\let\trace\tr  % Alias for backward compatibility
-\let\rank\relax \DeclareMathOperator{\rank}{rank}
-\@ifundefined{nullity}{\DeclareMathOperator{\nullity}{nullity}}{}
-\@ifundefined{Span}{\DeclareMathOperator{\Span}{span}}{}
-\@ifundefined{spn}{\DeclareMathOperator{\spn}{span}}{}
-\@ifundefined{col}{\DeclareMathOperator{\col}{col}}{}
-\@ifundefined{row}{\DeclareMathOperator{\row}{row}}{}
-\@ifundefined{nul}{\DeclareMathOperator{\nul}{nul}}{}
-\@ifundefined{img}{\DeclareMathOperator{\img}{img}}{}
-\let\diag\relax \DeclareMathOperator{\diag}{diag}
-\@ifundefined{lcm}{\DeclareMathOperator{\lcm}{lcm}}{}
-\@ifundefined{im}{\DeclareMathOperator{\im}{im}}{}
-\@ifundefined{sgn}{\DeclareMathOperator{\sgn}{sgn}}{}
-\@ifundefined{argmax}{\DeclareMathOperator*{\argmax}{argmax}}{}
-\@ifundefined{argmin}{\DeclareMathOperator*{\argmin}{argmin}}{}
-\@ifundefined{softmax}{\DeclareMathOperator{\softmax}{softmax}}{}
-
-% --- Delimiters (only if mathtools loaded and not already defined) ---
-\@ifundefined{abs}{\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}}{}
-\@ifundefined{norm}{\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}}{}
-\@ifundefined{floor}{\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}}{}
-\@ifundefined{ceil}{\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}}{}
-
-% --- Shortcuts (use \providecommand to avoid conflicts) ---
-\providecommand{\x}{\vx}
-\providecommand{\y}{\vy}
-\providecommand{\z}{\vz}
-\providecommand{\w}{\vw}
-% Note: \u and \e conflict with standard LaTeX, use \vu and \ve instead
 
 % End of package
 \endinput

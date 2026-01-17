@@ -1,6 +1,7 @@
 ---
 chapter-number: 5
 filters:
+  - latex-environment
   - chapter-number
 format:
   pdf:
@@ -12,6 +13,7 @@ format:
     include-in-header:
       text: |
         \usepackage[quartoenv]{../../config/latex-template}
+        \directlua{require("../../config/strip-numbers")}
 ---
 
 {{< include ../../config/macros.qmd >}}
