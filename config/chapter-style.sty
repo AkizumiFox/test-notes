@@ -1,0 +1,76 @@
+% Chapter and Section Styling Package
+% Matching the reference template exactly
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{chapter-style}[2025/01/17 Chapter and Section Styling]
+
+\RequirePackage[explicit]{titlesec}
+\RequirePackage{anyfontsize}
+
+% Color definitions for headers
+\definecolor{chaptercolor}{RGB}{40,40,40}
+\definecolor{chaptershadow}{RGB}{80,80,80}
+\definecolor{sectioncolor}{RGB}{60,60,60}
+
+% ======================================================================================
+% CHAPTER FORMATTING - TikZ style matching reference template
+% ======================================================================================
+
+\newcommand{\chapterboxheight}{3cm}
+
+\titleformat{\chapter}[display]
+{\gdef\chapterlabel{}\Huge\bfseries}{\gdef\chapterlabel{\chaptername\ \thechapter}}{0pt}{%
+\begin{tikzpicture}[remember picture, overlay]
+    % The Lower Rectangle (shadow)
+    \fill[fill=chaptershadow] (0pt,-18pt) rectangle (\paperwidth, \chapterboxheight);
+    % The Upper Rectangle
+    \fill[fill=chaptercolor] (-16pt,0) rectangle (\paperwidth, \chapterboxheight);
+    % Chapter Label (number)
+    \node[anchor=west,yshift=55pt,xshift=-6pt] {\color{white}\chapterlabel};
+    % Chapter Title
+    \node[anchor=west,xshift=4pt,yshift=18pt] {\color{white}\Huge\bfseries #1};
+\end{tikzpicture}%
+}
+
+\titlespacing*{\chapter}{0pt}{60pt}{50pt}
+
+% ======================================================================================
+% SECTION FORMATTING
+% ======================================================================================
+
+\titleformat{\section}
+{\normalfont\Large\bfseries}
+{\colorbox{sectioncolor}{\color{white}\,\thesection\,}}{0.8em}{#1}
+
+\titlespacing*{\section}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+
+% ======================================================================================
+% SUBSECTION FORMATTING
+% ======================================================================================
+
+\titleformat{\subsection}
+{\normalfont\large\bfseries}
+{\thesubsection}{1em}{#1}
+
+\titlespacing*{\subsection}{0pt}{2.5ex plus 0.5ex minus 0.2ex}{1.5ex plus 0.2ex}
+
+% ======================================================================================
+% TYPOGRAPHY
+% ======================================================================================
+
+\setlength{\parskip}{0.8em}
+\setlength{\parindent}{0pt}
+
+% ======================================================================================
+% HEADER/FOOTER
+% ======================================================================================
+
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\setlength{\headheight}{14pt}
+\fancyhf{}
+\fancyhead[R]{\thepage}
+\fancyhead[L]{\leftmark}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\endinput
