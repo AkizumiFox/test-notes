@@ -24,13 +24,30 @@ jobs:
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
+      - name: Install Chromium for Mermaid diagrams
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium-browser
+          echo "CHROMIUM_PATH=$(which chromium-browser)" >> $GITHUB_ENV
+
       - name: Install TinyTeX for PDF generation
         run: quarto install tinytex
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: |
+          pip install jupyter numpy matplotlib pandas scipy
+
       - name: Render HTML and full book PDF
+        timeout-minutes: 20
         run: quarto render
 
       - name: Build individual chapter PDFs
+        timeout-minutes: 15
         run: |
           TMPDIR=$(mktemp -d)
           

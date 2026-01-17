@@ -2,6 +2,10 @@ project:
   type: book
   output-dir: _book
 
+# Mermaid diagram configuration
+mermaid:
+  theme: default
+
 book:
   title: "Advanced Linear Algebra Notes"
   subtitle: "Spectral Theory & Optimization"
