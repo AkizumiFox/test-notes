@@ -6,6 +6,10 @@ project:
 execute:
   freeze: true
 
+# Use pre-compiled mermaid SVGs in CI
+filters:
+  - mermaid-static
+
 book:
   title: "Advanced Linear Algebra Notes"
   subtitle: "Spectral Theory & Optimization"

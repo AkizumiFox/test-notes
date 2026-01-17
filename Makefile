@@ -285,41 +285,13 @@ endif
 	echo "Run 'make update' to add to _quarto.yml"
 
 # =============================================================================
-# Diagrams (pre-compile Mermaid to PNG for PDF output)
+# Mermaid diagrams (pre-compile for CI)
 # =============================================================================
 
-# Compile all .mmd files to high-res PNG
-diagrams:
-	@echo "Compiling Mermaid diagrams to PNG (high-res for PDF)..."
-	@command -v mmdc >/dev/null 2>&1 || { echo "Installing mermaid-cli..."; npm install -g @mermaid-js/mermaid-cli; }
-	@for mmd in $$(find src -name "*.mmd" 2>/dev/null); do \
-		png="$${mmd%.mmd}.png"; \
-		echo "  $$mmd -> $$png"; \
-		mmdc -i "$$mmd" -o "$$png" -b white -w 1600 -s 3 2>/dev/null; \
-	done
-	@echo "Done!"
-
-# Extract mermaid blocks from qmd files and save as .mmd, then compile
-# Usage: make sync-diagrams
-sync-diagrams:
-	@echo "Extracting Mermaid diagrams from qmd files..."
-	@for qmd in $$(find src -name "*.qmd" 2>/dev/null); do \
-		dir=$$(dirname "$$qmd"); \
-		if grep -q '```{mermaid}' "$$qmd" 2>/dev/null; then \
-			mkdir -p "$$dir/images"; \
-			base=$$(basename "$$qmd" .qmd); \
-			mmd="$$dir/images/$$base-diagram.mmd"; \
-			awk '/^```\{mermaid\}/,/^```$$/{if(!/^```/)print}' "$$qmd" | grep -v '^%%|' > "$$mmd"; \
-			if [ -s "$$mmd" ]; then \
-				echo "  $$qmd -> $$mmd"; \
-				mmdc -i "$$mmd" -o "$${mmd%.mmd}.png" -b white -w 1600 -s 3 2>/dev/null; \
-				echo "  -> $${mmd%.mmd}.png"; \
-			else \
-				rm -f "$$mmd"; \
-			fi; \
-		fi; \
-	done
-	@echo "Done! Remember to update the PDF image path in qmd if filename changed."
+# Compile all mermaid blocks from qmd files to SVG for CI
+# Run this locally before pushing, then commit _mermaid-cache/
+mermaid:
+	@./scripts/compile-mermaid.sh
 
 # =============================================================================
 # Cleanup
